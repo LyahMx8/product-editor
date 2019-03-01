@@ -1,48 +1,34 @@
 <?php
 
 /**
- * Register all actions and filters for the plugin
+ * Mantiene y registra los hooks del plugin
  *
- * @link       http://orionorigin.com
- * @since      3.0
- *
- * @package    Wpd
- * @subpackage Wpd/includes
+ * @package    zalemto-editor
+ * @subpackage zalemto-editor/includes
+ * @author     ZALEMTO STUDIOS <soporte@zalemto.com>
+ * @link https://zalemto.com
  */
 
-/**
- * Register all actions and filters for the plugin.
- *
- * Maintain a list of all hooks that are registered throughout
- * the plugin, and register them with the WordPress API. Call the
- * run function to execute the list of actions and filters.
- *
- * @package    Wpd
- * @subpackage Wpd/includes
- * @author     ORION <support@orionorigin.com>
- */
-class Wpd_Loader {
+class Loader {
 
 	/**
-	 * The array of actions registered with WordPress.
+	 * Array de acciones registradas con Wordpress
 	 *
-	 * @since    3.0
 	 * @access   protected
-	 * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
+	 * @var      array    $actions   Acciones registradas con Wordpress para correr cuando el plugin arranca.
 	 */
 	protected $actions;
 
 	/**
-	 * The array of filters registered with WordPress.
+	 * Array de filtros registrados con Wordpress
 	 *
-	 * @since    3.0
 	 * @access   protected
-	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
+	 * @var      array    $filters    Filtros registrados con Wordpress para correr cuando el plugin arranca.
 	 */
 	protected $filters;
 
 	/**
-	 * Initialize the collections used to maintain the actions and filters.
+	 * Inicializar colecciones para mantener las acciones y filtros.
 	 *
 	 * @since    3.0
 	 */
@@ -54,9 +40,8 @@ class Wpd_Loader {
 	}
 
 	/**
-	 * Add a new action to the collection to be registered with WordPress.
+	 * Agrega una nueva accion a la coleccion para ser registrado con Wordpress
 	 *
-	 * @since    3.0
 	 * @param      string               $hook             The name of the WordPress action that is being registered.
 	 * @param      object               $component        A reference to the instance of the object on which the action is defined.
 	 * @param      string               $callback         The name of the function definition on the $component.

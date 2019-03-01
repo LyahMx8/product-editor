@@ -1,38 +1,12 @@
 <?php
 /**
- * Registro de acciones y funciones del plugin
- *
- * @link       http://orionorigin.com
- * @since      3.0
- *
- * @package    zalemto-editor
- * @subpackage zalemto-editor/includes
- * @author     ZALEMTO STUDIOS <soporte@zalemto.com>
- *
- */
-
-
-/**
- * El loader mantiene y registra los hooks del plugin
- */
-protected $loader;
-
-/**
- * Edit es el identificador general del plugin
- */
-protected $edit;
-
-public function __construct() {
-
-	$this->wpd = 'wpd';
-	$this->version = WPD_VERSION;
-
-	$this->load_dependencies();
-	$this->set_locale();
-	$this->define_admin_hooks();
-	$this->define_public_hooks();
-
-}
+* Registro de acciones y funciones del plugin
+*
+* @package    zalemto-editor
+* @subpackage zalemto-editor/includes
+* @author     ZALEMTO STUDIOS <soporte@zalemto.com>
+*
+*/
 
 
 $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes');
@@ -49,7 +23,6 @@ public function register_shortcodes() {
  * Prueba de funcion que dibuja el boton
  */
 function get_products_display($atts) {
-	global $wpdb;
 	
 	extract(shortcode_atts(array(
 		'cat' => '',
