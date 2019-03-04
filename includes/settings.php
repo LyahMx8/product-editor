@@ -10,6 +10,7 @@
 */
 
 define('app_env', 'development');
+define( 'W_URL', plugins_url('/zalemto-editor/') );
 ini_set('max_execution_time', 300);
 
 /**
@@ -34,15 +35,7 @@ if(app_env == 'production'){
 class Settings{
 	//header('Content-type: application/json; charset=utf-8');
 
-	/**
-	 * El loader mantiene y registra los hooks del plugin
-	 */
-	protected $loader;
-
-	/**
-	 * Edit es el identificador general del plugin
-	 */
-	protected $editor;
+	 
 
 
 	/**

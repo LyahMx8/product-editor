@@ -15,23 +15,34 @@ if (!defined('WPINC')) die;
 defined( 'ABSPATH' ) || exit;
 
 global $wpdb;
-
 require plugin_dir_path( __FILE__ ) . 'includes/settings.php';
 
 function api_plugin_menu(){
+	$icon = W_URL . 'assets/img/zalemto-logo.png';
 	add_menu_page(
-		'Editor de productos', //Titulo de la pagina
-		'Editor de productos', //Titulo en el menu
+		'Editar productos', //Titulo de la pagina
+		'Editar productos', //Titulo en el menu
 		'edit_posts', //Rol de usuario
 		'editor', //Sku en el menu
 		'configurar_editor', //Funcion que llama
-		'dashicons-admin-customizer'); //Icono
+		$icon); //Icono
 }
 add_action('admin_menu','api_plugin_menu');
 
 
 function configurar_editor(){
-	require_once('includes/settings.php');
 	include_once(SERV."/views/editor.php");
+}
+
+add_action( 'woocommerce_before_add_to_cart_button', 'bbloomer_custom_action', 5 );
+function bbloomer_custom_action(){
+	?>
+	<a onClick="openEditor()">Editar Producto</a>
+	<script>
+		function openEditor(){
+			alert('Hello World!')
+		}
+	</script>
+	<?php
 }
 
