@@ -22,7 +22,7 @@ class Functions{
 	public function register_shortcodes() {
 		add_shortcode('wpc-products', array($this, 'get_products_display'));
 		add_shortcode('wpc-editor', array($this, 'get_editor_shortcode_handler'));
-		add_shortcode('wpc-editor', array($this, 'get_editor_shortcode_handler'));
+		add_shortcode('wpc-editor', array($this, 'button_action'));
 	}
 
 	function button_action(){
