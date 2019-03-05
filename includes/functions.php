@@ -19,17 +19,22 @@ class Functions{
 	 */
 	protected $editor;
 
-	$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes');
-
 	public function register_shortcodes() {
 		add_shortcode('wpc-products', array($this, 'get_products_display'));
 		add_shortcode('wpc-editor', array($this, 'get_editor_shortcode_handler'));
-		
-		add_shortcode('wpd-products', array($this, 'get_products_display'));
-		add_shortcode('wpd-editor', array($this, 'get_editor_shortcode_handler'));
+		add_shortcode('wpc-editor', array($this, 'get_editor_shortcode_handler'));
 	}
 
-
+	function button_action(){
+		?>
+		<a onClick="openEditor()">Editar Producto</a>
+		<script>
+			function openEditor(){
+				alert('Hello World!')
+			}
+		</script>
+		<?php
+	}
 
 	/**
 	 * Prueba de funcion que dibuja el boton

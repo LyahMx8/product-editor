@@ -34,15 +34,21 @@ function configurar_editor(){
 	include_once(SERV."/views/editor.php");
 }
 
-add_action( 'woocommerce_before_add_to_cart_button', 'bbloomer_custom_action', 5 );
-function bbloomer_custom_action(){
-	?>
-	<a onClick="openEditor()">Editar Producto</a>
-	<script>
-		function openEditor(){
-			alert('Hello World!')
-		}
-	</script>
-	<?php
+
+/**
+ * Ejecución del plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0
+ */
+function run_editor() {
+
+	$plugin = new Settings();
+	$plugin->run();
+
 }
 
+run_editor();

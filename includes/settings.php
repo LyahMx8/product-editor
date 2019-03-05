@@ -35,7 +35,15 @@ if(app_env == 'production'){
 class Settings{
 	//header('Content-type: application/json; charset=utf-8');
 
-	 
+	/**
+	 * El loader mantiene y registra los hooks del plugin
+	 */
+	protected $loader;
+
+	/**
+	 * Edit es el identificador general del plugin
+	 */
+	protected $editor;
 
 
 	/**
@@ -154,6 +162,9 @@ class Settings{
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $plugin_public, 'get_customize_btn');
 		$this->loader->add_action( 'wp_ajax_handle_picture_upload', $plugin_public, 'handle_picture_upload');
 		$this->loader->add_action( 'wp_ajax_nopriv_handle_picture_upload', $plugin_public, 'handle_picture_upload');
+
+		//Perosnal
+		add_action( 'woocommerce_before_add_to_cart_button', 'button_action', 5 );
 		
 		$this->loader->add_filter( 'woocommerce_loop_add_to_cart_link', $plugin_public, 'get_customize_btn_loop',10,2);
 		
