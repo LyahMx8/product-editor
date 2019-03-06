@@ -17,7 +17,6 @@ ini_set('max_execution_time', 300);
 * Configurar el entorno 
 */
 if(app_env == 'production'){
-	define('api', 'apiProd.php');
 	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/zalemto-editor");
 	define('URL', $_SERVER['HTTP_HOST']."/wp-content/plugins/zalemto-editor");
 	define('URL_PB', "/wp-content/plugins/zalemto-editor");
@@ -26,7 +25,6 @@ if(app_env == 'production'){
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');
 	
-	define('api', 'apiDevelop.php');
 	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wordpress/wp-content/plugins/zalemto-editor");
 	define('URL', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/zalemto-editor");
 	define('URL_PB', "/wordpress/wp-content/plugins/zalemto-editor");
@@ -54,7 +52,7 @@ class Settings{
 		$this->editor = 'editor';
 
 		$this->load_dependencies();
-		$this->define_admin_hooks();
+		//$this->define_admin_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -80,7 +78,10 @@ class Settings{
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/functions.php';
 
 		//Clase con las funciones de las vistas publicas
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'views/functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'views/editor-public.php';
+
+		//Clase con las funciones de las vistas administrativas
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'views/editor-admin.php';
 
 		
 		$this->loader = new Loader();
@@ -151,47 +152,63 @@ class Settings{
 
 	/**
 	 * Registro de hooks relacionados con la funcionalidad del plugin
+	 * 
+	 * @since 1.0
+	 * @access   private
+	 */
+	private function define_function_hooks(){
+
+		$plugin_functions = new Functions( $this->editor() );
+
+		//Variable filters
+		//Add query vars and rewrite rules
+		$this->loader->add_filter('query_vars', $plugin_functions, 'wpd_add_query_vars');
+		$this->loader->add_action( 'init', $plugin_functions, 'set_variable_action_filters', 99);
+		$this->loader->add_filter('init', $plugin_functions, 'wpd_add_rewrite_rules',99);
+
+	}
+
+	/**
+	 * Registro de hooks relacionados con la parte administrativa del plugin
+	 * 
+	 * @since 1.0
+	 * @access   private
+	 */
+	private function define_admin_hooks(){
+
+		$plugin_admin = new Editor_Admin( $this->editor() );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'api_plugin_menu');
+
+	}
+
+	/**
+	 * Registro de hooks relacionados con la parte pública del plugin
 	 *
-	 * @since    3.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new WPD_Public( $this->editor(), $this->get_version() );
+		$plugin_public = new Editor_Public( $this->editor() );
+
+
 		//$plugin_admin = new WPD_Admin( $this->editor(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes');
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $plugin_public, 'get_customize_btn');
 		$this->loader->add_action( 'wp_ajax_handle_picture_upload', $plugin_public, 'handle_picture_upload');
 		$this->loader->add_action( 'wp_ajax_nopriv_handle_picture_upload', $plugin_public, 'handle_picture_upload');
 
 		//Perosnal
-		add_action( 'woocommerce_before_add_to_cart_button', 'button_action', 5 );
+		$this->loader->add_action( 'woocommerce_before_add_to_cart_button', $plugin_public, 'button_action', 5 );
 		
-		$this->loader->add_filter( 'woocommerce_loop_add_to_cart_link', $plugin_public, 'get_customize_btn_loop',10,2);
-		
-
-		//Add query vars and rewrite rules
-		$this->loader->add_filter('query_vars', $plugin_public, 'wpd_add_query_vars');
-		$this->loader->add_filter('init', $plugin_public, 'wpd_add_rewrite_rules',99);
 		
 		//Products
 		$wpd_product=new WPD_Product(false);                
 		$this->loader->add_action( 'woocommerce_add_to_cart', $wpd_product, 'set_custom_upl_cart_item_data',99,6);
 		$this->loader->add_filter( 'body_class', $wpd_product,'get_custom_products_body_class', 10, 2 );
 		$this->loader->add_action( 'woocommerce_product_duplicate', $wpd_product, 'duplicate_product_metas',10,2);
-
-		
-		//Variable filters
-		$this->loader->add_action( 'init', $plugin_public, 'set_variable_action_filters', 99);
-		
-		//Body class
-		$this->loader->add_filter('body_class', $plugin_public, 'add_class_to_body');
-		
-		//Shop loop item class
-		$this->loader->add_filter('post_class', $plugin_public, 'get_item_class', 10, 3);
 		
 		//Sessions
 		//$this->loader->add_action( 'init', $plugin_admin, 'init_sessions', 1);

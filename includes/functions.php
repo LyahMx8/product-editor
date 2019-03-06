@@ -15,108 +15,182 @@ class Functions{
 	protected $loader;
 
 	/**
-	 * Edit es el identificador general del plugin
+	 * Editor es el identificador general del plugin
 	 */
 	protected $editor;
 
-	public function register_shortcodes() {
-		add_shortcode('wpc-products', array($this, 'get_products_display'));
-		add_shortcode('open-modal', array($this, 'button_action'));
+	/**
+	 * Inicializar clase y brindarle propiedades
+	 *
+	 * @since 	1.0
+	 * @param 	string 	$editor 	El nombre del plugin.
+	 */
+	public function __construct($editor) {
+		$this->editor = $editor;
 	}
 
-	function button_action(){
-		?>
-		<a onClick="openEditor()">Editar Producto</a>
-		<script>
-			function openEditor(){
-				alert('Hello World!')
-			}
-		</script>
-		<?php
+
+	/**
+	 * Register the stylesheets for the public-facing side of the site.
+	 *
+	 * @since    3.0
+	 */
+	public function enqueue_scripts() {
+		GLOBAL $wpd_settings;
+		$options = $wpd_settings['wpc-general-options'];
+		wp_enqueue_script('jquery');
+		wp_enqueue_script("wpd-tooltip-js", WPD_URL . '/admin/js/tooltip.js', array('jquery'), $this->version, false);
+		wp_enqueue_script("wpd-colorpicker-js", WPD_URL . 'admin/js/colorpicker/js/colorpicker.min.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->wpd, plugin_dir_url(__FILE__) . 'js/wpd-public.js', array('jquery'), $this->version, false);
+//        if (!isset($options["wpc-load-bs-modal"]) || ($options["wpc-load-bs-modal"] == "1")) {
+			wp_enqueue_script('wpd-bs-modal', WPD_URL . 'public/js/modal/modal.min.js', array('jquery'), $this->version, false);
+//        }
+		wp_localize_script($this->wpd, 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+	}
+	
+	/*
+	 * Obtener la versión de WooCommerce
+	 */
+	private function wpc_get_woo_version_number() {
+		// If get_plugins() isn't available, require it
+		if (!function_exists('get_plugins'))
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+		// Create the plugins folder and file variables
+		$plugin_folder = get_plugins('/' . 'woocommerce');
+		$plugin_file = 'woocommerce.php';
+
+		// If the plugin version number is set, return it 
+		if (isset($plugin_folder[$plugin_file]['Version'])) {
+			return $plugin_folder[$plugin_file]['Version'];
+		} else {
+			// Otherwise return null
+			return NULL;
+		}
 	}
 
 	/**
-	 * Prueba de funcion que dibuja el boton
+	 * Redefine los filtros de variables de Woocommerce
 	 */
-	function get_products_display($atts) {
-		
-		extract(shortcode_atts(array(
-			'cat' => '',
-			'products' => '',
-			'cols' => '3'
-						), $atts, 'wpc-products'));
-
-		$where = "";
-		if (!empty($cat)) {
-			$where.=" AND $wpdb->term_relationships.term_taxonomy_id IN ($cat)";
-		} else if (!empty($products))
-			$where.=" AND p.ID IN ($products)";
-		else
-			$where = "";
-		$search = '"is-customizable";s:1:"1"';
-
-		$products = $wpdb->get_results(
-				"
-							SELECT distinct p.id
-							FROM $wpdb->posts p
-							JOIN $wpdb->postmeta pm on pm.post_id = p.id
-							INNER JOIN $wpdb->term_relationships ON (p.ID = $wpdb->term_relationships.object_id	) 
-							WHERE p.post_type = 'product'
-							AND p.post_status = 'publish'
-							AND pm.meta_key = 'wpc-metas'
-							$where
-							AND pm.meta_value like '%$search%'
-							");
-		ob_start();
-		?>
-		<div class='container wp-products-container wpc-grid wpc-grid-pad'>
-			<?php
-			$shop_currency_symbol = get_woocommerce_currency_symbol();
-			foreach ($products as $product) {
-				$prod = wc_get_product($product->id);
-				$url = get_permalink($product->id);
-				$wpd_product = new WPD_Product($product->id);
-				$wpc_metas = $wpd_product->settings;
-				$can_design_from_blank = get_proper_value($wpc_metas, 'can-design-from-blank', "");
-				$template_pages_urls = $this->get_template_pages($product->id, $prod, $wpc_metas);
-				?>
-				<div class='wpc-col-1-<?php echo $cols; ?> cat-item-ctn'>
-					<div class='cat-item'>
-						<h3><?php echo $prod->get_title(); ?> 
-							<span><?php echo $shop_currency_symbol . '' . $prod->get_price() ?></span>
-						</h3>
-						<?php echo get_the_post_thumbnail($product->id, 'medium'); ?>
-						<hr>
-						<?php
-						if ($prod->get_type() == "simple") {
-							if (!empty($can_design_from_blank)) {
-								?><a href="<?php echo $wpd_product->get_design_url() ?>" class='btn-choose wpc-customize-product'> <?php _e("Design from blank", "wpd"); ?></a><?php
-							}
-							if (array_key_exists($product->id, $template_pages_urls)) {
-								$templates_page_url = $template_pages_urls[$product->id];
-								echo '<a href="' . $templates_page_url . '" class="btn-choose tpl"> ' . __("Browse our templates", "wpd") . '</a>';
-							}
-						} else {
-							?><a href="<?php echo $url; ?>" class='btn-choose wpc-customize-product'> <?php _e("Design from blank", "wpd"); ?></a><?php
-							$variations = $prod->get_available_variations();
-							foreach ($variations as $variation) {
-								$variation_id = $variation['variation_id'];
-								if (array_key_exists($variation_id, $template_pages_urls) || array_key_exists($product->id, $template_pages_urls)) {
-									echo '<a href="' . $url . '" class="btn-choose tpl" id="btn-tpl"> ' . __("Browse our templates", "wpd") . '</a>';
-									break;
-								}
-							}
-						}
-						?>
-					</div>
-				</div>
-				<?php
+	function set_variable_action_filters() {
+		GLOBAL $wpd_settings;
+		$options = $wpd_settings['wpc-general-options'];
+		$woo_version = $this->wpc_get_woo_version_number();
+		if ($options['wpc-parts-position-cart'] == "name") {
+			if ($woo_version < 2.1) {
+				//Old WC versions
+				add_filter("woocommerce_in_cart_product_title", array($this, "get_wpd_data"), 10, 3);
+			} else {
+				//New WC versions
+				add_filter("woocommerce_cart_item_name", array($this, "get_wpd_data"), 10, 3);
 			}
-			?>
-		</div>
-		<?php
-		$output = ob_get_contents();
-		ob_end_clean();
-		return $output;
+		} else {
+			if ($woo_version < 2.1) {
+				//Old WC versions
+				add_filter("woocommerce_in_cart_product_thumbnail", array($this, "get_wpd_data"), 10, 3);
+			} else {
+				//New WC versions
+				add_filter("woocommerce_cart_item_thumbnail", array($this, "get_wpd_data"), 10, 3);
+			}
+		}
+		$append_content_filter = $options['wpc-content-filter'];
+
+		if ($append_content_filter !== "0" && !is_admin()) {
+
+			add_filter("the_content", array($this, "filter_content"), 99);
+		}
 	}
+
+	/**
+	 * Agrega nuevas variables
+	 */
+	public function wpd_add_query_vars($aVars) {
+		$aVars[] = "product_id";
+		$aVars[] = "tpl";
+		$aVars[] = "edit";
+		$aVars[] = "design_index";
+		$aVars[] = "oid";
+		return $aVars;
+	}
+
+	public function wpd_add_rewrite_rules($param) {
+		GLOBAL $wpd_settings;
+		GLOBAL $wp_rewrite;
+		$options = $wpd_settings['wpc-general-options'];
+		$wpc_page_id = $options['wpc_page_id'];
+		if (function_exists("icl_object_id"))
+			$wpc_page_id = icl_object_id($wpc_page_id, 'page', false, ICL_LANGUAGE_CODE);
+		$wpc_page = get_post($wpc_page_id);
+		if (is_object($wpc_page)) {
+			//$slug = $wpc_page->post_name;
+			$raw_slug = get_permalink($wpc_page->ID);
+			$home_url = home_url('/');
+			$slug = str_replace($home_url, '', $raw_slug);
+			//If the slug does not have the trailing slash, we get 404 (ex postname = /%postname%)
+			$sep="";
+			if(substr($slug, -1)!="/")
+				$sep="/";
+//            var_dump(substr($slug, -1));
+			add_rewrite_rule(
+					// The regex to match the incoming URL
+					$slug . $sep.'design' . '/([^/]+)/?$',
+					// The resulting internal URL: `index.php` because we still use WordPress
+					// `pagename` because we use this WordPress page
+					// `designer_slug` because we assign the first captured regex part to this variable
+					'index.php?pagename=' . $slug . '&product_id=$matches[1]',
+					// This is a rather specific URL, so we add it to the top of the list
+					// Otherwise, the "catch-all" rules at the bottom (for pages and attachments) will "win"
+					'top'
+			);
+			add_rewrite_rule(
+					// The regex to match the incoming URL
+					$slug . $sep.'design' . '/([^/]+)/([^/]+)/?$',
+					// The resulting internal URL: `index.php` because we still use WordPress
+					// `pagename` because we use this WordPress page
+					// `designer_slug` because we assign the first captured regex part to this variable
+					'index.php?pagename=' . $slug . '&product_id=$matches[1]&tpl=$matches[2]',
+					// This is a rather specific URL, so we add it to the top of the list
+					// Otherwise, the "catch-all" rules at the bottom (for pages and attachments) will "win"
+					'top'
+			);
+			add_rewrite_rule(
+					// The regex to match the incoming URL
+					$slug . $sep.'edit' . '/([^/]+)/([^/]+)/?$',
+					// The resulting internal URL: `index.php` because we still use WordPress
+					// `pagename` because we use this WordPress page
+					// `designer_slug` because we assign the first captured regex part to this variable
+					'index.php?pagename=' . $slug . '&product_id=$matches[1]&edit=$matches[2]',
+					// This is a rather specific URL, so we add it to the top of the list
+					// Otherwise, the "catch-all" rules at the bottom (for pages and attachments) will "win"
+					'top'
+			);
+			add_rewrite_rule(
+					// The regex to match the incoming URL
+					$slug . $sep.'ordered-design' . '/([^/]+)/([^/]+)/?$',
+					// The resulting internal URL: `index.php` because we still use WordPress
+					// `pagename` because we use this WordPress page
+					// `designer_slug` because we assign the first captured regex part to this variable
+					'index.php?pagename=' . $slug . '&product_id=$matches[1]&oid=$matches[2]',
+					// This is a rather specific URL, so we add it to the top of the list
+					// Otherwise, the "catch-all" rules at the bottom (for pages and attachments) will "win"
+					'top'
+			);
+
+			add_rewrite_rule(
+					// The regex to match the incoming URL
+					$slug . $sep.'saved-design' . '/([^/]+)/([^/]+)/?$',
+					// The resulting internal URL: `index.php` because we still use WordPress
+					// `pagename` because we use this WordPress page
+					// `designer_slug` because we assign the first captured regex part to this variable
+					'index.php?pagename=' . $slug . '&product_id=$matches[1]&design_index=$matches[2]',
+					// This is a rather specific URL, so we add it to the top of the list
+					// Otherwise, the "catch-all" rules at the bottom (for pages and attachments) will "win"
+					'top'
+			);
+
+			$wp_rewrite->flush_rules(false);
+		}
+	}
+
+	
 }

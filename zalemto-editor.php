@@ -17,23 +17,6 @@ defined( 'ABSPATH' ) || exit;
 global $wpdb;
 require plugin_dir_path( __FILE__ ) . 'includes/settings.php';
 
-function api_plugin_menu(){
-	$icon = W_URL . 'assets/img/zalemto-logo.png';
-	add_menu_page(
-		'Editar productos', //Titulo de la pagina
-		'Editar productos', //Titulo en el menu
-		'edit_posts', //Rol de usuario
-		'editor', //Sku en el menu
-		'configurar_editor', //Funcion que llama
-		$icon); //Icono
-}
-add_action('admin_menu','api_plugin_menu');
-
-
-function configurar_editor(){
-	include_once(SERV."/views/editor.php");
-}
-
 
 /**
  * Ejecución del plugin.
