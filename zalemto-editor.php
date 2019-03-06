@@ -38,9 +38,7 @@ function configurar_editor(){
 /**
  * Ejecución del plugin.
  *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
+ * Mantener todos los recursos del plugin via hooks
  *
  * @since    1.0
  */

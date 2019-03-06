@@ -69,7 +69,7 @@ class Settings{
 	 *
 	 * Crear e instanciar el loader habilitará los hooks de wordpress para su uso
 	 *
-	 * @since    3.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -78,6 +78,10 @@ class Settings{
 
 		//La clase que trae todas las funcionalidades usadas en el plugin
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/functions.php';
+
+		//Clase con las funciones de las vistas publicas
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'views/functions.php';
+
 		
 		$this->loader = new Loader();
 
@@ -89,7 +93,7 @@ class Settings{
 	 * @since    3.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	/*private function define_admin_hooks() {
 
 		$plugin_admin = new WPD_Admin( $this->editor(), $this->get_version() );
 
@@ -100,8 +104,8 @@ class Settings{
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_woo_parts_submenu');
 		
 		//General
-		$this->loader->add_action( 'init', $plugin_admin, 'init_globals');
-		$this->loader->add_action( 'wpc_admin_field_wpc-icon-select', $plugin_admin, 'get_icon_selector_field');
+		$this->loader->add_action('init', $plugin_admin, 'init_globals');
+		$this->loader->add_action('wpc_admin_field_wpc-icon-select', $plugin_admin, 'get_icon_selector_field');
 		$this->loader->add_action('admin_notices', $plugin_admin, 'notify_customization_page_missing');
 		$this->loader->add_action('admin_notices', $plugin_admin, 'notify_minmimum_required_parameters');
 		$this->loader->add_action('admin_notices', $plugin_admin, 'run_wpc_db_updates_requirements');
@@ -109,7 +113,7 @@ class Settings{
 		$this->loader->add_action('admin_notices', $plugin_admin, 'get_missing_parts_notice');
 		$this->loader->add_action('wp_ajax_run_updater', $plugin_admin, 'run_wpd_updater');
 		$this->loader->add_filter('upload_mimes', $plugin_admin, 'wpc_add_custom_mime_types');
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'get_max_input_vars_php_ini' );
+		$this->loader->add_action('admin_notices', $plugin_admin, 'get_max_input_vars_php_ini' );
 		
 		//Products
 		$product_admin=new WPD_Product(false);
@@ -143,7 +147,7 @@ class Settings{
 		$this->loader->add_action( 'woocommerce_save_product_variation', $wpd_config, 'save_variation_settings_fields');
 
 
-	}
+	}*/
 
 	/**
 	 * Registro de hooks relacionados con la funcionalidad del plugin
@@ -154,7 +158,7 @@ class Settings{
 	private function define_public_hooks() {
 
 		$plugin_public = new WPD_Public( $this->editor(), $this->get_version() );
-		$plugin_admin = new WPD_Admin( $this->editor(), $this->get_version() );
+		//$plugin_admin = new WPD_Admin( $this->editor(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -190,7 +194,7 @@ class Settings{
 		$this->loader->add_filter('post_class', $plugin_public, 'get_item_class', 10, 3);
 		
 		//Sessions
-		$this->loader->add_action( 'init', $plugin_admin, 'init_sessions', 1);
+		//$this->loader->add_action( 'init', $plugin_admin, 'init_sessions', 1);
 		
 		//Design hooks
 		$wpd_design=new WPD_Design();
