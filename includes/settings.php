@@ -78,10 +78,10 @@ class Settings{
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/functions.php';
 
 		//Clase con las funciones de las vistas publicas
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'views/editor-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'resources/editor-public.php';
 
 		//Clase con las funciones de las vistas administrativas
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'views/editor-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'resources/editor-admin.php';
 
 		
 		$this->loader = new Loader();
@@ -205,7 +205,7 @@ class Settings{
 		
 		
 		//Products
-		$wpd_product=new WPD_Product(false);                
+		$wpd_product=new WPD_Product(false);
 		$this->loader->add_action( 'woocommerce_add_to_cart', $wpd_product, 'set_custom_upl_cart_item_data',99,6);
 		$this->loader->add_filter( 'body_class', $wpd_product,'get_custom_products_body_class', 10, 2 );
 		$this->loader->add_action( 'woocommerce_product_duplicate', $wpd_product, 'duplicate_product_metas',10,2);

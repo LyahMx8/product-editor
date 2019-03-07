@@ -3,7 +3,7 @@
 * funciones del plugiin en la parte administrativa
 *
 * @package    zalemto-editor
-* @subpackage zalemto-editor/views
+* @subpackage zalemto-editor/resources
 * @author     ZALEMTO STUDIOS <soporte@zalemto.com>
 * @link https://zalemto.com
 *
