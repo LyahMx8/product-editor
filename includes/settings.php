@@ -52,7 +52,8 @@ class Settings{
 		$this->editor = 'editor';
 
 		$this->load_dependencies();
-		//$this->define_admin_hooks();
+		$this->define_function_hooks();
+		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -199,62 +200,8 @@ class Settings{
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes');
 		$this->loader->add_action( 'wp_ajax_handle_picture_upload', $plugin_public, 'handle_picture_upload');
 		$this->loader->add_action( 'wp_ajax_nopriv_handle_picture_upload', $plugin_public, 'handle_picture_upload');
-
-		//Perosnal
 		$this->loader->add_action( 'woocommerce_before_add_to_cart_button', $plugin_public, 'button_action', 5 );
-		
-		
-		//Products
-		$wpd_product=new WPD_Product(false);
-		$this->loader->add_action( 'woocommerce_add_to_cart', $wpd_product, 'set_custom_upl_cart_item_data',99,6);
-		$this->loader->add_filter( 'body_class', $wpd_product,'get_custom_products_body_class', 10, 2 );
-		$this->loader->add_action( 'woocommerce_product_duplicate', $wpd_product, 'duplicate_product_metas',10,2);
-		
-		//Sessions
-		//$this->loader->add_action( 'init', $plugin_admin, 'init_sessions', 1);
-		
-		//Design hooks
-		$wpd_design=new WPD_Design();
 
-		$this->loader->add_action( 'wp_ajax_add_custom_design_to_cart', $wpd_design, 'add_custom_design_to_cart_ajax' );
-		$this->loader->add_action( 'wp_ajax_nopriv_add_custom_design_to_cart', $wpd_design, 'add_custom_design_to_cart_ajax' );
-		$this->loader->add_action( 'wp_ajax_save_custom_design_for_later', $wpd_design, 'save_custom_design_for_later_ajax' );
-		$this->loader->add_action( 'wp_ajax_nopriv_save_custom_design_for_later', $wpd_design, 'save_custom_design_for_later_ajax' );
-		$this->loader->add_action( 'wp_ajax_save_canvas_to_session', $wpd_design, 'save_canvas_to_session_ajax' );
-		$this->loader->add_action( 'wp_ajax_nopriv_save_canvas_to_session', $wpd_design, 'save_canvas_to_session_ajax' );
-		$this->loader->add_action( 'wp_ajax_delete_saved_design', $wpd_design, 'delete_saved_design_ajax' );
-		$this->loader->add_action( 'wp_ajax_nopriv_delete_saved_design', $wpd_design, 'delete_saved_design_ajax' );
-		//$this->loader->add_action( 'woocommerce_admin_order_item_values', $wpd_design, 'get_order_custom_admin_data',10,3);
-		$this->loader->add_action( 'woocommerce_after_order_itemmeta', $wpd_design, 'get_order_custom_admin_data',10,3);
-		$this->loader->add_action( 'woocommerce_new_order_item', $wpd_design, 'save_customized_item_meta',10,3);
-		//$this->loader->add_action( 'woocommerce_before_cart_item_quantity_zero', $wpd_design, 'remove_wpc_customization');
-		$this->loader->add_action( 'wp_ajax_get_watermarked_preview', $wpd_design, 'get_watermarked_preview' );
-		$this->loader->add_action( 'wp_ajax_nopriv_get_watermarked_preview', $wpd_design, 'get_watermarked_preview' );
-		//$this->loader->add_action( 'user_register', $wpd_design, 'save_user_designs', 10, 1 );
-		$this->loader->add_action( 'wp_login', $wpd_design, 'save_user_temporary_designs', 10, 2 );
-		
-		$this->loader->add_action( 'wp_ajax_generate_downloadable_file', $wpd_design, 'generate_downloadable_file' );
-		$this->loader->add_action( 'wp_ajax_nopriv_generate_downloadable_file', $wpd_design, 'generate_downloadable_file' );
-		//User my account page
-		$this->loader->add_action( 'woocommerce_order_item_meta_end', $wpd_design, 'get_user_account_products_meta',11,4);
-		$this->loader->add_action( 'woocommerce_before_calculate_totals', $wpd_design, 'get_cart_item_price', 10 );
-		$this->loader->add_action( 'wp_ajax_get_design_price', $wpd_design, 'get_design_price_ajax' );
-		$this->loader->add_action( 'wp_ajax_nopriv_get_design_price', $wpd_design, 'get_design_price_ajax' );
-		//Reload an order
-		$this->loader->add_action( 'woocommerce_my_account_my_orders_actions', $wpd_design, 'get_user_account_load_order_button', 10, 2);
-		$this->loader->add_action( 'woocommerce_before_my_account', $wpd_design, 'get_user_saved_designs');
-		//Save data to reload
-		$this->loader->add_action( 'wp_ajax_save_data_to_reload', $wpd_design, 'save_data_to_reload' );
-		$this->loader->add_action( 'wp_ajax_nopriv_save_data_to_reload', $wpd_design, 'save_data_to_reload' );
-		
-		//Allow us to hide the wpc_data_upl meta from the meta list in the order details page
-		$this->loader->add_filter( 'woocommerce_hidden_order_itemmeta', $wpd_design, 'unset_wpc_data_upl_meta');
-		$this->loader->add_filter( 'woocommerce_add_cart_item_data', $wpd_design,'force_individual_cart_items', 10, 2 );
-		//Cart
-		//$this->loader->add_filter( 'woocommerce_get_price_excluding_tax', $wpd_design,'get_price_excluding_tax', 10, 3 );
-
-		//Emails
-		$this->loader->add_action( 'woocommerce_order_item_meta_start', $plugin_public, 'set_email_order_item_meta',10,3 );
 
 	}
 

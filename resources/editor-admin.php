@@ -29,15 +29,19 @@ class Editor_Admin{
 	/**
 	 * Crear item en el menu
 	 */
-	function api_plugin_menu(){
+	public function api_plugin_menu(){
 		$icon = W_URL . 'assets/img/zalemto-logo.png';
 		add_menu_page(
 			'Editar productos', //Titulo de la pagina
 			'Editar productos', //Titulo en el menu
 			'edit_posts', //Rol de usuario
 			'editor', //Sku en el menu
-			'configurar_editor', //Funcion que llama
+			'adminsitrar_editor', //Funcion que llama
 			$icon); //Icono
+	}
+
+	public function adminsitrar_editor(){
+		echo "popotl";
 	}
 
 
