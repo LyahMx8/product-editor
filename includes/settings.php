@@ -90,68 +90,6 @@ class Settings{
 	}
 
 	/**
-	 * Registro de hooks relacionados con el area de administracion de wordpress
-	 *
-	 * @since    3.0
-	 * @access   private
-	 */
-	/*private function define_admin_hooks() {
-
-		$plugin_admin = new WPD_Admin( $this->editor(), $this->get_version() );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'wpc_redirect' );
-		
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_woo_parts_submenu');
-		
-		//General
-		$this->loader->add_action('init', $plugin_admin, 'init_globals');
-		$this->loader->add_action('wpc_admin_field_wpc-icon-select', $plugin_admin, 'get_icon_selector_field');
-		$this->loader->add_action('admin_notices', $plugin_admin, 'notify_customization_page_missing');
-		$this->loader->add_action('admin_notices', $plugin_admin, 'notify_minmimum_required_parameters');
-		$this->loader->add_action('admin_notices', $plugin_admin, 'run_wpc_db_updates_requirements');
-		$this->loader->add_action('admin_notices', $plugin_admin, 'get_help_notices');
-		$this->loader->add_action('admin_notices', $plugin_admin, 'get_missing_parts_notice');
-		$this->loader->add_action('wp_ajax_run_updater', $plugin_admin, 'run_wpd_updater');
-		$this->loader->add_filter('upload_mimes', $plugin_admin, 'wpc_add_custom_mime_types');
-		$this->loader->add_action('admin_notices', $plugin_admin, 'get_max_input_vars_php_ini' );
-		
-		//Products
-		$product_admin=new WPD_Product(false);
-		$this->loader->add_filter('manage_edit-product_columns', $product_admin, 'get_product_columns');
-		$this->loader->add_action('manage_product_posts_custom_column', $product_admin, 'get_products_columns_values', 5, 2);
-		$this->loader->add_action('save_post_product', $product_admin, 'save_product_settings_fields');                
-		$this->loader->add_action( 'woocommerce_save_product_variation', $product_admin, 'save_product_settings_fields');
-		$this->loader->add_action( 'woocommerce_product_options_inventory_product_data', $product_admin, 'get_variable_product_details_location_notice');
-		
-		//Cliparts hooks
-		$clipart=new WPD_Clipart();
-		$this->loader->add_action( 'init', $clipart, 'register_cpt_cliparts');
-		$this->loader->add_action( 'add_meta_boxes', $clipart, 'get_cliparts_metabox');
-		$this->loader->add_action( 'save_post_wpc-cliparts', $clipart, 'save_cliparts' );
-		
-		$wpd_design=new WPD_Design();
-		//Allow us to hide the wpc_data_upl meta from the meta list in the order details page
-		$this->loader->add_filter( 'woocommerce_hidden_order_itemmeta', $wpd_design, 'unset_wpc_data_upl_meta');
-		
-		$wpd_config=new WPD_Config();
-		//Allow us to hide the wpc_data_upl meta from the meta list in the order details page
-		$this->loader->add_action( 'init', $wpd_config, 'register_cpt_config' );
-		$this->loader->add_action( 'save_post_wpd-config', $wpd_config, 'save_config' );
-		$this->loader->add_action( 'save_post_product', $wpd_config, 'save_config' );
-		$this->loader->add_action( 'add_meta_boxes', $wpd_config, 'get_config_metabox');
-		$this->loader->add_action( 'woocommerce_product_options_general_product_data', $wpd_config, 'get_product_config_selector' );
-		$this->loader->add_action( 'woocommerce_product_after_variable_attributes', $wpd_config, 'get_variation_product_config_selector', 10, 3 );
-		$this->loader->add_filter( 'get_user_option_meta-box-order_wpd-config', $wpd_config, 'get_metabox_order' );
-		$this->loader->add_action( 'admin_action_wpd_duplicate_config', $wpd_config, 'wpd_duplicate_config' );
-		$this->loader->add_filter( 'post_row_actions', $wpd_config, 'get_duplicate_post_link', 10, 2 );
-		$this->loader->add_action( 'woocommerce_save_product_variation', $wpd_config, 'save_variation_settings_fields');
-
-
-	}*/
-
-	/**
 	 * Registro de hooks relacionados con la funcionalidad del plugin
 	 * 
 	 * @since 1.0
