@@ -36,11 +36,11 @@ class Editor_Admin{
 			'Editar productos', //Titulo en el menu
 			'edit_posts', //Rol de usuario
 			'editor', //Sku en el menu
-			'adminsitrar_editor', //Funcion que llama
+			array($this, 'adminsitrar_editor'), //Funcion que llama
 			$icon); //Icono
 	}
 
-	public function adminsitrar_editor(){
+	function adminsitrar_editor(){
 		echo "popotl";
 	}
 

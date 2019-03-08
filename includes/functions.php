@@ -29,25 +29,31 @@ class Functions{
 		$this->editor = $editor;
 	}
 
-
 	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    3.0
+	 * Crear la base de datos para almacenar imagenes editadas
+	 * 
+	 * @since 1.0
 	 */
-	public function enqueue_scripts() {
-		GLOBAL $wpd_settings;
-		$options = $wpd_settings['wpc-general-options'];
-		wp_enqueue_script('jquery');
-		wp_enqueue_script("wpd-tooltip-js", WPD_URL . '/admin/js/tooltip.js', array('jquery'), $this->version, false);
-		wp_enqueue_script("wpd-colorpicker-js", WPD_URL . 'admin/js/colorpicker/js/colorpicker.min.js', array('jquery'), $this->version, false);
-		wp_enqueue_script($this->wpd, plugin_dir_url(__FILE__) . 'js/wpd-public.js', array('jquery'), $this->version, false);
-//        if (!isset($options["wpc-load-bs-modal"]) || ($options["wpc-load-bs-modal"] == "1")) {
-			wp_enqueue_script('wpd-bs-modal', WPD_URL . 'public/js/modal/modal.min.js', array('jquery'), $this->version, false);
-//        }
-		wp_localize_script($this->wpd, 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+	public function create_editor_table(){
+		global $wpdb;
+
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$sql = "CREATE TABLE IF NOT EXISTS zalemto_editor (
+			id int NOT NULL AUTO_INCREMENT,
+			id_product int NOT NULL,
+			id_usr int NOT NULL,
+			name_usr int NOT NULL,
+			email_usr int NOT NULL,
+			cel_usr int NOT NULL,
+			url varchar(55) DEFAULT '' NOT NULL,
+			PRIMARY KEY  (id)
+		) $charset_collate;";
+
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );
 	}
-	
+
 	/*
 	 * Obtener la versión de WooCommerce
 	 */
