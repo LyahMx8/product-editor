@@ -19,8 +19,8 @@ class Editor_Public{
 	/**
 	 * Inicializar clase y brindarle propiedades
 	 *
-	 * @since 	1.0
-	 * @param 	string 	$editor 	El nombre del plugin.
+	 * @since   1.0
+	 * @param   string  $editor   El nombre del plugin.
 	 */
 	public function __construct($editor) {
 		$this->editor = $editor;
@@ -29,7 +29,7 @@ class Editor_Public{
 	/**
 	 * Registro de los estilos para el lado público
 	 *
-	 * @since 	1.0
+	 * @since   1.0
 	 */
 	public function enqueue_styles() {
 
@@ -43,7 +43,7 @@ class Editor_Public{
 	/**
 	 * Registro de scripts para el lado público
 	 *
-	 * @since 	1.0
+	 * @since   1.0
 	 */
 	public function enqueue_scripts() {
 		GLOBAL $wpd_settings;
@@ -59,10 +59,32 @@ class Editor_Public{
 	
 	function button_action(){
 		?>
-		<a class="caracoles" onClick="openEditor()">Editar Producto</a>
+		<a class="btnEditor" onclick="openEditor()">Editar Producto</a>
+		<div id="popContainer">
+			<div id="popLayer" onclick="closeModal()">
+				<span>X</span>
+			</div>
+			<section class="popUp" id="popUp"></section>
+		</div>
+
 		<script>
-			function openEditor(){
-				alert('Hello World!')
+			function openEditor() {
+				document.getElementById("popContainer").style.display = "block";
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					console.log(this.responseText)
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("popUp").innerHTML =
+						this.response;
+						console.log(this.status)
+						console.log(this.readyState)
+					}
+				};
+				xhttp.open("GET", "<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php", true);
+				xhttp.send();
+			}
+			function closeModal(){
+				document.getElementById("popContainer").style.display = "none";
 			}
 		</script>
 		<?php
@@ -93,7 +115,7 @@ class Editor_Public{
 							SELECT distinct p.id
 							FROM $wpdb->posts p
 							JOIN $wpdb->postmeta pm on pm.post_id = p.id
-							INNER JOIN $wpdb->term_relationships ON (p.ID = $wpdb->term_relationships.object_id	) 
+							INNER JOIN $wpdb->term_relationships ON (p.ID = $wpdb->term_relationships.object_id ) 
 							WHERE p.post_type = 'product'
 							AND p.post_status = 'publish'
 							AND pm.meta_key = 'wpc-metas'

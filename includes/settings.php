@@ -14,7 +14,7 @@ define( 'W_URL', plugins_url('/zalemto-editor/') );
 ini_set('max_execution_time', 300);
 
 /**
-* Configurar el entorno 
+* Configurar el entorno
 */
 if(app_env == 'production'){
 	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/zalemto-editor");
@@ -118,6 +118,7 @@ class Settings{
 
 		$plugin_admin = new Editor_Admin( $this->editor() );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'api_plugin_menu');
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 
 	}
 

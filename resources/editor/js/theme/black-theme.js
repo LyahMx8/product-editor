@@ -1,7 +1,7 @@
 var blackTheme = {
-    'common.bi.image': 'https://uicdn.toast.com/toastui/img/tui-image-editor-bi.png',
-    'common.bisize.width': '251px',
-    'common.bisize.height': '21px',
+    'common.bi.image': './img/LogoZalemto-Wh.png',
+    'common.bisize.width': '105px',
+    'common.bisize.height': '35px',
     'common.backgroundImage': 'none',
     'common.backgroundColor': '#1e1e1e',
     'common.border': '0px',
@@ -26,13 +26,13 @@ var blackTheme = {
     'downloadButton.fontSize': '12px',
 
     // main icons
-    'menu.normalIcon.path': './css/svg/icon-d.svg',
+    'menu.normalIcon.path': './img/svg/icon-d.svg',
     'menu.normalIcon.name': 'icon-d',
-    'menu.activeIcon.path': './css/svg/icon-b.svg',
+    'menu.activeIcon.path': './img/svg/icon-b.svg',
     'menu.activeIcon.name': 'icon-b',
-    'menu.disabledIcon.path': './css/svg/icon-a.svg',
+    'menu.disabledIcon.path': './img/svg/icon-a.svg',
     'menu.disabledIcon.name': 'icon-a',
-    'menu.hoverIcon.path': './css/svg/icon-c.svg',
+    'menu.hoverIcon.path': './img/svg/icon-c.svg',
     'menu.hoverIcon.name': 'icon-c',
     'menu.iconSize.width': '24px',
     'menu.iconSize.height': '24px',
@@ -42,9 +42,9 @@ var blackTheme = {
     'submenu.partition.color': '#3c3c3c',
 
     // submenu icons
-    'submenu.normalIcon.path': './css/svg/icon-d.svg',
+    'submenu.normalIcon.path': './img/svg/icon-d.svg',
     'submenu.normalIcon.name': 'icon-d',
-    'submenu.activeIcon.path': './css/svg/icon-c.svg',
+    'submenu.activeIcon.path': './img/svg/icon-c.svg',
     'submenu.activeIcon.name': 'icon-c',
     'submenu.iconSize.width': '32px',
     'submenu.iconSize.height': '32px',

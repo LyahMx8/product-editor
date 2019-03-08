@@ -9,12 +9,14 @@
 *
 */
 
+
 class Editor_Admin{
 
 	/**
 	 * Edit es el identificador general del plugin
 	 */
 	protected $editor;
+
 
 	/**
 	 * Inicializar clase y brindarle propiedades
@@ -24,6 +26,20 @@ class Editor_Admin{
 	 */
 	public function __construct($editor) {
 		$this->editor = $editor;
+	}
+
+	/**
+	 * Registro de los estilos para el lado administrativo
+	 *
+	 * @since   1.0
+	 */
+	public function enqueue_styles() {
+
+		/**
+		 * la instancia de esta clase inicia con el método run()
+		 * El Loader puede crear una relacion entre los hooks definidos y las funciones definidas en esta clase
+		 */
+		wp_enqueue_style($this->editor, plugin_dir_url(__FILE__) . 'css/style.css', array(), 'all');
 	}
 	
 	/**
@@ -41,7 +57,32 @@ class Editor_Admin{
 	}
 
 	function adminsitrar_editor(){
-		echo "popotl";
+		global $wpdb;
+	?>
+		<table id="customers">
+			<tr>
+				<th>id</th>
+				<th>Nombre</th>
+				<th>Celular</th>
+				<th>Email</th>
+				<th>Producto Editado</th>
+			</tr>
+	<?php
+		$resultados= $wpdb->get_results( "SELECT * FROM zalemto_editor" );
+
+		foreach ( $resultados as $rows ) {
+	?>
+			<tr>
+				<td><?php  echo $rows->id; ?></td>
+				<td><?php echo $rows->name_usr; ?></td>
+				<span class="dashicons dashicons-smiley"></span>
+				<td><img style="width:100px" src="<?php echo URL_PB.$rows->url; ?>"></td>
+			</tr>
+	<?php
+		}
+	?>
+		</table>
+	<?php
 	}
 
 

@@ -14,7 +14,7 @@
 if (!defined('WPINC')) die;
 defined( 'ABSPATH' ) || exit;
 
-global $wpdb;
+
 require plugin_dir_path( __FILE__ ) . 'includes/settings.php';
 
 

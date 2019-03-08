@@ -43,10 +43,13 @@ class Functions{
 			id int NOT NULL AUTO_INCREMENT,
 			id_product int NOT NULL,
 			id_usr int NOT NULL,
-			name_usr int NOT NULL,
-			email_usr int NOT NULL,
-			cel_usr int NOT NULL,
-			url varchar(55) DEFAULT '' NOT NULL,
+			name_usr varchar(60) NOT NULL,
+			email_usr varchar(60) NOT NULL,
+			cel_usr bigint(15) NOT NULL,
+			producto_editado varchar(255) DEFAULT '' NOT NULL,
+			producto_alfa varchar(255) NOT NULL,
+			producto_frontal varchar(255) NOT NULL,
+			producto_trasero varchar(255) NOT NULL,
 			PRIMARY KEY  (id)
 		) $charset_collate;";
 

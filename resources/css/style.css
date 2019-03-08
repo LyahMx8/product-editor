@@ -1,2 +1,16 @@
-.caracoles{padding:10px 15px;color:#fff;border:2px solid #61B9D7;background:#009acf;border-radius:5px;cursor:pointer;}
-.caracoles:hover{border:2px solid #009acf;background:#fff;color:#009acf;}
+.btnEditor{padding:10px 15px;color:#fff;border:2px solid #61B9D7;background:#009acf;border-radius:5px;cursor:pointer;}
+.btnEditor:hover{border:2px solid #009acf;background:#fff;color:#009acf;}
+#popContainer{display:none;}
+.popUp{width:80%;height:90vh;top:5vh;left:10%;display:block;margin:0 auto;position:fixed;z-index:9999;background:#fff;border:2px solid #efefef;border-radius:15px;}
+#popLayer{width:100%;height:100vh;position:fixed;top:0;left:0;background:rgba(0,0,0,.6);z-index:9998;cursor:pointer;}
+#popLayer span{font-size:22px;font-weight:900;position:fixed;top:15px;right:15px;color:rgba(255,255,255,.8);}
+
+#productos {border-collapse: collapse;width: 100%;overflow-x:auto;}
+#productos td, #productos th {border: 1px solid #ddd;padding: 8px;}
+#productos tr:nth-child(even){background-color: #f2f2f2;}
+#productos tr:hover {background-color: #ddd;}
+#productos th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color: white;}
+
+@media screen and (max-width:600px){
+	.popUp{width:96%;left:2%;}
+}
