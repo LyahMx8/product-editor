@@ -59,7 +59,7 @@ class Editor_Admin{
 	function adminsitrar_editor(){
 		global $wpdb;
 	?>
-		<table id="customers">
+		<table id="productos">
 			<tr>
 				<th>id</th>
 				<th>Nombre</th>
@@ -75,8 +75,10 @@ class Editor_Admin{
 			<tr>
 				<td><?php  echo $rows->id; ?></td>
 				<td><?php echo $rows->name_usr; ?></td>
-				<span class="dashicons dashicons-smiley"></span>
-				<td><img style="width:100px" src="<?php echo URL_PB.$rows->url; ?>"></td>
+				<td><?php echo $rows->cel_usr; ?></td>
+				<td><?php echo $rows->email_usr; ?></td>
+				<td><img style="width:100px" src="<?php echo URL_PB.$rows->producto_editado; ?>">
+				<a href="<?php echo URL_PB.$rows->producto_editado; ?>" download><span class="dashicons dashicons-download"></span></a></td>
 			</tr>
 	<?php
 		}
