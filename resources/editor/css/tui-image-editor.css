@@ -42,7 +42,7 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-header-buttons,
 .tui-image-editor-container .tui-image-editor-controls-buttons {
-  float: right;
+  display: inline-block;
   margin: 8px;
 }
 .tui-image-editor-container .tui-image-editor-header-logo,
@@ -62,10 +62,7 @@ body > textarea {
 .tui-image-editor-container .tui-image-editor-controls-buttons button {
   display: inline-block;
   position: relative;
-  width: 120px;
-  height: 40px;
   padding: 0;
-  line-height: 40px;
   outline: none;
   border-radius: 20px;
   border: 1px solid #ddd;
@@ -76,6 +73,7 @@ body > textarea {
   vertical-align: middle;
   letter-spacing: 0.3px;
   text-align: center;
+  padding: 10px 15px;
 }
 .tui-image-editor-container .tui-image-editor-download-btn {
   background-color: #fdba3b;
@@ -106,6 +104,8 @@ body > textarea {
   bottom: 0;
   right: 0;
   left: 0;
+  display: block;
+  overflow: auto;
 }
 .tui-image-editor-container .tui-image-editor-wrap {
   position: absolute;
@@ -525,6 +525,8 @@ body > textarea {
   display: table;
   bottom: 0;
   z-index: 2;
+  display: block;
+  overflow: auto;
 }
 .tui-image-editor-container .tui-image-editor-icpartition {
   display: inline-block;

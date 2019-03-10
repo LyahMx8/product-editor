@@ -50,6 +50,7 @@ class Functions{
 			producto_alfa varchar(255) NOT NULL,
 			producto_frontal varchar(255) NOT NULL,
 			producto_trasero varchar(255) NOT NULL,
+			fecha DATETIME NOT NULL,
 			PRIMARY KEY  (id)
 		) $charset_collate;";
 

@@ -48,8 +48,8 @@ class Editor_Admin{
 	public function api_plugin_menu(){
 		$icon = W_URL . 'assets/img/zalemto-logo.png';
 		add_menu_page(
-			'Editar productos', //Titulo de la pagina
-			'Editar productos', //Titulo en el menu
+			'Productos Editados', //Titulo de la pagina
+			'Productos Editados', //Titulo en el menu
 			'edit_posts', //Rol de usuario
 			'editor', //Sku en el menu
 			array($this, 'adminsitrar_editor'), //Funcion que llama
@@ -59,6 +59,7 @@ class Editor_Admin{
 	function adminsitrar_editor(){
 		global $wpdb;
 	?>
+		<h1>Lista de productos editados</h1>
 		<table id="productos">
 			<tr>
 				<th>id</th>
@@ -66,6 +67,7 @@ class Editor_Admin{
 				<th>Celular</th>
 				<th>Email</th>
 				<th>Producto Editado</th>
+				<th>Fecha</th>
 			</tr>
 	<?php
 		$resultados= $wpdb->get_results( "SELECT * FROM zalemto_editor" );
@@ -77,8 +79,9 @@ class Editor_Admin{
 				<td><?php echo $rows->name_usr; ?></td>
 				<td><?php echo $rows->cel_usr; ?></td>
 				<td><?php echo $rows->email_usr; ?></td>
-				<td><img style="width:100px" src="<?php echo URL_PB.$rows->producto_editado; ?>">
-				<a href="<?php echo URL_PB.$rows->producto_editado; ?>" download><span class="dashicons dashicons-download"></span></a></td>
+				<td><img style="width:100px;height:70px;object-fit:cover;" src="<?php echo URL_PB.$rows->producto_editado; ?>">
+				<a style="margin-top:calc((70px / 2) - 10px)" href="<?php echo URL_PB.$rows->producto_editado; ?>" download class="dashicons dashicons-download"></a></td>
+				<td><?php echo $rows->fecha; ?></td>
 			</tr>
 	<?php
 		}

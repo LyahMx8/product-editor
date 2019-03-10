@@ -5669,7 +5669,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        loadButtonStyle = _ref.loadButtonStyle,
 	        downloadButtonStyle = _ref.downloadButtonStyle,
 	        submenuStyle = _ref.submenuStyle;
-	    return '\n    <div class="tui-image-editor-main-container" style="' + commonStyle + '">\n        <div class="tui-image-editor-header" style="' + headerStyle + '">\n            <div class="tui-image-editor-header-logo">\n                <img src="' + biImage + '" />\n            </div>\n            <div class="tui-image-editor-header-buttons">\n                <div style="' + loadButtonStyle + '">\n                    ' + locale.localize('Load') + '\n                    <input type="file" class="tui-image-editor-load-btn" />\n                </div>\n                <button class="tui-image-editor-download-btn" style="' + downloadButtonStyle + '">\n                    ' + locale.localize('Download') + '\n                </button>\n            </div>\n        </div>\n        <div class="tui-image-editor-main">\n            <div class="tui-image-editor-submenu">\n                <div class="tui-image-editor-submenu-style" style="' + submenuStyle + '"></div>\n            </div>\n            <div class="tui-image-editor-wrap">\n                <div class="tui-image-editor-size-wrap">\n                    <div class="tui-image-editor-align-wrap">\n                        <div class="tui-image-editor"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n';
+	    return '\n    <div class="tui-image-editor-main-container" style="' + commonStyle + '">\n        <div class="tui-image-editor-header" style="' + headerStyle + '">\n            <div class="tui-image-editor-header-logo">\n                <img src="' + biImage + '" />\n            </div>\n            <div class="tui-image-editor-header-buttons">\n                <div style="' + loadButtonStyle + '">\n                    ' + locale.localize('Cargar') + '\n                    <input type="file" class="tui-image-editor-load-btn" />\n                </div>\n                <button class="tui-image-editor-download-btn" style="' + downloadButtonStyle + '">\n                    ' + locale.localize('Descargar') + '\n                </button>\n            </div>\n        </div>\n        <div class="tui-image-editor-main">\n            <div class="tui-image-editor-submenu">\n                <div class="tui-image-editor-submenu-style" style="' + submenuStyle + '"></div>\n            </div>\n            <div class="tui-image-editor-wrap">\n                <div class="tui-image-editor-size-wrap">\n                    <div class="tui-image-editor-align-wrap">\n                        <div class="tui-image-editor"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n';
 	};
 
 /***/ }),
@@ -6004,7 +6004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 // default keys and styles
 	 var customTheme = {
-	    'common.bi.image': './img/LogoZalemto-Wh.png',
+	    'common.bi.image': '/wordpress/wp-content/plugins/zalemto-editor/assets/img/LogoZalemto-Wh.png',
 	    'common.bisize.width': '105px',
 	    'common.bisize.height': '35px',
 	    'common.backgroundImage': 'none',
@@ -6031,9 +6031,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'downloadButton.fontSize': '12px',
 
 	    // main icons
-	    'menu.normalIcon.path': './img/svg/icon-b.svg',
+	    'menu.normalIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-b.svg',
 	    'menu.normalIcon.name': 'icon-b',
-	    'menu.activeIcon.path': './img/svg/icon-a.svg',
+	    'menu.activeIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-a.svg',
 	    'menu.activeIcon.name': 'icon-a',
 	    'menu.iconSize.width': '24px',
 	    'menu.iconSize.height': '24px',
@@ -6043,9 +6043,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'submenu.partition.color': '#858585',
 
 	    // submenu icons
-	    'submenu.normalIcon.path': './img/svg/icon-a.svg',
+	    'submenu.normalIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-a.svg',
 	    'submenu.normalIcon.name': 'icon-a',
-	    'submenu.activeIcon.path': './img/svg/icon-c.svg',
+	    'submenu.activeIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-c.svg',
 	    'submenu.activeIcon.name': 'icon-c',
 	    'submenu.iconSize.width': '32px',
 	    'submenu.iconSize.height': '32px',
@@ -6078,7 +6078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	 */
 	exports.default = {
-	  'common.bi.image': './img/LogoZalemto-Wh.png',
+	  'common.bi.image': '/wordpress/wp-content/plugins/zalemto-editor/assets/img/LogoZalemto-Wh.png',
 	  'common.bisize.width': '105px',
 	  'common.bisize.height': '35px',
 	  'common.backgroundImage': 'none',

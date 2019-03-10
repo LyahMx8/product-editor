@@ -3,6 +3,7 @@ if ( !defined('ABSPATH') ) {
     //If wordpress isn't loaded load it up.
     $path = $_SERVER['DOCUMENT_ROOT']."/wordpress";
     include_once $path . '/wp-load.php';
+    include_once $path."/wp-content/plugins/zalemto-editor/includes/settings.php";
 }
 ?>
 <!DOCTYPE html>
@@ -21,7 +22,6 @@ if ( !defined('ABSPATH') ) {
 		</style>
 	</head>
 	<body>
-		<h1>PRUEBA DE CARGA</h1>
 		<div id="tui-image-editor-container"></div>
 
 		<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
@@ -34,19 +34,19 @@ if ( !defined('ABSPATH') ) {
 		<script>
 
 		 // Image editor
-		 var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
-			 includeUI: {
-				 loadImage: {
-					 path: 'img/sampleImage2.png',
-					 name: 'SampleImage'
-				 },
-				 theme: blackTheme, // or whiteTheme
-				 initMenu: 'filter',
-				 menuBarPosition: 'bottom'
-			 },
-			 cssMaxWidth: 700,
-			 cssMaxHeight: 500
-		 });
+		var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
+			includeUI: {
+				loadImage: {
+					path: '/wordpress/wp-content/plugins/zalemto-editor/productos/sampleImage.jpg',
+					name: 'SampleImage'
+				},
+				theme: blackTheme, // or whiteTheme
+				initMenu: 'filter',
+				menuBarPosition: 'bottom'
+			},
+			cssMaxWidth: 700,
+			cssMaxHeight: 500
+		});
 
 		 window.onresize = function() {
 			 imageEditor.ui.resizeEditor();

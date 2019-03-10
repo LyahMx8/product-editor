@@ -18,7 +18,7 @@ ini_set('max_execution_time', 300);
 */
 if(app_env == 'production'){
 	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/zalemto-editor");
-	define('URL', $_SERVER['HTTP_HOST']."/wp-content/plugins/zalemto-editor");
+	define('URL_PS', $_SERVER['HTTP_HOST']."wp-content/plugins/zalemto-editor/");
 	define('URL_PB', "/wp-content/plugins/zalemto-editor");
 }else{
 	//Mostrar errores de php
@@ -26,7 +26,8 @@ if(app_env == 'production'){
 	ini_set('display_errors', '1');
 	
 	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wordpress/wp-content/plugins/zalemto-editor");
-	define('URL', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/zalemto-editor");
+	define('URL_PS', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/zalemto-editor");
+	//echo URL;
 	define('URL_PB', "/wordpress/wp-content/plugins/zalemto-editor");
 }
 
