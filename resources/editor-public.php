@@ -77,7 +77,7 @@ class Editor_Public{
 			});
 
 			function closeModal(){
-				document.getElementById("popContainer").style.display = "none";
+				document.getElementById("popContainer").style.display = "none"; jQuery('#Editor').removeAttr('disabled');
 			}
 		</script>
 		<?php
