@@ -58,7 +58,7 @@ class Editor_Public{
 	
 	function button_action(){
 		?>
-		<a class="btnEditor" onclick="fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php')">Editar Producto</a>
+		<button class="btnEditor" id="Editor">Editar Producto</button>
 		<a class="btnEditor" id="perros">Editar Producto 2</a>
 		<div id="popContainer">
 			<div id="popLayer" onclick="closeModal()">
@@ -68,17 +68,8 @@ class Editor_Public{
 		</div>
 
 		<script>
-			/**
-			*	Abrir el editor 
-			*/
-			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){
-				document.getElementById("popContainer").style.display = "block";
-				jQuery.ajax({
-					url: vrblurlorigen,
-					type: 'GET',
-				  	success: function(vrblprdctscplt){return jQuery('#'+vrbldivdestino).html(vrblprdctscplt);}
-				});
-			}
+			jQuery(document).ready(function(){ fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); jQuery('#Editor').click(function(e){ e.preventDefault(); document.getElementById("popContainer").style.display = "block"; fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); }); });
+			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){ jQuery.ajax({ url: vrblurlorigen,	type: 'GET', beforeSend: function(){jQuery("#"+vrbldivdestino).html("Cargando Editor..."); jQuery('#Editor').attr('disabled','disabled'); },	success: function(vrblprdctscplt){ jQuery('#Editor').removeAttr('disabled'); return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); } }); }
 
 			jQuery("#perros").click(function(){
 				document.getElementById("popContainer").style.display = "block";
