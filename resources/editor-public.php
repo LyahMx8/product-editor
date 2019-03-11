@@ -68,8 +68,8 @@ class Editor_Public{
 		</div>
 
 		<script>
-			jQuery(document).ready(function(){ fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); jQuery('#Editor').click(function(e){ e.preventDefault(); document.getElementById("popContainer").style.display = "block"; fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); }); });
-			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){ jQuery.ajax({ url: vrblurlorigen,	type: 'GET', beforeSend: function(){jQuery("#"+vrbldivdestino).html("Cargando Editor..."); jQuery('#Editor').attr('disabled','disabled'); },	success: function(vrblprdctscplt){ jQuery('#Editor').removeAttr('disabled'); return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); } }); }
+			jQuery(document).ready(function(){ fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); jQuery('#Editor').click(function(e){ e.preventDefault(); document.getElementById("popContainer").style.display = "block"; fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); }); jQuery(window).load(function(){jQuery('#Editor').removeAttr('disabled');});});
+			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){ jQuery.ajax({ url: vrblurlorigen,	type: 'GET', beforeSend: function(){jQuery("#"+vrbldivdestino).html("Cargando Editor..."); jQuery('#Editor').attr('disabled','disabled'); },	success: function(vrblprdctscplt){ return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); } }); }
 
 			jQuery("#perros").click(function(){
 				document.getElementById("popContainer").style.display = "block";
