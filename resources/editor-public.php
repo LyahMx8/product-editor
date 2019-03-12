@@ -59,7 +59,6 @@ class Editor_Public{
 	function button_action(){
 		?>
 		<button class="btnEditor" id="Editor">Editar Producto</button>
-		<a class="btnEditor" id="perros">Editar Producto 2</a>
 		<div id="popContainer">
 			<div id="popLayer" onclick="closeModal()">
 				<span>X</span>
@@ -68,14 +67,15 @@ class Editor_Public{
 		</div>
 
 		<script>
-			jQuery(document).ready(function(){ fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); jQuery('#Editor').click(function(e){ e.preventDefault(); document.getElementById("popContainer").style.display = "block"; fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); }); jQuery(window).load(function(){jQuery('#Editor').removeAttr('disabled');});});
+			/**
+			* Funcion que abre el modal y carga el editor dentro del div popUp
+			*/
+			jQuery(document).ready(function(){fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); jQuery('#Editor').click(function(e){ e.preventDefault(); document.getElementById("popContainer").style.display = "block"; fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); }); jQuery(window).load(function(){jQuery('#Editor').removeAttr('disabled');});});
 			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){ jQuery.ajax({ url: vrblurlorigen,	type: 'GET', beforeSend: function(){jQuery("#"+vrbldivdestino).html("Cargando Editor..."); jQuery('#Editor').attr('disabled','disabled'); },	success: function(vrblprdctscplt){ return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); } }); }
 
-			jQuery("#perros").click(function(){
-				document.getElementById("popContainer").style.display = "block";
-				jQuery("#popUp").load("<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php");
-			});
-
+			/**
+			* Funcion que cierra el modal
+			*/
 			function closeModal(){
 				document.getElementById("popContainer").style.display = "none"; jQuery('#Editor').removeAttr('disabled');
 			}
