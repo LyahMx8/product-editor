@@ -107,16 +107,21 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAdd">
-					<img id="output" style="width:100%;max-height:500px;object-fit:cover;"/>
+					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;"/></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
 				</label>
 			</div>
 			<div style="display:none;" id="alphaSend">
 				<p>Haz clic en la imagen para editarla o actualizarla</p>
-				<button class="button button-primary button-large" onclick="">Subir imagen</button>
+				<input type="hidden" id="idproductup" value="<?php print($thepostid); ?>">
+				<button id="upalpha" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagen</button>
 			</div>
 		</form>
 		<script>
+			$('#upalpha').click(function(e){ e.preventDefault();
+				mFnctnajaxflereqst("uprecall","#mImageAdd",$(this).attr("rel"));
+			});
+
 			var loadFile = function(event) {
 				document.getElementById('alphaSend').style.display = "block";
 				var output = document.getElementById('output');
@@ -125,14 +130,14 @@ class Editor_Admin{
 
 			mFnctnajaxflereqst = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
 				var mGetFleRequest = new FormData();
-				mGetFleRequest.append('mImageRequest',$(vrbldtscntrl)[0].files[0]);
+				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductup").val());
 				$.ajax({
 					url: vrblurlorigen,
 					data: mGetFleRequest,
 					processData: false,
 					contentType: false,
 					type: 'POST',
-					beforeSend: function(){$("#"+vrbldivdestino).html("Loading...");},
+					beforeSend: function(){$("#"+vrbldivdestino).html("Guardando Imagen...");},
 					success: function(vrblprdctscplt){return $('#'+vrbldivdestino).html(vrblprdctscplt);}
 				});
 			}

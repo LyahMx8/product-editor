@@ -85,6 +85,8 @@ class Settings{
 		//Clase con las funciones de las vistas administrativas
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'resources/editor-admin.php';
 
+		//La clase para guardar las imagenes del Plugin
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/mCntrolFileSave.php';
 		
 		$this->loader = new Loader();
 
