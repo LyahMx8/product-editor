@@ -57,6 +57,11 @@ class Editor_Public{
 	}
 	
 	function button_action(){
+		global $wpdb;
+
+		$thepostid = get_the_ID();
+		$product_editor = $wpdb->get_row( "SELECT producto_frontal, producto_alfa_frontal, producto_trasero, producto_alfa_trasero FROM zalemto_editor WHERE id_product = '$thepostid'" );
+		echo $product_editor->producto_frontal;
 		?>
 		<button class="btnEditor" id="Editor">Editar Producto</button>
 		<div id="popContainer">
@@ -70,8 +75,26 @@ class Editor_Public{
 			/**
 			* Funcion que abre el modal y carga el editor dentro del div popUp
 			*/
-			jQuery(document).ready(function(){fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); jQuery('#Editor').click(function(e){ e.preventDefault(); document.getElementById("popContainer").style.display = "block"; fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); }); jQuery(window).load(function(){jQuery('#Editor').removeAttr('disabled');});});
-			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){ jQuery.ajax({ url: vrblurlorigen,	type: 'GET', beforeSend: function(){jQuery("#"+vrbldivdestino).html("Cargando Editor..."); jQuery('#Editor').attr('disabled','disabled'); },	success: function(vrblprdctscplt){ return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); } }); }
+			jQuery(document).ready(function(){
+				fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); 
+				jQuery('#Editor').click(function(e){
+					e.preventDefault();
+					document.getElementById("popContainer").style.display = "block"; 
+					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
+				});
+				jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
+			});
+			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){
+				jQuery.ajax({
+					url: vrblurlorigen,
+					type: 'GET',
+					beforeSend: function(){
+						jQuery("#"+vrbldivdestino).html("Cargando Editor...");
+						jQuery('#Editor').attr('disabled','disabled');
+					},
+					success: function(vrblprdctscplt){ return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); }
+				});
+			}
 
 			/**
 			* Funcion que cierra el modal

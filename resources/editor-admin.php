@@ -105,11 +105,24 @@ class Editor_Admin{
 		?>
 		<form enctype="multipart/form-data" class="vFormImg">
 			<div class="col-sm-5 custom-file">
-				<input type="file" class="custom-file-input" name="mImageAdd" id="mImageAdd">
-				<label class="custom-file-label" for="mImageAdd">Seleccione Imagen</label>
+				<input type="file" class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
+				<label class="custom-file-label" for="mImageAdd">
+					<img id="output" style="width:100%;max-height:500px;object-fit:cover;"/>
+					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
+				</label>
+			</div>
+			<div style="display:none;" id="alphaSend">
+				<p>Haz clic en la imagen para editarla o actualizarla</p>
+				<button class="button button-primary button-large" onclick="">Subir imagen</button>
 			</div>
 		</form>
 		<script>
+			var loadFile = function(event) {
+				document.getElementById('alphaSend').style.display = "block";
+				var output = document.getElementById('output');
+				output.src = URL.createObjectURL(event.target.files[0]);
+			};
+
 			mFnctnajaxflereqst = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
 				var mGetFleRequest = new FormData();
 				mGetFleRequest.append('mImageRequest',$(vrbldtscntrl)[0].files[0]);
@@ -120,7 +133,7 @@ class Editor_Admin{
 					contentType: false,
 					type: 'POST',
 					beforeSend: function(){$("#"+vrbldivdestino).html("Loading...");},
-				  	success: function(vrblprdctscplt){return $('#'+vrbldivdestino).html(vrblprdctscplt);}
+					success: function(vrblprdctscplt){return $('#'+vrbldivdestino).html(vrblprdctscplt);}
 				});
 			}
 		</script>

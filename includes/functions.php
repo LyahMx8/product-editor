@@ -42,7 +42,6 @@ class Functions{
 		$sql = "CREATE TABLE IF NOT EXISTS zalemto_editor (
 			id int NOT NULL AUTO_INCREMENT,
 			id_product int NOT NULL,
-			id_usr int NOT NULL,
 			name_usr varchar(60) NOT NULL,
 			email_usr varchar(60) NOT NULL,
 			cel_usr bigint(15) NOT NULL,
