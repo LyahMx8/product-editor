@@ -47,9 +47,10 @@ class Functions{
 			email_usr varchar(60) NOT NULL,
 			cel_usr bigint(15) NOT NULL,
 			producto_editado varchar(255) DEFAULT '' NOT NULL,
-			producto_alfa varchar(255) NOT NULL,
 			producto_frontal varchar(255) NOT NULL,
+			producto_alfa_frontal varchar(255) NOT NULL,
 			producto_trasero varchar(255) NOT NULL,
+			producto_alfa_trasero varchar(255) NOT NULL,
 			fecha DATETIME NOT NULL,
 			PRIMARY KEY  (id)
 		) $charset_collate;";

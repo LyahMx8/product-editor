@@ -96,7 +96,7 @@ class Editor_Admin{
 	/**
 	 * Creacion de la caja en que se adjunta la imagen alpha 
 	 */
-	public static function output( $post ) {
+	public static function output( $post ){
 		global $thepostid, $product_object;
 
 		$thepostid      = $post->ID;
