@@ -51,7 +51,7 @@ class Functions{
 			producto_trasero varchar(255) NOT NULL,
 			producto_alfa_trasero varchar(255) NOT NULL,
 			fecha DATETIME NOT NULL,
-			PRIMARY KEY  (id)
+			PRIMARY KEY (id)
 		) $charset_collate;";
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

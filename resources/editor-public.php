@@ -61,49 +61,51 @@ class Editor_Public{
 
 		$thepostid = get_the_ID();
 		$product_editor = $wpdb->get_row( "SELECT producto_frontal, producto_alfa_frontal, producto_trasero, producto_alfa_trasero FROM zalemto_editor WHERE id_product = '$thepostid'" );
-		echo $product_editor->producto_frontal;
-		?>
-		<button class="btnEditor" id="Editor">Editar Producto</button>
-		<div id="popContainer">
-			<div id="popLayer" onclick="closeModal()">
-				<span>X</span>
+		if (null !== $product_editor):
+			print_r($product_editor->producto_alfa_frontal);
+			?>
+			<button class="btnEditor" id="Editor">Editar Producto</button>
+			<div id="popContainer">
+				<div id="popLayer" onclick="closeModal()">
+					<span>X</span>
+				</div>
+				<section class="popUp" id="popUp"></section>
 			</div>
-			<section class="popUp" id="popUp"></section>
-		</div>
 
-		<script>
-			/**
-			* Funcion que abre el modal y carga el editor dentro del div popUp
-			*/
-			jQuery(document).ready(function(){
-				fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); 
-				jQuery('#Editor').click(function(e){
-					e.preventDefault();
-					document.getElementById("popContainer").style.display = "block"; 
-					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
+			<script>
+				/**
+				* Funcion que abre el modal y carga el editor dentro del div popUp
+				*/
+				jQuery(document).ready(function(){
+					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); 
+					jQuery('#Editor').click(function(e){
+						e.preventDefault();
+						document.getElementById("popContainer").style.display = "block"; 
+						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
+					});
+					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
 				});
-				jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
-			});
-			fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){
-				jQuery.ajax({
-					url: vrblurlorigen,
-					type: 'GET',
-					beforeSend: function(){
-						jQuery("#"+vrbldivdestino).html("Cargando Editor...");
-						jQuery('#Editor').attr('disabled','disabled');
-					},
-					success: function(vrblprdctscplt){ return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); }
-				});
-			}
+				fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){
+					jQuery.ajax({
+						url: vrblurlorigen,
+						type: 'GET',
+						beforeSend: function(){
+							jQuery("#"+vrbldivdestino).html("Cargando Editor...");
+							jQuery('#Editor').attr('disabled','disabled');
+						},
+						success: function(vrblprdctscplt){ return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); }
+					});
+				}
 
-			/**
-			* Funcion que cierra el modal
-			*/
-			function closeModal(){
-				document.getElementById("popContainer").style.display = "none"; jQuery('#Editor').removeAttr('disabled');
-			}
-		</script>
+				/**
+				* Funcion que cierra el modal
+				*/
+				function closeModal(){
+					document.getElementById("popContainer").style.display = "none"; jQuery('#Editor').removeAttr('disabled');
+				}
+			</script>
 		<?php
+		endif;
 	}
 	
 

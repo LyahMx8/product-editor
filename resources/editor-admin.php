@@ -105,7 +105,7 @@ class Editor_Admin{
 		?>
 		<form enctype="multipart/form-data" class="vFormImg">
 			<div class="col-sm-5 custom-file">
-				<input type="file" class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
+				<input type="file" multiple class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAdd">
 					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;"/></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
@@ -117,6 +117,7 @@ class Editor_Admin{
 				<button id="upalpha" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagen</button>
 			</div>
 		</form>
+		
 		<script>
 			$('#upalpha').click(function(e){ e.preventDefault();
 				mFnctnajaxflereqst("uprecall","#mImageAdd",$(this).attr("rel"));
