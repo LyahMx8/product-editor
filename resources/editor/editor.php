@@ -15,6 +15,7 @@ if ( !defined('ABSPATH') ) {
 		margin: 0;
 	}
 </style>
+	
 <div id="tui-image-editor-container"></div>
 
 <script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
@@ -30,11 +31,11 @@ if ( !defined('ABSPATH') ) {
 var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 	includeUI: {
 		loadImage: {
-			path: '/wordpress/wp-content/plugins/zalemto-editor/productos/sampleImage.jpg',
+			path: '/wordpress/wp-content/plugins/zalemto-editor<?php echo $_GET['producto']; ?>',
 			name: 'SampleImage'
 		},
 		theme: blackTheme, // or whiteTheme
-		initMenu: 'filter',
+		initMenu: '',
 		menuBarPosition: 'bottom'
 	},
 	cssMaxWidth: 700,

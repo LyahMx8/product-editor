@@ -62,7 +62,7 @@ class Editor_Public{
 		$thepostid = get_the_ID();
 		$product_editor = $wpdb->get_row( "SELECT producto_frontal, producto_alfa_frontal, producto_trasero, producto_alfa_trasero FROM zalemto_editor WHERE id_product = '$thepostid'" );
 		if (null !== $product_editor):
-			print_r($product_editor->producto_alfa_frontal);
+			$producto = $product_editor->producto_frontal;
 			?>
 			<button class="btnEditor" id="Editor">Editar Producto</button>
 			<div id="popContainer">
@@ -81,7 +81,7 @@ class Editor_Public{
 					jQuery('#Editor').click(function(e){
 						e.preventDefault();
 						document.getElementById("popContainer").style.display = "block"; 
-						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
+						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $producto; ?>');
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
 				});

@@ -5332,7 +5332,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                active = _theme$getStyle.active,
 	                hover = _theme$getStyle.hover;
 
-	            var menuItemHtml = '\n            <svg class="svg_ic-menu">\n                <use xlink:href="' + normal.path + '#' + normal.name + '-ic-' + menuName + '" class="normal"/>\n                <use xlink:href="' + active.path + '#' + active.name + '-ic-' + menuName + '" class=""/>\n                <use xlink:href="' + hover.path + '#' + hover.name + '-ic-' + menuName + '" class="hover"/>\n            </svg>\n        ';
+	            var menuItemHtml = '\n            <svg class="svg_ic-menu">\n                <use xlink:href="' + normal.path + '#' + normal.name + '-ic-' + menuName + '" class="normal active"/>\n                <use xlink:href="' + active.path + '#' + active.name + '-ic-' + menuName + '" class="active"/>\n                <use xlink:href="' + hover.path + '#' + hover.name + '-ic-' + menuName + '" class="hover"/>\n            </svg>\n        ';
 
 	            btnElement.id = 'tie-btn-' + menuName;
 	            btnElement.className = 'tui-image-editor-item normal';
