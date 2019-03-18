@@ -13,6 +13,11 @@ define('app_env', 'development');
 define( 'W_URL', plugins_url('/zalemto-editor/') );
 ini_set('max_execution_time', 300);
 
+date_default_timezone_set('America/Bogota');
+$fecha = date("Y"). date("m"). date("d"). date("H"). date("i"). date("s");
+$dia = date("Y").'-'.date("m").'-'.date("d");
+
+
 /**
 * Configurar el entorno
 */
