@@ -2,8 +2,8 @@
 /**
 * funciones del plugiin en la parte pública
 *
-* @package    zalemto-editor
-* @subpackage zalemto-editor/resources
+* @package    edicion-de-productos
+* @subpackage edicion-de-productos/resources
 * @author     ZALEMTO STUDIOS <soporte@zalemto.com>
 * @link https://zalemto.com
 *

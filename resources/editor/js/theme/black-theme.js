@@ -1,5 +1,5 @@
 var blackTheme = {
-    'common.bi.image': '/wordpress/wp-content/plugins/zalemto-editor/assets/img/LogoZalemto-Wh.png',
+    'common.bi.image': '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
     'common.bisize.width': '105px',
     'common.bisize.height': '35px',
     'common.backgroundImage': 'none',
@@ -26,13 +26,13 @@ var blackTheme = {
     'downloadButton.fontSize': '12px',
 
     // main icons
-    'menu.normalIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-d.svg',
+    'menu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
     'menu.normalIcon.name': 'icon-d',
-    'menu.activeIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-b.svg',
+    'menu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg',
     'menu.activeIcon.name': 'icon-b',
-    'menu.disabledIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-a.svg',
+    'menu.disabledIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
     'menu.disabledIcon.name': 'icon-a',
-    'menu.hoverIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-c.svg',
+    'menu.hoverIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
     'menu.hoverIcon.name': 'icon-c',
     'menu.iconSize.width': '24px',
     'menu.iconSize.height': '24px',
@@ -42,9 +42,9 @@ var blackTheme = {
     'submenu.partition.color': '#3c3c3c',
 
     // submenu icons
-    'submenu.normalIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-d.svg',
+    'submenu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
     'submenu.normalIcon.name': 'icon-d',
-    'submenu.activeIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-c.svg',
+    'submenu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
     'submenu.activeIcon.name': 'icon-c',
     'submenu.iconSize.width': '32px',
     'submenu.iconSize.height': '32px',

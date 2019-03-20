@@ -1,7 +1,7 @@
 <?php
 /**
 *	@wordpress-plugin
-*	Plugin Name: 	Zalemto-Editor
+*	Plugin Name: 	Edicion-De-Productos
 *	Plugin URI: 	https://htcolombia.com
 *	description: 	Plugin de edicion de productos para woocommerce
 *	Version: 		1.0

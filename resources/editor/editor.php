@@ -1,9 +1,9 @@
 <?php
 if ( !defined('ABSPATH') ) {
-    //If wordpress isn't loaded load it up.
-    $path = $_SERVER['DOCUMENT_ROOT']."/wordpress";
-    include_once $path . '/wp-load.php';
-    include_once $path."/wp-content/plugins/zalemto-editor/includes/settings.php";
+	//If wordpress isn't loaded load it up.
+	$path = $_SERVER['DOCUMENT_ROOT']."/wordpress";
+	include_once $path . '/wp-load.php';
+	include_once $path."/wp-content/plugins/edicion-de-productos/includes/settings.php";
 }
 ?>
 <!DOCTYPE html>
@@ -18,6 +18,11 @@ if ( !defined('ABSPATH') ) {
 		div #tui-image-editor-container{
 			height: 100%;
 			margin: 0;
+		}
+		.tui-image-editor .tui-image-editor-canvas-container{
+			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto"]; ?>');
+			background-size:contain;
+			background-repeat:no-repeat;
 		}
 	</style>
 </head>
@@ -37,6 +42,10 @@ if ( !defined('ABSPATH') ) {
 	 // Image editor
 	var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 		includeUI: {
+			loadImage: {
+				path: '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/background.png',
+				name: 'SampleImage'
+			},
 			theme: blackTheme, // or whiteTheme
 			initMenu: '',
 			menuBarPosition: 'bottom'

@@ -3,8 +3,8 @@
 /**
  * Mantiene y registra los hooks del plugin
  *
- * @package    zalemto-editor
- * @subpackage zalemto-editor/includes
+ * @package    edicion-de-productos
+ * @subpackage edicion-de-productos/includes
  * @author     ZALEMTO STUDIOS <soporte@zalemto.com>
  * @link https://zalemto.com
  */

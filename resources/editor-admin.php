@@ -2,8 +2,8 @@
 /**
 * funciones del plugiin en la parte administrativa
 *
-* @package    zalemto-editor
-* @subpackage zalemto-editor/resources
+* @package    edicion-de-productos
+* @subpackage edicion-de-productos/resources
 * @author     ZALEMTO STUDIOS <soporte@zalemto.com>
 * @link https://zalemto.com
 *
@@ -13,7 +13,7 @@
 class Editor_Admin{
 
 	/**
-	 * Edit es el identificador general del plugin
+	 * Editor es el identificador general del plugin
 	 */
 	protected $editor;
 

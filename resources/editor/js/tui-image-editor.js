@@ -6004,7 +6004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 // default keys and styles
 	 var customTheme = {
-		'common.bi.image': '/wordpress/wp-content/plugins/zalemto-editor/assets/img/LogoZalemto-Wh.png',
+		'common.bi.image': '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
 		'common.bisize.width': '105px',
 		'common.bisize.height': '35px',
 		'common.backgroundImage': 'none',
@@ -6031,9 +6031,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		'downloadButton.fontSize': '12px',
 
 		// main icons
-		'menu.normalIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-b.svg',
+		'menu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg',
 		'menu.normalIcon.name': 'icon-b',
-		'menu.activeIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-a.svg',
+		'menu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
 		'menu.activeIcon.name': 'icon-a',
 		'menu.iconSize.width': '24px',
 		'menu.iconSize.height': '24px',
@@ -6043,9 +6043,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		'submenu.partition.color': '#858585',
 
 		// submenu icons
-		'submenu.normalIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-a.svg',
+		'submenu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
 		'submenu.normalIcon.name': 'icon-a',
-		'submenu.activeIcon.path': '/wordpress/wp-content/plugins/zalemto-editor/resources/editor/img/svg/icon-c.svg',
+		'submenu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
 		'submenu.activeIcon.name': 'icon-c',
 		'submenu.iconSize.width': '32px',
 		'submenu.iconSize.height': '32px',
@@ -6078,7 +6078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	 */
 	exports.default = {
-	  'common.bi.image': '/wordpress/wp-content/plugins/zalemto-editor/assets/img/LogoZalemto-Wh.png',
+	  'common.bi.image': '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
 	  'common.bisize.width': '105px',
 	  'common.bisize.height': '35px',
 	  'common.backgroundImage': 'none',

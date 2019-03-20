@@ -2,15 +2,15 @@
 /**
 * Registro de configuraciones del plugin
 *
-* @package    zalemto-editor
-* @subpackage zalemto-editor/includes
+* @package    edicion-de-productos
+* @subpackage edicion-de-productos/includes
 * @author     ZALEMTO STUDIOS <soporte@zalemto.com>
 * @link https://zalemto.com
 *
 */
 
 define('app_env', 'development');
-define( 'W_URL', plugins_url('/zalemto-editor/') );
+define( 'W_URL', plugins_url('/edicion-de-productos/') );
 ini_set('max_execution_time', 300);
 
 date_default_timezone_set('America/Bogota');
@@ -22,18 +22,18 @@ $dia = date("Y").'-'.date("m").'-'.date("d");
 * Configurar el entorno
 */
 if(app_env == 'production'){
-	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/zalemto-editor");
-	define('URL_PS', $_SERVER['HTTP_HOST']."wp-content/plugins/zalemto-editor/");
-	define('URL_PB', "/wp-content/plugins/zalemto-editor");
+	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/edicion-de-productos");
+	define('URL_PS', $_SERVER['HTTP_HOST']."wp-content/plugins/edicion-de-productos/");
+	define('URL_PB', "/wp-content/plugins/edicion-de-productos");
 }else{
 	//Mostrar errores de php supongo que toca cabiar eso Yimmy por edicion-de-productos
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');
 	
 	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wordpress/wp-content/plugins/edicion-de-productos");
-	define('URL_PS', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/zalemto-editor");
+	define('URL_PS', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/edicion-de-productos");
 	//echo URL;
-	define('URL_PB', "/wordpress/wp-content/plugins/zalemto-editor");
+	define('URL_PB', "/wordpress/wp-content/plugins/edicion-de-productos");
 }
 
 class Settings{
