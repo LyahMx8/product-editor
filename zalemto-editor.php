@@ -6,7 +6,7 @@
 *	description: 	Plugin de edicion de productos para woocommerce
 *	Version: 		1.0
 *	Author: 		Zalemto Studios
-*	Author URI: 	https://zalemto.com
+*	Author URI: 	https://www.zalemto.com
 *	License: 		GPL2
 *	License URI:	http://www.gnu.org/licenses/gpl-2.0.txt
 */
