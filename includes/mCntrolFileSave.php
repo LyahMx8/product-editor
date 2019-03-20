@@ -1,19 +1,20 @@
 <?php
 
 class mCntrolFileSave{
+	
 	private $mGetFileSletd;
 	private $ModelNmImg;
 	private $rBasExt;
-	private $mSeccnSave;
+
 	function __construct($FileGetoSve){
 		
-		$this->mGetFileSletd = $FileGetoSve;
+		$this->mGetFileSletd = $FileGetoSve; $this->mFunSlcErrFle();
 
 	}
-	public function mFunSlcErrFle(){
+	private function mFunSlcErrFle(){
 		
 		try{
-			$this->mSeccnSave = $mGetSeccin;
+
 			if($this->mGetFileSletd['type']!=UPLOAD_ERR_OK)
 				throw new Exception("Error al Subir la Imagen!");
 			else return $this->mFunSlcTypFle();
@@ -43,7 +44,7 @@ class mCntrolFileSave{
 		else return $this->mFunSlcMovImg();
 
 	}
-	private function mFunSlcMovImg(){ $mPath = W_URL."/productos/";
+	private function mFunSlcMovImg(){ $mPath = SERV."/productos/";
 
 		$mNmbArchv = basename(date("Y-m-d").".".$this->rBasExt);
 		if(!move_uploaded_file($this->mGetFileSletd['tmp_name'],$mPath.$mNmbArchv))
