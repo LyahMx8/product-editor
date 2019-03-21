@@ -167,7 +167,7 @@ class Editor_Admin{
 	 * Funcion que agrega el nuevo metabox de edición de productos
 	 */
 	function meta_box_editor(){
-		add_meta_box( 'image-alpha-product', __( 'Image Alpha', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
+		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
 	}
 
 
