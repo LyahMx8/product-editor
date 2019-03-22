@@ -65,7 +65,7 @@ class Functions{
 		$sql = "CREATE TABLE IF NOT EXISTS zalemto_editor_img (
 			cmpidimg int(10) NOT NULL AUTO_INCREMENT,
 			cmpidprdct int(15) NOT NULL,
-			cmpidtipimg varchar(10) NOT NULL,
+			cmpidtipimg int(10) NOT NULL,
 			cmpurlimg varchar(255) DEFAULT '' NOT NULL,
 			cmpfechup DATETIME NOT NULL,
 			PRIMARY KEY (cmpidimg)

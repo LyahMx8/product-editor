@@ -114,6 +114,7 @@ class Editor_Admin{
 			<div style="display:none;" id="alphaSend">
 				<p>Haz clic en la imagen para editarla o actualizarla</p>
 				<input type="hidden" id="idproductup" value="<?php print($thepostid); ?>">
+				<input type="hidden" id="tipproduct" value="0">
 				<button id="upalpha" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagen</button>
 			</div>
 		</form>
@@ -131,7 +132,7 @@ class Editor_Admin{
 
 			mFnctnajaxflereqst = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
 				var mGetFleRequest = new FormData();
-				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductup").val());
+				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductup").val()); mGetFleRequest.append('TiProduct',$("#tipproduct").val());
 				$.ajax({
 					url: vrblurlorigen,
 					data: mGetFleRequest,

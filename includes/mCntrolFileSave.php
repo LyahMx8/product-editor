@@ -3,12 +3,15 @@
 class mCntrolFileSave{
 	
 	private $mGetFileSletd;
-	private $ModelNmImg;
+	private $ModelNmImg=array(0=>"Imagen Alpha Frontal",1=>"Imagen Alpha Trasera",2=>"Imagenes Frontales",3=>"Imagenes Traseras", 4=>"Imagen Editada");
 	private $rBasExt;
+	private $m_base_post;
 
-	function __construct($FileGetoSve){
+	function __construct($FileGetoSve, $base_post){
 		
-		$this->mGetFileSletd = $FileGetoSve; $this->mFunSlcErrFle();
+		$this->mGetFileSletd = $FileGetoSve;
+
+		$this->m_base_post = $base_post; $this->mFunSlcErrFle();
 
 	}
 	private function mFunSlcErrFle(){
@@ -44,9 +47,15 @@ class mCntrolFileSave{
 		else return $this->mFunSlcMovImg();
 
 	}
-	private function mFunSlcMovImg(){ $mPath = SERV."/productos/";
+	private function mFunSlcMovImg(){ $mPath = SERV."/productos/"; $mPatchsave = "productos/";
+
+		global $wpdb; 
 
 		$mNmbArchv = basename(date("Y-m-d").".".$this->rBasExt);
+
+		$sql = ("INSERT INTO zalemto_editor_img (cmpidprdct, cmpidtipimg, cmpurlimg, cmpfechup) values ('".$this->m_base_post['IdProduct']."','".$this->m_base_post['TiProduct']."','".$mPatchsave.$mNmbArchv."','".date("Y-m-d H:i:s")."')");
+		$wpdb->query($sql);
+
 		if(!move_uploaded_file($this->mGetFileSletd['tmp_name'],$mPath.$mNmbArchv))
 			throw new Exception("Error Moviendo Archivo Ubicacion");
 		else return true;
@@ -54,5 +63,6 @@ class mCntrolFileSave{
 	function __destruct(){
 		unset($this->mGetFileSletd);
 		unset($this->rBasExt);
+		unset($this->m_base_post);
 	}
 }
