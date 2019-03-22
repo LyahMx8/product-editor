@@ -57,7 +57,23 @@ class Functions{
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
 	}
+	public function create_images_table(){
+		global $wpdb;
 
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$sql = "CREATE TABLE IF NOT EXISTS zalemto_editor_img (
+			cmpidimg int(10) NOT NULL AUTO_INCREMENT,
+			cmpidprdct int(15) NOT NULL,
+			cmpidtipimg varchar(10) NOT NULL,
+			cmpurlimg varchar(255) DEFAULT '' NOT NULL,
+			cmpfechup DATETIME NOT NULL,
+			PRIMARY KEY (cmpidimg)
+		) $charset_collate;";		
+
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );				
+	}
 	/*
 	 * Obtener la versión de WooCommerce
 	 */

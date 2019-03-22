@@ -9,9 +9,15 @@ if ( !defined('ABSPATH') ) {
 $fecha = date("Y-m-d H:i:s");
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 	/* 
-	* El uso de INSERT se puede dar por descartado ya que tendría que implementarse para cada una de las opciones de subida
-	* eso quiere decir que si suben una con el ID del producto se tendría que inspeccionar si ya esta el id creado y hacer updates dependiendo la cituacion de cada uno de los casos se estima un rediseño de la base de datos para guardar cada img
+	* Ya definila consulta en functions ahora se puede almacenar las imagenes con este array para definir si es frontal o algo 
+	* asi....
 	*/
+	$array_imagen_tipo=array(0=>"Imagen Alpha Frontal",1=>"Imagen Alpha Trasera",2=>"Imagenes Frontales",3=>"Imagenes Traseras", 4=>"Imagen Editada");
+	/*
+	*	Que dice Yimmy? asi seria mas facil saber si es imagen alpha se peude borrar al igual que las imagenes que se tienen
+	*	los unicos estados que van a tener mayor cantidad de imagenes van a ser el 2, 3 y muy posible 4
+	*/
+
 	$foo = new mCntrolFileSave($_FILES["ImageRequest"]);
 
 	global $wpdb;

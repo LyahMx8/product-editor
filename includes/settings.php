@@ -112,6 +112,7 @@ class Settings{
 		$this->loader->add_action( 'init', $plugin_functions, 'set_variable_action_filters', 99);
 		$this->loader->add_filter('init', $plugin_functions, 'wpd_add_rewrite_rules',99);
 		$this->loader->add_action('init', $plugin_functions, 'create_editor_table',99);
+		$this->loader->add_action('init', $plugin_functions, 'create_images_table',99);
 		$this->loader->add_filter('query_vars', $plugin_functions, 'wpd_add_query_vars');
 
 	}
