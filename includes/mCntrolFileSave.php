@@ -53,6 +53,13 @@ class mCntrolFileSave{
 
 		$mNmbArchv = basename(date("Y-m-d").".".$this->rBasExt);
 
+		if($this->m_base_post['TiProduct']==0 || $this->m_base_post['TiProduct']==1){
+	
+			$result = $wpdb->get_row("SELECT cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$this->m_base_post['TiProduct']." AND cmpidprdct = ".$this->m_base_post['IdProduct'], ARRAY_A);
+
+			if(!empty($result['cmpidimg']) || !is_null($result['cmpidimg'])) $wpdb->query("DELETE FROM zalemto_editor_img WHERE cmpidimg = ".$result['cmpidimg']);
+		}
+
 		$sql = ("INSERT INTO zalemto_editor_img (cmpidprdct, cmpidtipimg, cmpurlimg, cmpfechup) values ('".$this->m_base_post['IdProduct']."','".$this->m_base_post['TiProduct']."','".$mPatchsave.$mNmbArchv."','".date("Y-m-d H:i:s")."')");
 		$wpdb->query($sql);
 
