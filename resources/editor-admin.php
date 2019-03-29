@@ -107,7 +107,7 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" multiple class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAdd">
-					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;"/></div>
+					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,0); ?> /></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
 				</label>
 			</div>
@@ -161,7 +161,7 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" multiple class="custom-file-input" name="mImageAddBack" id="mImageAddBack" onchange="loadFileBck(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddBack">
-					<div id="uprecallbck" ><img id="outputbck" style="width:100%;max-height:500px;object-fit:cover;"/></div>
+					<div id="uprecallbck" ><img id="outputbck" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,1); ?> /></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
 				</label>
 			</div>
@@ -209,7 +209,14 @@ class Editor_Admin{
 		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}
 
+	private static function show_preimages($id_post,$tip_post){
+		global $wpdb;
+		
+		$result = $wpdb->get_row("SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A);
 
-	
+		if(!is_null($result['cmpurlimg'])) return 'src="'.W_URL.$result['cmpurlimg'].'"';
+
+		return "";
+	}
 
 }
