@@ -209,9 +209,9 @@ class Editor_Admin{
 		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}
 
-	private static function show_preimages($id_post,$tip_post){
+	public static function show_preimages($id_post,$tip_post){
 		global $wpdb;
-		
+
 		$result = $wpdb->get_row("SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A);
 
 		if(!is_null($result['cmpurlimg'])) return 'src="'.W_URL.$result['cmpurlimg'].'"';

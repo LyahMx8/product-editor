@@ -23,8 +23,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	global $wpdb;
 
 	if($foo){
-		
-		//print("ID->".$_POST["IdProduct"]);
+
+		echo '<img id="output" style="width:100%;max-height:500px;object-fit:cover;" '.Editor_Admin::show_preimages($_POST['IdProduct'],$_POST['TiProduct']).' />';
 		
 		echo "Subida Exitosa";
 
