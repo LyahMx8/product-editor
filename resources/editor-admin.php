@@ -107,13 +107,14 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" multiple class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAdd">
-					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;"/></div>
+					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,0); ?> /></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
 				</label>
 			</div>
 			<div style="display:none;" id="alphaSend">
 				<p>Haz clic en la imagen para editarla o actualizarla</p>
 				<input type="hidden" id="idproductup" value="<?php print($thepostid); ?>">
+				<input type="hidden" id="tipproduct" value="0">
 				<button id="upalpha" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagen</button>
 			</div>
 		</form>
@@ -131,7 +132,61 @@ class Editor_Admin{
 
 			mFnctnajaxflereqst = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
 				var mGetFleRequest = new FormData();
-				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductup").val());
+				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductup").val()); mGetFleRequest.append('TiProduct',$("#tipproduct").val());
+				$.ajax({
+					url: vrblurlorigen,
+					data: mGetFleRequest,
+					processData: false,
+					contentType: false,
+					type: 'POST',
+					beforeSend: function(){$("#"+vrbldivdestino).html("Guardando Imagen...");},
+					success: function(vrblprdctscplt){return $('#'+vrbldivdestino).html(vrblprdctscplt);}
+				});
+			}
+		</script>
+		<?php
+	}
+	public static function outputb($post){
+		/*
+			El Funcionamiento de cada subida es muy parecida se espera optimizar y modificar esta seccion para utilizar solo
+			una function en JS para este caso
+		*/
+		global $thepostid, $product_object;
+
+		$thepostid      = $post->ID;
+		$product_object = $thepostid ? wc_get_product( $thepostid ) : new WC_Product();
+		wp_nonce_field( 'woocommerce_save_data', 'woocommerce_meta_nonce' );
+		?>
+		<form enctype="multipart/form-data" class="vFormImg">
+			<div class="col-sm-5 custom-file">
+				<input type="file" multiple class="custom-file-input" name="mImageAddBack" id="mImageAddBack" onchange="loadFileBck(event)" style="display:none;">
+				<label class="custom-file-label" for="mImageAddBack">
+					<div id="uprecallbck" ><img id="outputbck" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,1); ?> /></div>
+					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
+				</label>
+			</div>
+			<div style="display:none;" id="alphaSendbck">
+				<p>Haz clic en la imagen para editarla o actualizarla</p>
+				<input type="hidden" id="idproductupbck" value="<?php print($thepostid); ?>">
+				<input type="hidden" id="tipproductbck" value="1">
+				<button id="upalphaback" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagen</button>
+			</div>
+		</form>
+		
+		<script>
+			$('#upalphaback').click(function(e){ e.preventDefault();
+				mFnctnajaxflereqstbck("uprecallbck","#mImageAddBack",$(this).attr("rel"));
+			});
+
+			var loadFileBck = function(event) {
+				document.getElementById('alphaSendbck').style.display = "block";
+				var outputbck = document.getElementById('outputbck');
+				outputbck.src = URL.createObjectURL(event.target.files[0]);
+			};
+
+			mFnctnajaxflereqstbck = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
+				var mGetFleRequest = new FormData();
+				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductupbck").val()); mGetFleRequest.append('TiProduct',$("#tipproductbck").val());
 				$.ajax({
 					url: vrblurlorigen,
 					data: mGetFleRequest,
@@ -147,30 +202,21 @@ class Editor_Admin{
 	}
 
 	/**
-	 * Funcion que almacena los datos contenidos en el metabox
-	 *
-	 * @param int     $post_id
-	 * @param WP_Post $post
-	 */
-	public static function save( $post_id, $post ) {
-		$product_type   = empty( $_POST['product-type'] ) ? WC_Product_Factory::get_product_type( $post_id ) : sanitize_title( stripslashes( $_POST['product-type'] ) );
-		$classname      = WC_Product_Factory::get_product_classname( $post_id, $product_type ? $product_type : 'simple' );
-		$product        = new $classname( $post_id );
-		$attachment_ids = isset( $_POST['product_image_gallery'] ) ? array_filter( explode( ',', wc_clean( $_POST['product_image_gallery'] ) ) ) : array();
-
-		$product->set_gallery_image_ids( $attachment_ids );
-		$product->save();
-	}
-
-
-	/**
 	 * Funcion que agrega el nuevo metabox de edición de productos
 	 */
 	function meta_box_editor(){
 		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
+		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}
 
+	public static function show_preimages($id_post,$tip_post){
+		global $wpdb;
 
-	
+		$result = $wpdb->get_row("SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A);
+
+		if(!is_null($result['cmpurlimg'])) return 'src="'.W_URL.$result['cmpurlimg'].'"';
+
+		return "";
+	}
 
 }
