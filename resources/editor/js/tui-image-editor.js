@@ -5211,7 +5211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					},
 					locale: {},
 					menuIconPath: '',
-					menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'icon', 'text', 'mask', 'filter'],
+					menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'icon', 'text'],
 					initMenu: '',
 					uiSize: {
 						width: '100%',
