@@ -27,7 +27,6 @@ if ( !defined('ABSPATH') ) {
 	</style>
 </head>
 	
-<div id="tui-image-editor-container"></div>
 
 <body>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
@@ -37,6 +36,9 @@ if ( !defined('ABSPATH') ) {
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-image-editor.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/white-theme.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
+	
+	<div id="tui-image-editor-container"></div>
+	
 	<script>
 
 	 // Image editor

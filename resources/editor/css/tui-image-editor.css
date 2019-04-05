@@ -59,7 +59,7 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-header-buttons button,
 .tui-image-editor-container .tui-image-editor-header-buttons div,
-.tui-image-editor-container .tui-image-editor-controls-buttons button {
+.tui-image-editor-container .tui-image-editor-controls-buttons button, #tui-image-editor-next-btn {
   display: inline-block;
   position: relative;
   padding: 0;
