@@ -4,8 +4,13 @@
 .popUp{width:80%;height:93vh;top:3vh;left:10%;display:block;margin:0 auto;position:fixed;overflow-y:auto;overflow-x:auto;z-index:9999;background:#fff;border:2px solid #efefef;border-radius:15px;}
 .popLayer{width:100%;height:100vh;position:fixed;top:0;left:0;background:rgba(0,0,0,.6);z-index:9998;cursor:pointer;}
 .popLayer span{font-size:22px;font-weight:900;position:fixed;top:15px;right:15px;color:rgba(255,255,255,.8);}
-.datosForm div input + label {position: relative;top: -30px;left: 10px;color: rgba(255,255,255,0);transition: .2s all ease;}
-.datosForm div input:focus + label {top: -60px;left: 0;color: rgba(255,255,255,1);}
+.datosForm{padding:15px;display:block;overflow:hidden;}
+.datosForm div input{display:block;padding: 5px;border:2px solid #009acf;border-radius:15px;}
+.datosForm div input + label {position: relative;top: -34px;left: 10px;color: rgba(0,0,0,0.5);transition: .2s all ease;}
+.datosForm div input:focus + label {top: -65px;left: 0;color: rgba(0,0,0,0.8);}
+.datosForm input[type="submit"]{border-radius:15px;border:2px solid #fff;background:#009acf;color:#fff;}
+.datosForm input[type="submit"]:hover{border-radius:25px;border:2px solid #009acf;background:#fff;color:#009acf;}
+.formCntn{float:left;margin-right:15px;}
 
 #productos {border-collapse: collapse;width: 100%;overflow-x:auto;}
 #productos td, #productos th {padding: 8px;}
@@ -15,4 +20,5 @@
 
 @media screen and (max-width:600px){
 	.popUp{width:96%;left:2%;}
+	.formCntn{margin-right:0}
 }

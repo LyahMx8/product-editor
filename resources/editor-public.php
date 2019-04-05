@@ -78,13 +78,18 @@ class Editor_Public{
 					<span>X</span>
 				</div>
 				<section class="popUp">
-					<h3>Llena tus datos</h3>
-					<p>Por favor llena tus datos completos, para que podamos ponernos en contacto contigo</p>
 					<form action="" class="datosForm">
-						<div><input type="text" id="datoNom"><label for="datoNom">Nombre</label></div>
-						<div><input type="text" id="datoTel"><label for="datoTel">Teléfono</label></div>
-						<div><input type="text" id="datoDir"><label for="datoDir">Dirección</label></div>
-						<div><input type="text" id="datoEmail"><label for="datoEmail">Correo Electrónico</label></div>
+						<h3>Llena tus datos</h3>
+						<p>Por favor llena tus datos completos, para que podamos ponernos en contacto contigo</p>
+						<div class="formCntn">
+							<div><input type="text" id="datoNom"><label for="datoNom">Nombre</label></div>
+							<div><input type="text" id="datoTel"><label for="datoTel">Teléfono</label></div>
+						</div>
+						<div class="formCntn">
+							<div><input type="text" id="datoDir"><label for="datoDir">Dirección</label></div>
+							<div><input type="text" id="datoEmail"><label for="datoEmail">Correo Electrónico</label></div>
+						</div><br style="clear:left;">
+						<input type="submit" value="Enviar">
 					</form>
 				</section>
 			</div>
