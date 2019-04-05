@@ -65,11 +65,28 @@ class Editor_Public{
 			$producto = $product_editor->producto_frontal;
 			?>
 			<button class="btnEditor" id="Editor">Editar Producto</button>
+			<button class="btnEditor" id="Datos">Llenar datos</button>
 			<div id="popContainer">
-				<div id="popLayer" onclick="closeModal()">
+				<div class="popLayer" onclick="closeModal('popContainer')">
 					<span>X</span>
 				</div>
 				<section class="popUp" id="popUp"></section>
+			</div>
+
+			<div id="popDatos">
+				<div class="popLayer" onclick="closeModal('popDatos')">
+					<span>X</span>
+				</div>
+				<section class="popUp">
+					<h3>Llena tus datos</h3>
+					<p>Por favor llena tus datos completos, para que podamos ponernos en contacto contigo</p>
+					<form action="" class="datosForm">
+						<div><input type="text" id="datoNom"><label for="datoNom">Nombre</label></div>
+						<div><input type="text" id="datoTel"><label for="datoTel">Teléfono</label></div>
+						<div><input type="text" id="datoDir"><label for="datoDir">Dirección</label></div>
+						<div><input type="text" id="datoEmail"><label for="datoEmail">Correo Electrónico</label></div>
+					</form>
+				</section>
 			</div>
 
 			<script>
@@ -84,6 +101,11 @@ class Editor_Public{
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $producto; ?>');
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
+
+					jQuery('#Datos').click(function(e){
+						e.preventDefault();
+						document.getElementById("popDatos").style.display = "block";
+					});
 				});
 				fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){
 					jQuery.ajax({
@@ -100,8 +122,8 @@ class Editor_Public{
 				/**
 				* Funcion que cierra el modal
 				*/
-				function closeModal(){
-					document.getElementById("popContainer").style.display = "none"; jQuery('#Editor').removeAttr('disabled');
+				function closeModal(nombreModal){
+					document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
 				}
 			</script>
 		<?php
