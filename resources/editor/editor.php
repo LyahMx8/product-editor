@@ -3,7 +3,7 @@ if ( !defined('ABSPATH') ) {
 	//traer cuando wordprress cargue.
 	$path = $_SERVER['DOCUMENT_ROOT'].'/wordpress';
 	include_once $path.'/wp-load.php';
-	include_once plugin_dir_path(  dirname(__DIR__) ).'includes/settings.php';
+	include_once plugin_dir_path( dirname(__DIR__) ).'includes/settings.php';
 }
 ?>
 <!DOCTYPE html>
@@ -13,6 +13,7 @@ if ( !defined('ABSPATH') ) {
 	<title>Document</title>
 	<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/tui-image-editor.css'; ?>" rel="stylesheet">
+	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/fontselect-alternate.css'; ?>" rel="stylesheet">
 	<style>
 		@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
 		div #tui-image-editor-container{
@@ -29,11 +30,13 @@ if ( !defined('ABSPATH') ) {
 	
 
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
 	<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
 	<script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.js"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-image-editor.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/white-theme.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
 	
@@ -59,6 +62,21 @@ if ( !defined('ABSPATH') ) {
 	 window.onresize = function() {
 		 imageEditor.ui.resizeEditor();
 	 }
+	</script>
+	<script>
+		$(function(){
+			$('#font').fontselect().change(function(){
+			
+				// replace + signs with spaces for css
+				var font = $(this).val().replace(/\+/g, ' ');
+				
+				// split font into family and weight
+				font = font.split(':');
+				
+				// set family on paragraphs 
+				$('p').css('font-family', font[0]);
+			});
+		});
 	</script>
 
 	

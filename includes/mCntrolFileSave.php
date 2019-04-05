@@ -56,7 +56,7 @@ class mCntrolFileSave{
 		if($this->m_base_post['TiProduct']==0 || $this->m_base_post['TiProduct']==1){
 	
 			$result = $wpdb->get_row("SELECT cmpidimg,cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$this->m_base_post['TiProduct']." AND cmpidprdct = ".$this->m_base_post['IdProduct'], ARRAY_A);
-
+			//echo $result['cmpurlimg'];
 			if(!empty($result['cmpidimg']) || !is_null($result['cmpidimg'])) $wpdb->query("DELETE FROM zalemto_editor_img WHERE cmpidimg = ".$result['cmpidimg']); unlink(SERV."/".$result['cmpurlimg']);
 		}
 
