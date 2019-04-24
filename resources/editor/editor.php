@@ -53,7 +53,7 @@ if ( !defined('ABSPATH') ) {
 			},
 			theme: blackTheme, // or whiteTheme
 			initMenu: '',
-			menuBarPosition: 'bottom'
+			menuBarPosition: 'left'
 		},
 		cssMaxWidth: 700,
 		cssMaxHeight: 500
