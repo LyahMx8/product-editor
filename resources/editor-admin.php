@@ -201,15 +201,60 @@ class Editor_Admin{
 		<?php
 	}
 	public static function out_carrousel_image($post){
-		print("Galeria Imagenes");
+		
+		$thepostid = $post->ID;
+
+		?>
+		<form enctype="multipart/form-data" class="vFormImgGalMuch">
+			<div class="col-sm-5 custom-file">
+				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas" id="mImageAddMuchas" onchange="loadFileBck(event)" style="display:none;">
+				<label class="custom-file-label" for="mImageAddMuchas">
+					<div id="uprecallmuchas" ><img id="outputmuchas" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,2); ?> /></div>
+					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
+				</label>
+			</div>
+			<div style="display:none;" id="GallerySendMuchas">
+				<p>Haz clic en la imagen para editarla o actualizarla</p>
+				<input type="hidden" id="idproductGalMuch" value="<?php print($thepostid); ?>">
+				<input type="hidden" id="tipproductGalMuch" value="1">
+				<button id="upalphaback" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagen</button>
+			</div>
+		</form>
+		
+		<script>
+			$('#upalphaback').click(function(e){ e.preventDefault();
+				mFnctnajaxflereqstGalMuch("uprecallmuchas","#mImageAddMuchas",$(this).attr("rel"));
+			});
+
+			var loadFileBck = function(event) {
+				document.getElementById('GallerySendMuchas').style.display = "block";
+				var outputmuchas = document.getElementById('outputmuchas');
+				outputmuchas.src = URL.createObjectURL(event.target.files[0]);
+			};
+
+			mFnctnajaxflereqstGalMuch = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
+				var mGetFleRequest = new FormData();
+				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductGalMuch").val()); mGetFleRequest.append('TiProduct',$("#tipproductGalMuch").val());
+				$.ajax({
+					url: vrblurlorigen,
+					data: mGetFleRequest,
+					processData: false,
+					contentType: false,
+					type: 'POST',
+					beforeSend: function(){$("#"+vrbldivdestino).html("Guardando Imagen...");},
+					success: function(vrblprdctscplt){return $('#'+vrbldivdestino).html(vrblprdctscplt);}
+				});
+			}
+		</script>
+		<?php
 	}
 	/**
 	 * Funcion que agrega el nuevo metabox de edición de productos
 	 */
 	function meta_box_editor(){
+		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
 		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
 		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
-		add_meta_box( 'image-alpha-product-back', __( 'Galeria de Imagenes Edicion', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
 	}
 
 	public static function show_preimages($id_post,$tip_post){
