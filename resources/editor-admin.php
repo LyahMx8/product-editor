@@ -105,7 +105,7 @@ class Editor_Admin{
 		?>
 		<form enctype="multipart/form-data" class="vFormImg">
 			<div class="col-sm-5 custom-file">
-				<input type="file" multiple class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
+				<input type="file" class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAdd">
 					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,0); ?> /></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
@@ -159,7 +159,7 @@ class Editor_Admin{
 		?>
 		<form enctype="multipart/form-data" class="vFormImg">
 			<div class="col-sm-5 custom-file">
-				<input type="file" multiple class="custom-file-input" name="mImageAddBack" id="mImageAddBack" onchange="loadFileBck(event)" style="display:none;">
+				<input type="file" class="custom-file-input" name="mImageAddBack" id="mImageAddBack" onchange="loadFileBck(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddBack">
 					<div id="uprecallbck" ><img id="outputbck" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,1); ?> /></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
@@ -207,26 +207,26 @@ class Editor_Admin{
 		?>
 		<form enctype="multipart/form-data" class="vFormImgGalMuch">
 			<div class="col-sm-5 custom-file">
-				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas" id="mImageAddMuchas" onchange="loadFileBck(event)" style="display:none;">
+				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddMuchas">
 					<div id="uprecallmuchas" ><img id="outputmuchas" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,2); ?> /></div>
-					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
+					<a style="text-decoration:underline;">Establecer imagenes para Edición</a>
 				</label>
 			</div>
 			<div style="display:none;" id="GallerySendMuchas">
-				<p>Haz clic en la imagen para editarla o actualizarla</p>
+				<p>Haz clic en la X para eliminar la imagen de la lista</p>
 				<input type="hidden" id="idproductGalMuch" value="<?php print($thepostid); ?>">
-				<input type="hidden" id="tipproductGalMuch" value="1">
-				<button id="upalphaback" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagen</button>
+				<input type="hidden" id="tipproductGalMuch" value="2">
+				<button id="upImagGalMuch" class="button button-primary button-large" rel="<?php echo plugin_dir_url(__FILE__); ?>editor-admin-up.php">Subir imagenes</button>
 			</div>
 		</form>
 		
 		<script>
-			$('#upalphaback').click(function(e){ e.preventDefault();
+			$('#upImagGalMuch').click(function(e){ e.preventDefault();
 				mFnctnajaxflereqstGalMuch("uprecallmuchas","#mImageAddMuchas",$(this).attr("rel"));
 			});
 
-			var loadFileBck = function(event) {
+			var loadFilesGaleryMuch = function(event) {
 				document.getElementById('GallerySendMuchas').style.display = "block";
 				var outputmuchas = document.getElementById('outputmuchas');
 				outputmuchas.src = URL.createObjectURL(event.target.files[0]);
