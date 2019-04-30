@@ -18,16 +18,24 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	*	los unicos estados que van a tener mayor cantidad de imagenes van a ser el 2, 3 y muy posible 4
 	*/
 
-	if($_POST['TiProduct']!=2 && $_POST['TiProduct']!=3)
+	if($_POST['TiProduct']==2 || $_POST['TiProduct']==3){
+		// Con el Tiempo se deberá cambiar el metodo a subir varias imagenes
+
+		for ($i=0;$i<count($_FILES["ImageRequest"]["name"]);$i++){ 
+			$foo = new mCntrolMultiFileSave($_FILES["ImageRequest"],$_POST,$i);
+		}
+
+	}
+	else{
 		$foo = new mCntrolFileSave($_FILES["ImageRequest"],$_POST);
-	else
-		print_r($_FILES); print("<br>"); print_r($_POST); $foo = false;
+		print("si");
+	}
 
 	global $wpdb;
 
 	if($foo){
 
-		echo '<img id="output" style="width:100%;max-height:500px;object-fit:cover;" '.Editor_Admin::show_preimages($_POST['IdProduct'],$_POST['TiProduct']).' />';
+		Editor_Admin::show_preimages($_POST['IdProduct'],$_POST['TiProduct']);
 		
 		echo "Subida Exitosa";
 

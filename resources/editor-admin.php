@@ -107,7 +107,7 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAdd">
-					<div id="uprecall" ><img id="output" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,0); ?> /></div>
+					<div id="uprecall" ><?php echo Editor_Admin::show_preimages($thepostid,0); ?></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
 				</label>
 			</div>
@@ -161,7 +161,7 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" class="custom-file-input" name="mImageAddBack" id="mImageAddBack" onchange="loadFileBck(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddBack">
-					<div id="uprecallbck" ><img id="outputbck" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,1); ?> /></div>
+					<div id="uprecallbck" ><?php echo Editor_Admin::show_preimages($thepostid,1); ?></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
 				</label>
 			</div>
@@ -210,7 +210,7 @@ class Editor_Admin{
 				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas[]" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddMuchas">
 					<div id="uprecallmuchas" style="overflow: auto;width:100%;">
-					<?php //echo Editor_Admin::show_preimages($thepostid,2); ?>
+					<?php echo Editor_Admin::show_preimages($thepostid,2); ?>
 					</div>
 					<a style="text-decoration:underline;">Establecer imagenes para Edición</a>
 				</label>
@@ -275,9 +275,26 @@ class Editor_Admin{
 	public static function show_preimages($id_post,$tip_post){
 		global $wpdb;
 
-		$result = $wpdb->get_row("SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A);
+		if($tip_post==3 || $tip_post==2){
 
-		if(!is_null($result['cmpurlimg'])) return 'src="'.W_URL.$result['cmpurlimg'].'"';
+			$_order = "";
+
+			$result =  $wpdb->get_results( "SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A );
+
+			if(!is_null($result)){
+				foreach ($result as$k=>$e){
+					$_order .= '<img id="output" style="width:200px;height:150px;margin:25px;"  src="'.W_URL.$e['cmpurlimg'].'"/>';
+				}
+			}
+
+			print($_order);			
+		}
+		else{
+			
+			$result = $wpdb->get_row("SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A);
+
+			if(!is_null($result['cmpurlimg'])) return '<img id="output" style="width:100%;max-height:500px;object-fit:cover;"  src="'.W_URL.$result['cmpurlimg'].'"/>';
+		}
 
 		return "";
 	}
