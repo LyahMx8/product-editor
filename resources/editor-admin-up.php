@@ -28,7 +28,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	}
 	else{
 		$foo = new mCntrolFileSave($_FILES["ImageRequest"],$_POST);
-		print("si");
 	}
 
 	global $wpdb;

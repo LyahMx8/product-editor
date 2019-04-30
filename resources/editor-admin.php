@@ -287,7 +287,7 @@ class Editor_Admin{
 				}
 			}
 
-			print($_order);			
+			return $_order;
 		}
 		else{
 			
