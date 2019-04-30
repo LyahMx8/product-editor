@@ -225,22 +225,31 @@ class Editor_Admin{
 		
 		<script>
 			$('#upImagGalMuch').click(function(e){ e.preventDefault();
-				mFnctnajaxflereqstGalMuch("uprecallmuchas","#mImageAddMuchas",$(this).attr("rel"));
+				mFnctnajaxflereqstGalMuch("uprecallmuchas",$(this).attr("rel"));
 			});
-			/*
-			* Aun hay errores con la logica de subida que planea cambiar a una opion mejor nota aun no se pueden subir imagenes
-			*/
+
+			var FilesAdd = [];
+
 			var loadFilesGaleryMuch = function(event) {
 				document.getElementById('GallerySendMuchas').style.display = "block";
 				console.log(event.target.files);
+				
 				for (var i=0;i<event.target.files.length;i++) {
-					$("#uprecallmuchas").append("<img id =\"ImGaleryMuch\" style=\"width:200px;height:150px;margin:25px;\" src="+URL.createObjectURL(event.target.files[i])+" />");
+
+					$("#uprecallmuchas").append("<img id =\"ImGaleryMuch"+i+"\" class=\"ImgCont\" style=\"width:200px;height:150px;margin:25px;\" src="+URL.createObjectURL(event.target.files[i])+" />");
+
+					FilesAdd.push(event.target.files[i]);
 				}
+				console.log(FilesAdd);
 			};
 
-			mFnctnajaxflereqstGalMuch = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
+			mFnctnajaxflereqstGalMuch = function(vrbldivdestino,vrblurlorigen){
 				var mGetFleRequest = new FormData();
-				mGetFleRequest.append('ImageRequest',$(vrbldtscntrl)[0].files[0]); mGetFleRequest.append('IdProduct',$("#idproductGalMuch").val()); mGetFleRequest.append('TiProduct',$("#tipproductGalMuch").val());
+
+				$.each(FilesAdd, function(i, file) { mGetFleRequest.append('ImageRequest[]',FilesAdd[i]); });
+				
+				mGetFleRequest.append('IdProduct',$("#idproductGalMuch").val()); mGetFleRequest.append('TiProduct',$("#tipproductGalMuch").val());
+
 				$.ajax({
 					url: vrblurlorigen,
 					data: mGetFleRequest,
@@ -248,7 +257,7 @@ class Editor_Admin{
 					contentType: false,
 					type: 'POST',
 					beforeSend: function(){$("#"+vrbldivdestino).html("Guardando Imagen...");},
-					success: function(vrblprdctscplt){return $('#'+vrbldivdestino).html(vrblprdctscplt);}
+					success: function(vrblprdctscplt){ FilesAdd = []; return $('#'+vrbldivdestino).html(vrblprdctscplt);}
 				});
 			}
 		</script>
@@ -258,7 +267,7 @@ class Editor_Admin{
 	 * Funcion que agrega el nuevo metabox de edición de productos
 	 */
 	function meta_box_editor(){
-		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
+		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
 		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
 		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}

@@ -18,7 +18,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	*	los unicos estados que van a tener mayor cantidad de imagenes van a ser el 2, 3 y muy posible 4
 	*/
 
-	$foo = new mCntrolFileSave($_FILES["ImageRequest"],$_POST);
+	if($_POST['TiProduct']!=2 && $_POST['TiProduct']!=3)
+		$foo = new mCntrolFileSave($_FILES["ImageRequest"],$_POST);
+	else
+		print_r($_FILES); print("<br>"); print_r($_POST); $foo = false;
 
 	global $wpdb;
 
