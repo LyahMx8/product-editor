@@ -207,9 +207,11 @@ class Editor_Admin{
 		?>
 		<form enctype="multipart/form-data" class="vFormImgGalMuch">
 			<div class="col-sm-5 custom-file">
-				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
+				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas[]" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddMuchas">
-					<div id="uprecallmuchas" ><img id="outputmuchas" style="width:100%;max-height:500px;object-fit:cover;" <?php echo Editor_Admin::show_preimages($thepostid,2); ?> /></div>
+					<div id="uprecallmuchas" style="overflow: auto;width:100%;">
+					<?php //echo Editor_Admin::show_preimages($thepostid,2); ?>
+					</div>
 					<a style="text-decoration:underline;">Establecer imagenes para Edición</a>
 				</label>
 			</div>
@@ -225,11 +227,15 @@ class Editor_Admin{
 			$('#upImagGalMuch').click(function(e){ e.preventDefault();
 				mFnctnajaxflereqstGalMuch("uprecallmuchas","#mImageAddMuchas",$(this).attr("rel"));
 			});
-
+			/*
+			* Aun hay errores con la logica de subida que planea cambiar a una opion mejor nota aun no se pueden subir imagenes
+			*/
 			var loadFilesGaleryMuch = function(event) {
 				document.getElementById('GallerySendMuchas').style.display = "block";
-				var outputmuchas = document.getElementById('outputmuchas');
-				outputmuchas.src = URL.createObjectURL(event.target.files[0]);
+				console.log(event.target.files);
+				for (var i=0;i<event.target.files.length;i++) {
+					$("#uprecallmuchas").append("<img id =\"ImGaleryMuch\" style=\"width:200px;height:150px;margin:25px;\" src="+URL.createObjectURL(event.target.files[i])+" />");
+				}
 			};
 
 			mFnctnajaxflereqstGalMuch = function(vrbldivdestino,vrbldtscntrl,vrblurlorigen){
