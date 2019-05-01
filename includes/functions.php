@@ -57,6 +57,28 @@ class Functions{
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
 	}
+
+	/**
+	 * Crear la base de datos para almacenar las imagenes de iconos
+	 * 
+	 * @since 1.0
+	 */
+	public function create_icons_table(){
+		global $wpdb;
+
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$sql = "CREATE TABLE IF NOT EXISTS zalemto_icons (
+			id int NOT NULL AUTO_INCREMENT,
+			url varchar(255) NOT NULL,
+			fecha DATETIME NOT NULL,
+			PRIMARY KEY (id)
+		) $charset_collate;";
+
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );
+	}
+
 	public function create_images_table(){
 		global $wpdb;
 

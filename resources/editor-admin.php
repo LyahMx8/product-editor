@@ -54,6 +54,14 @@ class Editor_Admin{
 			'editor', //Sku en el menu
 			array($this, 'adminsitrar_editor'), //Funcion que llama
 			$icon); //Icono
+		add_submenu_page(
+			'editor',
+			'Agregar Íconos',
+			'Íconos',
+			'edit_posts', //Rol de usuario
+			'subir-icono',
+			array($this, 'cargar_iconos')
+		);
 	}
 
 	/**
@@ -92,6 +100,14 @@ class Editor_Admin{
 		</table>
 	<?php
 	}
+
+	/**
+	*
+	*/
+	public function cargar_iconos(){
+
+	}
+
 
 	/**
 	 * Creacion de la caja en que se adjunta la imagen alpha 

@@ -25,6 +25,7 @@ if ( !defined('ABSPATH') ) {
 			background-size:contain;
 			background-repeat:no-repeat;
 		}
+		
 	</style>
 </head>
 	
