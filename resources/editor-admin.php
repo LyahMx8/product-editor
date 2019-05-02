@@ -225,7 +225,7 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas[]" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddMuchas">
-					<div id="uprecallmuchas" style="overflow: auto;width:100%;">
+					<div id="uprecallmuchas" style="overflow: auto;overflow-y: hidden;width:100%;white-space: nowrap;">
 					<?php echo Editor_Admin::show_preimages($thepostid,2); ?>
 					</div>
 					<a style="text-decoration:underline;">Establecer imagenes para Edición</a>
@@ -252,7 +252,7 @@ class Editor_Admin{
 				
 				for (var i=0;i<event.target.files.length;i++) {
 
-					$("#uprecallmuchas").append("<img id =\"ImGaleryMuch"+i+"\" class=\"ImgCont\" style=\"width:200px;height:150px;margin:25px;\" src="+URL.createObjectURL(event.target.files[i])+" />");
+					$("#uprecallmuchas").append("<img id =\"ImGaleryMuch"+i+"\" class=\"ImgCont\" style=\"width:200px;height:150px;margin:25px;\" src="+URL.createObjectURL(event.target.files[i])+" rel=\"0\" /><a href=\"#\" style=\"position:absolute;margin-top_20px;\" onclick=\"_CallDeleteImg(event,this);\" rel="+i+">X</a>");
 
 					FilesAdd.push(event.target.files[i]);
 				}
@@ -262,7 +262,7 @@ class Editor_Admin{
 			mFnctnajaxflereqstGalMuch = function(vrbldivdestino,vrblurlorigen){
 				var mGetFleRequest = new FormData();
 
-				$.each(FilesAdd, function(i, file) { mGetFleRequest.append('ImageRequest[]',FilesAdd[i]); });
+				$.each(FilesAdd, function(i, file) { mGetFleRequest.append('ImageRequest[]',file); });
 				
 				mGetFleRequest.append('IdProduct',$("#idproductGalMuch").val()); mGetFleRequest.append('TiProduct',$("#tipproductGalMuch").val());
 
@@ -275,6 +275,12 @@ class Editor_Admin{
 					beforeSend: function(){$("#"+vrbldivdestino).html("Guardando Imagen...");},
 					success: function(vrblprdctscplt){ FilesAdd = []; return $('#'+vrbldivdestino).html(vrblprdctscplt);}
 				});
+			}
+			function _CallDeleteImg(e,_this){ e.preventDefault();
+				
+				if($(_this).prev().attr("rel")!=0) 
+					$.ajax({ url:"<?php echo plugin_dir_url(__FILE__)."editor-admin-down.php"; ?>",data:{"down":$(_this).prev().attr("rel")},type:'POST',beforeSend: function(){$("#uprecallmuchas").html("Eliminando Imagen...");},success: function(vrblprdctscplt){ return $('#uprecallmuchas').html(vrblprdctscplt);} });
+				else FilesAdd.splice($(_this).attr("rel"),1); $(_this).prev().remove(); $(_this).remove();
 			}
 		</script>
 		<?php
@@ -295,11 +301,11 @@ class Editor_Admin{
 
 			$_order = "";
 
-			$result =  $wpdb->get_results( "SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A );
+			$result =  $wpdb->get_results( "SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A );
 
 			if(!is_null($result)){
 				foreach ($result as$k=>$e){
-					$_order .= '<img id="output" style="width:200px;height:150px;margin:25px;"  src="'.W_URL.$e['cmpurlimg'].'"/>';
+					$_order .= '<img id="output" style="width:200px;height:150px;margin:25px;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;margin-top_20px;" onclick="_CallDeleteImg(event,this);">X</a>';
 				}
 			}
 

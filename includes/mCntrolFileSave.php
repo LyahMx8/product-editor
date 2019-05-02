@@ -35,7 +35,7 @@ class mCntrolFileSave{
 	}
 
 	private function mFunSlcMaxSize(){
-		$mKbySzeUp=600;
+		$mKbySzeUp=1500;
 		if($this->mGetFileSletd['size']>=($mKbySzeUp*1024))
 			throw new Exception("La Imagen es muy Pesada!");
 		else return $this->mFunSlcIsUp();
@@ -51,7 +51,7 @@ class mCntrolFileSave{
 
 		global $wpdb; 
 
-		$mNmbArchv = basename(date("Y-m-d").".".$this->rBasExt);
+		$mNmbArchv = basename(date("Y-m-d H:i:s").".".$this->rBasExt);
 
 		if($this->m_base_post['TiProduct']==0 || $this->m_base_post['TiProduct']==1){
 	
