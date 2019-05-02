@@ -131,7 +131,7 @@ body > textarea {
   list-style: none;
   padding: 0;
   margin: 0 auto;
-  display: table-cell;
+  display: block;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
@@ -526,7 +526,8 @@ body > textarea {
   bottom: 0;
   z-index: 2;
   display: block;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .tui-image-editor-container .tui-image-editor-icpartition {
   display: inline-block;
@@ -540,6 +541,17 @@ body > textarea {
   border-right: 7px solid #2f2f2f;
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
+}
+.tui-image-editor-menu-text{
+  height: 100%;
+}
+.tui-image-editor-submenu-item {
+    display: block;
+    overflow: auto;
+    height: calc(100% - 80px);
+    position: relative;
+    bottom: 0;
+    top: -25px;
 }
 .tui-image-editor-container.left .tui-image-editor-menu > .tui-image-editor-item[title]:after {
   top: 7px;
@@ -559,7 +571,7 @@ body > textarea {
 .tui-image-editor-container.left .tui-image-editor-controls {
   width: 64px;
   height: 100%;
-  display: table;
+  display: block;
 }
 .tui-image-editor-container.left .tui-image-editor-menu,
 .tui-image-editor-container.right .tui-image-editor-menu {
