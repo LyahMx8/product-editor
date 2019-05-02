@@ -18,26 +18,17 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	*	los unicos estados que van a tener mayor cantidad de imagenes van a ser el 2, 3 y muy posible 4
 	*/
 
-	if($_POST['TiProduct']==2 || $_POST['TiProduct']==3){
-		// Con el Tiempo se deberá cambiar el metodo a subir varias imagenes
-
-		for ($i=0;$i<count($_FILES["ImageRequest"]["name"]);$i++){ 
-			$foo = new mCntrolMultiFileSave($_FILES["ImageRequest"],$_POST,$i);
-		}
-
-	}
-	else{
-		$foo = new mCntrolFileSave($_FILES["ImageRequest"],$_POST);
-	}
-
 	global $wpdb;
 
-	if($foo){
+	if(!empty($_POST['down'])){
+		
+		$result = $wpdb->get_row("SELECT cmpidprdct,cmpidtipimg,cmpurlimg FROM zalemto_editor_img WHERE cmpidimg = ".$_POST['down'],ARRAY_A);
 
-		echo Editor_Admin::show_preimages($_POST['IdProduct'],$_POST['TiProduct']);
 
-	}else{
-		print("Problema al subir la imagen");
+		$wpdb->query("DELETE FROM zalemto_editor_img WHERE cmpidimg = ".$_POST['down']); unlink(SERV."/".$result['cmpurlimg']);
+
+
+		echo Editor_Admin::show_preimages($result['cmpidprdct'],$result['cmpidtipimg']);
 	}
 }
 ?>

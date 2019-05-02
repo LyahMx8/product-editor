@@ -36,7 +36,7 @@ class mCntrolMultiFileSave{
 	}
 
 	private function mFunSlcMaxSize(){
-		$mKbySzeUp=600;
+		$mKbySzeUp=1500;
 		if($this->mGetFileSletd['size'][$this->_index]>=($mKbySzeUp*1024))
 			throw new Exception("La Imagen es muy Pesada! 2");
 		else return $this->mFunSlcIsUp();
