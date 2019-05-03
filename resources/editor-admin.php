@@ -40,6 +40,7 @@ class Editor_Admin{
 		 * El Loader puede crear una relacion entre los hooks definidos y las funciones definidas en esta clase
 		 */
 		wp_enqueue_style($this->editor, plugin_dir_url(__FILE__) . 'css/style.css', array(), 'all');
+		wp_enqueue_style($this->editor, '/wordpress/wp-admin/load-styles.php', array(), 'all');
 	}
 	
 	/**
@@ -123,7 +124,41 @@ class Editor_Admin{
 	*
 	*/
 	public function cargar_iconos(){
+		global $wpdb;
+	?>
+	<div class="wrap" id="wp-media-grid" data-search="">
+		<h1 class="wp-heading-inline">Biblioteca de medios</h1>
 
+		<a href="http://localhost/wordpress/wp-admin/media-new.php" class="page-title-action aria-button-if-js" role="button" aria-expanded="false">Añadir nuevo</a>
+<div class="media-frame wp-core-ui mode-grid mode-edit hide-menu">
+		<div class="uploader-inline">
+		
+		
+		<button class="close dashicons dashicons-no"><span class="screen-reader-text">Cerrar cargador</span></button>
+		
+		<div class="uploader-inline-content no-upload-message">
+		
+					<div class="upload-ui">
+				<h2 class="upload-instructions drop-instructions">Arrastra archivos a cualquier lugar para subirlos</h2>
+				<p class="upload-instructions drop-instructions">o</p>
+				<button type="button" class="browser button button-hero" style="display: inline-block; position: relative; z-index: 1;" id="__wp-uploader-id-1">Seleccionar archivos</button>
+			</div>
+
+			<div class="upload-inline-status"></div>
+
+			<div class="post-upload-ui">
+				
+				<p class="max-upload-size">
+				Tamaño máximo de archivo: 512 MB.				</p>
+
+				
+
+							</div>
+				</div>
+	</div>
+</div>
+	</div>
+	<?php
 	}
 
 	public static function variations( $post ){
