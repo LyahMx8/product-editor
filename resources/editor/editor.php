@@ -21,7 +21,7 @@ if ( !defined('ABSPATH') ) {
 			margin: 0;
 		}
 		.tui-image-editor .tui-image-editor-canvas-container{
-			background:url('/wordpress/wp-content/plugins/edicion-de-productos<?php echo $_GET["producto"]; ?>');
+			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto"]; ?>');
 			background-size:contain;
 			background-repeat:no-repeat;
 		}
@@ -32,13 +32,13 @@ if ( !defined('ABSPATH') ) {
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: url('/wordpress/wp-content/plugins/edicion-de-productos/productos/2019-04-30.jpg');
+			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
 			background-repeat: repeat;
 			background-size: auto;
 			background-size: contain;
 			background-repeat: no-repeat;
 			mix-blend-mode: multiply;
-			opacity: .5;
+			opacity: .6;
 		}
 		
 	</style>

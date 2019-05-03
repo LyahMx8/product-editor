@@ -52,19 +52,46 @@ class Editor_Public{
 		wp_enqueue_script($this->editor, plugin_dir_url(__FILE__) . 'js/scripts.js', array('jquery'), false);
 	}
 	
+	/**
+	* Registro de shortcodes para el lado público
+	*
+	* @since 1.0
+	*/
 	public function register_shortcodes() {
 		add_shortcode('open-modal', array($this, 'button_action'));
 	}
 	
+	/**
+	* Método que toma el id del producto actual y llama los datos correspondientes
+	*/
 	function button_action(){
 		global $wpdb;
 
 		$thepostid = get_the_ID();
-		$product_editor = $wpdb->get_row( "SELECT * FROM zalemto_editor_img WHERE cmpidprdct = '$thepostid'" );
-		print_r($product_editor);
-		if (null !== $product_editor):
-			$producto = $product_editor->producto_frontal;
-			?>
+		$product_editor = $wpdb->get_results( "SELECT cmpidtipimg, cmpurlimg FROM zalemto_editor_img WHERE cmpidprdct = '$thepostid'" );
+		$clr_tsr = array();
+		$clr_frn = array();
+		foreach ($product_editor as $key) {
+			if($key->cmpidtipimg == 0){
+				$alph_frn = $key->cmpurlimg;
+			} else if($key->cmpidtipimg == 1){
+				$alph_tsr = $key->cmpurlimg;
+			} else if($key->cmpidtipimg == 2){
+				array_push($clr_frn, $key->cmpurlimg);
+			} else if($key->cmpidtipimg == 3){
+				array_push($clr_tsr, $key->cmpurlimg);
+			}
+		}
+
+		if ($product_editor !== null): ?>
+			<section class="carrusel-prods">
+		<?php foreach ($clr_frn as $key) { ?>
+				<div class="img-btn Editor" url="<?php echo $key; ?>">
+					<img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>" alt="Producto Htc">
+					<span>Editar Producto</span>
+				</div>
+		<?php } ?>
+			</section>
 			<button class="btnEditor" id="Editor">Editar Producto</button>
 			<button class="btnEditor" id="Datos">Llenar datos</button>
 			<div id="popContainer">
@@ -101,10 +128,11 @@ class Editor_Public{
 				*/
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); 
-					jQuery('#Editor').click(function(e){
+					jQuery('.Editor').click(function(e){
 						e.preventDefault();
+						console.log(this.attributes.url.textContent);
 						document.getElementById("popContainer").style.display = "block"; 
-						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $producto; ?>');
+						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto='+this.attributes.url.textContent+'&alpha_frn=<?php echo $alph_frn; ?>&alpha_tsr=<?php echo $alph_tsr; ?>');
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
 

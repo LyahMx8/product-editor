@@ -233,7 +233,7 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas[]" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddMuchas">
-					<div id="uprecallmuchas" style="overflow: auto;overflow-y: hidden;width:100%;white-space: nowrap;">
+					<div id="uprecallmuchas" class="carrusel-prods">
 					<?php echo Editor_Admin::show_preimages($thepostid,2); ?>
 					</div>
 					<a style="text-decoration:underline;">Establecer imagenes para Edición</a>

@@ -1,22 +1,25 @@
-.btnEditor{padding:10px 15px;color:#fff;border:2px solid #61B9D7;background:#009acf;border-radius:5px;cursor:pointer;}
-.btnEditor:hover{border:2px solid #009acf;background:#fff;color:#009acf;}
+.btnEditor{padding:10px 15px;color:#fff;border:2px solid #70CE51;background:#89bd30;border-radius:5px;cursor:pointer;}
+.btnEditor:hover{border:2px solid #89bd30;background:#fff;color:#89bd30;}
 #popContainer,#popDatos{display:none;}
 .popUp{width:80%;height:93vh;top:3vh;left:10%;display:block;margin:0 auto;position:fixed;overflow-y:auto;overflow-x:auto;z-index:9999;background:#fff;border:2px solid #efefef;border-radius:15px;}
 .popLayer{width:100%;height:100vh;position:fixed;top:0;left:0;background:rgba(0,0,0,.6);z-index:9998;cursor:pointer;}
 .popLayer span{font-size:22px;font-weight:900;position:fixed;top:15px;right:15px;color:rgba(255,255,255,.8);}
 .datosForm{padding:15px;display:block;overflow:hidden;}
-.datosForm div input{display:block;padding: 5px;border:2px solid #009acf;border-radius:15px;}
+.datosForm div input{display:block;padding: 5px;border:2px solid #89bd30;border-radius:15px;}
 .datosForm div input + label {position: relative;top: -34px;left: 10px;color: rgba(0,0,0,0.5);transition: .2s all ease;}
 .datosForm div input:focus + label {top: -65px;left: 0;color: rgba(0,0,0,0.8);}
-.datosForm input[type="submit"]{border-radius:15px;border:2px solid #fff;background:#009acf;color:#fff;}
-.datosForm input[type="submit"]:hover{border-radius:25px;border:2px solid #009acf;background:#fff;color:#009acf;}
+.datosForm input[type="submit"]{border-radius:15px;border:2px solid #fff;background:#89bd30;color:#fff;}
+.datosForm input[type="submit"]:hover{border-radius:25px;border:2px solid #89bd30;background:#fff;color:#89bd30;}
 .formCntn{float:left;margin-right:15px;}
-
 #productos {border-collapse: collapse;width: 100%;overflow-x:auto;}
 #productos td, #productos th {padding: 8px;}
 #productos tr{background-color: #fff;border: 10px solid #f1f1f1;display:inherit;}
 #productos tr:hover {background-color: #ddd;}
-#productos th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4AB5C8;color: white;}
+#productos th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4AB55C;color: white;}
+.carrusel-prods{overflow: auto;overflow-y: auto;overflow-y: hidden;width: 100%;white-space: nowrap;}
+.img-btn{display:inline-block;text-align:center;padding:5px;border:1px solid #efefef;position:relative;cursor:pointer;border-radius:10px;}
+.img-btn img{width:95px;}.img-btn:hover img{filter: brightness(50%);background: #000;}
+.img-btn span{display:none;position:absolute;top: 40%;left: 0;right: 0;color: #fff;}.img-btn:hover span{display:block;}
 
 @media screen and (max-width:600px){
 	.popUp{width:96%;left:2%;}

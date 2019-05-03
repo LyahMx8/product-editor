@@ -154,7 +154,7 @@ class Settings{
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes');
 		$this->loader->add_action( 'wp_ajax_handle_picture_upload', $plugin_public, 'handle_picture_upload');
 		$this->loader->add_action( 'wp_ajax_nopriv_handle_picture_upload', $plugin_public, 'handle_picture_upload');
-		$this->loader->add_action( 'woocommerce_before_add_to_cart_form', $plugin_public, 'button_action', 10, 0 );
+		$this->loader->add_action( 'woocommerce_product_meta_start', $plugin_public, 'button_action', 10, 0 );
 
 
 	}
