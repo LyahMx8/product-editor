@@ -301,7 +301,7 @@ class Editor_Admin{
 
 			$_order = "";
 
-			$result =  $wpdb->get_results( "SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A );
+			$result =  $wpdb->get_results( "SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = 3 OR cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A );
 
 			if(!is_null($result)){
 				foreach ($result as$k=>$e){
