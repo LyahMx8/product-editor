@@ -116,6 +116,16 @@ class Editor_Admin{
 
 	}
 
+	public static function variations( $post ){
+		global $thepostid, $product_object;
+
+		$thepostid      = $post->ID;
+		$product_object = $thepostid ? wc_get_product( $thepostid ) : new WC_Product();
+		wp_nonce_field( 'woocommerce_save_data', 'woocommerce_meta_nonce' );
+
+		
+	}
+
 
 	/**
 	 * Creacion de la caja en que se adjunta la imagen alpha 
@@ -298,6 +308,7 @@ class Editor_Admin{
 	 */
 	function meta_box_editor(){
 		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
+		add_meta_box( 'product-variations', __( 'Variaciones del producto', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
 		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
 		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}

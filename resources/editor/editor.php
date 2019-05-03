@@ -93,8 +93,24 @@ if ( !defined('ABSPATH') ) {
 				});
 			});
 		});
-	</script>
 
+	</script>
+	<script>
+		jQuery(document).ready(function(){
+			jQuery('#tui-image-editor-next-btn').click(function(e){
+				e.preventDefault();
+				imageEditor.addImageObject('http://localhost/wordpress/wp-content/plugins/edicion-de-productos/productos/2019-05-03-00-48-12.png', 'lena').then(result => {
+				     console.log('result');
+				});
+				imageEditor.applyFilter('mask', {maskObjId: imageEditor.activeObjectId}).then(obj => {
+					console.log('filterType: ', obj.type);
+					console.log('actType: ', obj.action);
+				}).catch(message => {
+					console.log('error: ', message);
+				});;
+			});
+		});
+	</script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
 	
 </body>
