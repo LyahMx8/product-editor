@@ -51,7 +51,7 @@ class mCntrolFileSave{
 
 		global $wpdb; 
 
-		$mNmbArchv = basename(date("Y-m-d H:i:s").".".$this->rBasExt);
+		$mNmbArchv = basename(date("Y-m-d-H-i-s").".".$this->rBasExt);
 
 		if($this->m_base_post['TiProduct']==0 || $this->m_base_post['TiProduct']==1){
 	

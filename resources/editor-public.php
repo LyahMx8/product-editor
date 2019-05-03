@@ -60,7 +60,8 @@ class Editor_Public{
 		global $wpdb;
 
 		$thepostid = get_the_ID();
-		$product_editor = $wpdb->get_row( "SELECT producto_frontal, producto_alfa_frontal, producto_trasero, producto_alfa_trasero FROM zalemto_editor WHERE id_product = '$thepostid'" );
+		$product_editor = $wpdb->get_row( "SELECT * FROM zalemto_editor_img WHERE cmpidprdct = '$thepostid'" );
+		print_r($product_editor);
 		if (null !== $product_editor):
 			$producto = $product_editor->producto_frontal;
 			?>

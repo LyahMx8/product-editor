@@ -21,9 +21,24 @@ if ( !defined('ABSPATH') ) {
 			margin: 0;
 		}
 		.tui-image-editor .tui-image-editor-canvas-container{
-			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto"]; ?>');
+			background:url('/wordpress/wp-content/plugins/edicion-de-productos<?php echo $_GET["producto"]; ?>');
 			background-size:contain;
 			background-repeat:no-repeat;
+		}
+		.tui-image-editor .tui-image-editor-canvas-container::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url('/wordpress/wp-content/plugins/edicion-de-productos/productos/2019-04-30.jpg');
+			background-repeat: repeat;
+			background-size: auto;
+			background-size: contain;
+			background-repeat: no-repeat;
+			mix-blend-mode: multiply;
+			opacity: .5;
 		}
 		
 	</style>
@@ -31,7 +46,7 @@ if ( !defined('ABSPATH') ) {
 	
 
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
 	<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
@@ -72,9 +87,9 @@ if ( !defined('ABSPATH') ) {
 				
 				// split font into family and weight
 				font = font.split(':');
-				
-       			imageEditor.changeTextStyle(imageEditor.activeObjectId, {
-				    fontFamily: font[0]
+
+				imageEditor.changeTextStyle(imageEditor.activeObjectId, {
+					fontFamily: font[0]
 				});
 			});
 		});
