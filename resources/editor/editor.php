@@ -73,13 +73,13 @@ if ( !defined('ABSPATH') ) {
 				// split font into family and weight
 				font = font.split(':');
 				
-				// set family on paragraphs 
-				$('p').css('font-family', font[0]);
+       			imageEditor.changeTextStyle(imageEditor.activeObjectId, {
+				    fontFamily: font[0]
+				});
 			});
 		});
 	</script>
 
-	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/require.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
 	
 </body>

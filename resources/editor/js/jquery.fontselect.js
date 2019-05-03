@@ -324,8 +324,6 @@
         
         var font = this.$original.val();
         $('span', this.$element).text(this.toReadable(font)).css(this.toStyle(font));
-        var ImageEditor = require('tui-image-editor');
-        console.log(imageEditor.activeObjectId);
       };
       
       Fontselect.prototype.setupHtml = function(){

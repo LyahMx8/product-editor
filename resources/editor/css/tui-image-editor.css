@@ -48,7 +48,6 @@ body > textarea {
 .tui-image-editor-container .tui-image-editor-header-logo,
 .tui-image-editor-container .tui-image-editor-controls-logo {
   float: left;
-  width: 30%;
   padding: 17px;
 }
 .tui-image-editor-container .tui-image-editor-controls-logo,
@@ -542,6 +541,12 @@ body > textarea {
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
 }
+table tbody tr:nth-child(2n) td, fieldset, fieldset legend {
+    background-color: transparent !important;
+}
+table tbody td {
+    background-color: transparent !important;
+}
 .tui-image-editor-menu-text{
   height: 100%;
 }
@@ -552,6 +557,8 @@ body > textarea {
     position: relative;
     bottom: 0;
     top: -25px;
+    background: rgba(0,0,0,.2);
+    padding: 10px !important;
 }
 .tui-image-editor-container.left .tui-image-editor-menu > .tui-image-editor-item[title]:after {
   top: 7px;
