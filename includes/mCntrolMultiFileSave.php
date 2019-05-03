@@ -54,6 +54,8 @@ class mCntrolMultiFileSave{
 
 		$mNmbArchv = basename(date("Y-m-d")."-".$this->mGetFileSletd['name'][$this->_index]);
 
+		if(strpos($this->mGetFileSletd['name'][$this->_index],"trase")!==false) $this->m_base_post['TiProduct'] = 3;
+
 		$sql = ("INSERT INTO zalemto_editor_img (cmpidprdct, cmpidtipimg, cmpurlimg, cmpfechup) values ('".$this->m_base_post['IdProduct']."','".$this->m_base_post['TiProduct']."','".$mPatchsave.$mNmbArchv."','".date("Y-m-d H:i:s")."')");
 		$wpdb->query($sql);
 
