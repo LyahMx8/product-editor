@@ -43,6 +43,16 @@ class Editor_Admin{
 	}
 	
 	/**
+	 * Funcion que agrega el nuevo metabox de edición de productos
+	 */
+	function meta_box_editor(){
+		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
+		add_meta_box( 'product-variations', __( 'Variaciones del producto', 'woocommerce' ), 'Editor_Admin::variations', 'product', 'side', 'low' );
+		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
+		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
+	}
+	
+	/**
 	 * Crear item en el menu
 	 */
 	public function api_plugin_menu(){
@@ -123,7 +133,7 @@ class Editor_Admin{
 		$product_object = $thepostid ? wc_get_product( $thepostid ) : new WC_Product();
 		wp_nonce_field( 'woocommerce_save_data', 'woocommerce_meta_nonce' );
 
-		
+
 	}
 
 
@@ -302,15 +312,6 @@ class Editor_Admin{
 			}
 		</script>
 		<?php
-	}
-	/**
-	 * Funcion que agrega el nuevo metabox de edición de productos
-	 */
-	function meta_box_editor(){
-		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
-		add_meta_box( 'product-variations', __( 'Variaciones del producto', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
-		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
-		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}
 
 	public static function show_preimages($id_post,$tip_post){
