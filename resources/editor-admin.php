@@ -127,37 +127,43 @@ class Editor_Admin{
 		global $wpdb;
 	?>
 	<div class="wrap" id="wp-media-grid" data-search="">
-		<h1 class="wp-heading-inline">Biblioteca de medios</h1>
-
-		<a href="http://localhost/wordpress/wp-admin/media-new.php" class="page-title-action aria-button-if-js" role="button" aria-expanded="false">Añadir nuevo</a>
+		<h1 class="wp-heading-inline">Biblioteca de Íconos( En Desarrollo)</h1>
 <div class="media-frame wp-core-ui mode-grid mode-edit hide-menu">
-		<div class="uploader-inline">
+	<div class="uploader-inline" style="padding:20px;">
 		
+		<div class="uploader-inline-content no-upload-message" style="display:flex;justify-content:center;">
 		
-		<button class="close dashicons dashicons-no"><span class="screen-reader-text">Cerrar cargador</span></button>
-		
-		<div class="uploader-inline-content no-upload-message">
-		
-					<div class="upload-ui">
-				<h2 class="upload-instructions drop-instructions">Arrastra archivos a cualquier lugar para subirlos</h2>
-				<p class="upload-instructions drop-instructions">o</p>
-				<button type="button" class="browser button button-hero" style="display: inline-block; position: relative; z-index: 1;" id="__wp-uploader-id-1">Seleccionar archivos</button>
+			<div class="upload-ui">
+				<input type="file" multiple class="custom-file-input" name="mImageAddIcon" id="mImageAddIcon" style="display:none;" onchange="loadFilesGaleryIcon(event)">
+				<input type="hidden" id="_icon_prodct" value="0">
+				<input type="hidden" id="_icon_tiprodct" value="6">
+				<button type="button" class="browser button button-hero" onclick="document.getElementById('mImageAddIcon').click();" style="display: inline-block; position: relative; z-index: 1;" id="__wp-uploader-id-1">Seleccionar archivos</button>
+
 			</div>
 
-			<div class="upload-inline-status"></div>
-
-			<div class="post-upload-ui">
-				
-				<p class="max-upload-size">
-				Tamaño máximo de archivo: 512 MB.				</p>
-
-				
-
-							</div>
-				</div>
+		</div>
+		<div class="post-upload-ui">
+			<p class="max-upload-size">Tamaño máximo de archivo: 512 MB.</p>
+		</div>
 	</div>
+	<div class="upload-inline-status" id="_charge_img" style="padding:50px;"><?php echo Editor_Admin::show_preimages(0,6); ?></div>
 </div>
 	</div>
+	<script>
+		function loadFilesGaleryIcon(event){
+			console.log(event.target.files);
+
+			var mGetFleRequest = new FormData();
+
+			jQuery.each(event.target.files, function(i, file) { mGetFleRequest.append('ImageRequest[]',file); });
+			
+			mGetFleRequest.append('IdProduct',jQuery("#_icon_prodct").val()); mGetFleRequest.append('TiProduct',jQuery("#_icon_tiprodct").val());
+
+			jQuery.ajax({ url: "<?php echo plugin_dir_url(__FILE__)."editor-admin-up.php"; ?>", data: mGetFleRequest, processData: false,
+				contentType: false, type: 'POST', beforeSend: function(){jQuery("#_charge_img").html("Guardando Imagen(es)...");}, success: function(vrblprdctscplt){ return jQuery('#_charge_img').html(vrblprdctscplt);} });
+
+		}
+	</script>
 	<?php
 	}
 
@@ -345,7 +351,7 @@ class Editor_Admin{
 			function _CallDeleteImg(e,_this){ e.preventDefault();
 				
 				if($(_this).prev().attr("rel")!=0) 
-					$.ajax({ url:"<?php echo plugin_dir_url(__FILE__)."editor-admin-down.php"; ?>",data:{"down":$(_this).prev().attr("rel")},type:'POST',beforeSend: function(){$("#uprecallmuchas").html("Eliminando Imagen...");},success: function(vrblprdctscplt){ return $('#uprecallmuchas').html(vrblprdctscplt);} });
+					FilesAdd = []; $.ajax({ url:"<?php echo plugin_dir_url(__FILE__)."editor-admin-down.php"; ?>",data:{"down":$(_this).prev().attr("rel")},type:'POST',beforeSend: function(){$("#uprecallmuchas").html("Eliminando Imagen...");},success: function(vrblprdctscplt){ return $('#uprecallmuchas').html(vrblprdctscplt);} });
 				else FilesAdd.splice($(_this).attr("rel"),1); $(_this).prev().remove(); $(_this).remove();
 			}
 		</script>

@@ -27,8 +27,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 		$wpdb->query("DELETE FROM zalemto_editor_img WHERE cmpidimg = ".$_POST['down']); unlink(SERV."/".$result['cmpurlimg']);
 
-
-		echo Editor_Admin::show_preimages($result['cmpidprdct'],2);
+		$_access_img=is_null($_POST['icon']) ? 2 : 6; echo Editor_Admin::show_preimages($result['cmpidprdct'],$_access_img);
 	}
 }
 ?>
