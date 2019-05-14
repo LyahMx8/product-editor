@@ -59,26 +59,49 @@ class Functions{
 	}
 
 	/**
-	 * Crear la base de datos para almacenar las imagenes de iconos
-	 * 
-	 * @since 1.0
-	 */
-	public function create_icons_table(){
-		global $wpdb;
+	* Cargar SDK de facebook
+	*
+	* @since 1.0
+	*/
+	public function loadFacebook(){
+		/* ?>
+		
+		<script>
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId      : '303269393938393',
+					cookie     : true,
+					xfbml      : true,
+					version    : 'v3.3'
+				});
+					
+				FB.AppEvents.logPageView();   
+					
+			};
 
-		$charset_collate = $wpdb->get_charset_collate();
-
-		$sql = "CREATE TABLE IF NOT EXISTS zalemto_icons (
-			id int NOT NULL AUTO_INCREMENT,
-			url varchar(255) NOT NULL,
-			fecha DATETIME NOT NULL,
-			PRIMARY KEY (id)
-		) $charset_collate;";
-
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		dbDelta( $sql );
+			(function(d, s, id){
+				 var js, fjs = d.getElementsByTagName(s)[0];
+				 if (d.getElementById(id)) {return;}
+				 js = d.createElement(s); js.id = id;
+				 js.src = "https://connect.facebook.net/en_US/sdk.js";
+				 fjs.parentNode.insertBefore(js, fjs);
+			 }(document, 'script', 'facebook-jssdk'));
+		</script>
+		<?php */
 	}
 
+	/**
+	* Crear la tabla para almacenar imagenes
+	* @var 0 = alpha frontal
+	* @var 1 = alpha trasero
+	* @var 2 = color frontal
+	* @var 3 = color trasero
+	* @var 4 = editada frontal
+	* @var 5 = editada trasero
+	* @var 6 = icono de producto
+	*
+	* @since 1.0
+	*/
 	public function create_images_table(){
 		global $wpdb;
 
@@ -96,7 +119,8 @@ class Functions{
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );				
 	}
-	/*
+
+	/**
 	 * Obtener la versión de WooCommerce
 	 */
 	private function wpc_get_woo_version_number() {

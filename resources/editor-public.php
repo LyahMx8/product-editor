@@ -88,12 +88,12 @@ class Editor_Public{
 		<?php foreach ($clr_frn as $key) { ?>
 				<div class="img-btn Editor" url="<?php echo $key; ?>">
 					<img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>" alt="Producto Htc">
-					<span>Editar Producto</span>
+					<span>Editar<br>Producto</span>
 				</div>
 		<?php } ?>
 			</section>
-			<button class="btnEditor" id="Editor">Editar Producto</button>
-			<button class="btnEditor" id="Datos">Llenar datos</button>
+			<!--button class="btnEditor" id="Editor">Editar Producto</button>
+			<button class="btnEditor" id="Datos">Llenar datos</button-->
 			<div id="popContainer">
 				<div class="popLayer" onclick="closeModal('popContainer')">
 					<span>X</span>
@@ -101,7 +101,7 @@ class Editor_Public{
 				<section class="popUp" id="popUp"></section>
 			</div>
 
-			<div id="popDatos">
+			<!--div id="popDatos">
 				<div class="popLayer" onclick="closeModal('popDatos')">
 					<span>X</span>
 				</div>
@@ -120,7 +120,7 @@ class Editor_Public{
 						<input type="submit" value="Enviar">
 					</form>
 				</section>
-			</div>
+			</div-->
 
 			<script>
 				/**
@@ -136,10 +136,10 @@ class Editor_Public{
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
 
-					jQuery('#Datos').click(function(e){
+					/*jQuery('#Datos').click(function(e){
 						e.preventDefault();
 						document.getElementById("popDatos").style.display = "block";
-					});
+					});*/
 				});
 				fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){
 					jQuery.ajax({

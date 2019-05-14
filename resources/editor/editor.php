@@ -34,7 +34,6 @@ if ( !defined('ABSPATH') ) {
 			height: 100%;
 			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
 			background-repeat: repeat;
-			background-size: auto;
 			background-size: contain;
 			background-repeat: no-repeat;
 			mix-blend-mode: multiply;

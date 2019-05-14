@@ -48,7 +48,7 @@ class Editor_Admin{
 	 */
 	function meta_box_editor(){
 		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
-		add_meta_box( 'product-variations', __( 'Variaciones del producto(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::variations', 'product', 'side', 'low' );
+		/*add_meta_box( 'product-variations', __( 'Variaciones del producto(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::variations', 'product', 'side', 'low' );*/
 		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
 		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}
@@ -168,7 +168,7 @@ class Editor_Admin{
 	}
 
 	public static function variations( $post ){
-		global $thepostid, $product_object;
+		/*global $thepostid, $product_object;
 
 		$thepostid      = $post->ID;
 		$product_object = $thepostid ? wc_get_product( $thepostid ) : new WC_Product();
@@ -177,7 +177,7 @@ class Editor_Admin{
 		?>
 		<label>¿Este producto es full color? - <input type="checkbox"></label>
 
-		<?php
+		<?php*/
 	}
 
 
@@ -318,13 +318,13 @@ class Editor_Admin{
 
 			var FilesAdd = [];
 
-			var loadFilesGaleryMuch = function(event) {
+			function loadFilesGaleryMuch(event) {
 				document.getElementById('GallerySendMuchas').style.display = "block";
 				console.log(event.target.files);
 				
 				for (var i=0;i<event.target.files.length;i++) {
 
-					$("#uprecallmuchas").append("<img id =\"ImGaleryMuch"+i+"\" class=\"ImgCont\" style=\"width:200px;height:150px;margin:25px;\" src="+URL.createObjectURL(event.target.files[i])+" rel=\"0\" /><a href=\"#\" style=\"position:absolute;margin-top_20px;\" onclick=\"_CallDeleteImg(event,this);\" rel="+i+">X</a>");
+					$("#uprecallmuchas").append("<div class='variationGallery'><img id =\"ImGaleryMuch"+i+"\" class=\"ImgCont\" style=\"width:200px;\" src="+URL.createObjectURL(event.target.files[i])+" rel=\"0\" /><a href=\"#\" style=\"position:absolute;top:5px;right:5px;\" onclick=\"_CallDeleteImg(event,this);\" rel="+i+">X</a></div>");
 
 					FilesAdd.push(event.target.files[i]);
 				}
@@ -348,11 +348,14 @@ class Editor_Admin{
 					success: function(vrblprdctscplt){ FilesAdd = []; return $('#'+vrbldivdestino).html(vrblprdctscplt);}
 				});
 			}
-			function _CallDeleteImg(e,_this){ e.preventDefault();
+			function _CallDeleteImg(e,_this){ 
+				e.preventDefault();
 				
-				if($(_this).prev().attr("rel")!=0) 
+				if($(_this).prev().attr("rel")!=0) {
 					FilesAdd = []; $.ajax({ url:"<?php echo plugin_dir_url(__FILE__)."editor-admin-down.php"; ?>",data:{"down":$(_this).prev().attr("rel")},type:'POST',beforeSend: function(){$("#uprecallmuchas").html("Eliminando Imagen...");},success: function(vrblprdctscplt){ return $('#uprecallmuchas').html(vrblprdctscplt);} });
-				else FilesAdd.splice($(_this).attr("rel"),1); $(_this).prev().remove(); $(_this).remove();
+				} else {
+					FilesAdd.splice($(_this).attr("rel"),1); $(_this).prev().remove(); $(_this).remove();
+				}
 			}
 		</script>
 		<?php
@@ -369,7 +372,7 @@ class Editor_Admin{
 
 			if(!is_null($result)){
 				foreach ($result as$k=>$e){
-					$_order .= '<img id="output" style="width:200px;height:150px;margin:25px;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;margin-top_20px;" onclick="_CallDeleteImg(event,this);">X</a>';
+					$_order .= '<div class="variationGallery"><img id="output" style="width:200px;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;top:5px;right:5px;" onclick="_CallDeleteImg(event,this);">X</a></div>';
 				}
 			}
 

@@ -16,10 +16,11 @@
 #productos tr{background-color: #fff;border: 10px solid #f1f1f1;display:inherit;}
 #productos tr:hover {background-color: #ddd;}
 #productos th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4AB55C;color: white;}
-.carrusel-prods{overflow: auto;overflow-y: auto;overflow-y: hidden;width: 100%;white-space: nowrap;}
+.carrusel-prods{overflow-x: auto;overflow-y: hidden;white-space: nowrap;scrollbar-color: #89bd30 #dcff9f;scrollbar-width: thin;}
+.variationGallery{display: inline-block;position: relative;margin: 10px;}
 .img-btn{display:inline-block;text-align:center;padding:5px;border:1px solid #efefef;position:relative;cursor:pointer;border-radius:10px;}
-.img-btn img{width:95px;}.img-btn:hover img{filter: brightness(50%);background: #000;}
-.img-btn span{display:none;position:absolute;top: 40%;left: 0;right: 0;color: #fff;}.img-btn:hover span{display:block;}
+.img-btn img{width:70px;}.img-btn:hover img{filter: brightness(50%);background: #000;}
+.img-btn span{line-height: 18px;display:none;position:absolute;top: 30%;left: 0;right: 0;color: #fff;}.img-btn:hover span{display:block;}
 
 @media screen and (max-width:600px){
 	.popUp{width:96%;left:2%;}
