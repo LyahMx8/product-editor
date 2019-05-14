@@ -137,13 +137,14 @@ class Editor_Admin{
 				<input type="file" multiple class="custom-file-input" name="mImageAddIcon" id="mImageAddIcon" style="display:none;" onchange="loadFilesGaleryIcon(event)">
 				<input type="hidden" id="_icon_prodct" value="0">
 				<input type="hidden" id="_icon_tiprodct" value="6">
+				<input type="hidden" id="_icon_value_flag" value="1">
 				<button type="button" class="browser button button-hero" onclick="document.getElementById('mImageAddIcon').click();" style="display: inline-block; position: relative; z-index: 1;" id="__wp-uploader-id-1">Seleccionar archivos</button>
 
 			</div>
 
 		</div>
 		<div class="post-upload-ui">
-			<p class="max-upload-size">Tamaño máximo de archivo: 512 MB.</p>
+			<p class="max-upload-size">Tamaño máximo de archivo: 1.5 MB.</p>
 		</div>
 	</div>
 	<div class="upload-inline-status" id="_charge_img" style="padding:50px;"><?php echo Editor_Admin::show_preimages(0,6); ?></div>
@@ -162,6 +163,9 @@ class Editor_Admin{
 			jQuery.ajax({ url: "<?php echo plugin_dir_url(__FILE__)."editor-admin-up.php"; ?>", data: mGetFleRequest, processData: false,
 				contentType: false, type: 'POST', beforeSend: function(){jQuery("#_charge_img").html("Guardando Imagen(es)...");}, success: function(vrblprdctscplt){ return jQuery('#_charge_img').html(vrblprdctscplt);} });
 
+		}
+		function _CallDeleteImg(e,_this){ e.preventDefault(); 
+			jQuery.ajax({ url:"<?php echo plugin_dir_url(__FILE__)."editor-admin-down.php"; ?>",data:{"down":jQuery(_this).prev().attr("rel"),"icon":jQuery("#_icon_value_flag").val()},type:'POST',beforeSend: function(){jQuery("#_charge_img").html("Eliminando Imagen...");},success: function(vrblprdctscplt){ return jQuery('#_charge_img').html(vrblprdctscplt);} });
 		}
 	</script>
 	<?php
@@ -361,11 +365,13 @@ class Editor_Admin{
 	public static function show_preimages($id_post,$tip_post){
 		global $wpdb;
 
-		if($tip_post==3 || $tip_post==2){
+		if($tip_post==3 || $tip_post==2 || $tip_post==6){
 
+			$_query_multi_img = ($tip_post==3 || $tip_post==2)?"SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = 3 OR cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post:"SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post;
+			
 			$_order = "";
 
-			$result =  $wpdb->get_results( "SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = 3 OR cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A );
+			$result =  $wpdb->get_results( $_query_multi_img, ARRAY_A );
 
 			if(!is_null($result)){
 				foreach ($result as$k=>$e){
