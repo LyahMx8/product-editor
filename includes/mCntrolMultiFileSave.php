@@ -50,7 +50,9 @@ class mCntrolMultiFileSave{
 	}
 	private function mFunSlcMovImg(){ $mPath = SERV."/productos/"; $mPatchsave = "productos/";
 
-		global $wpdb; 
+		global $wpdb;
+
+		if($this->m_base_post['TiProduct']==6){ $mPath = SERV."/iconos/"; $mPatchsave = "iconos/"; }
 
 		$mNmbArchv = basename(date("Y-m-d")."-".$this->mGetFileSletd['name'][$this->_index]);
 
