@@ -535,11 +535,10 @@ body > textarea {
   height: 24px;
 }
 .tui-image-editor-container.left .tui-image-editor-menu > .tui-image-editor-item[title]:before {
-  left: 28px;
-  top: 11px;
-  border-right: 7px solid #2f2f2f;
+  top: 16px;
+  border-right: 7px solid transparent;
   border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
+  border-bottom: 7px solid #2f2f2f;
 }
 table tbody tr:nth-child(2n) td, fieldset, fieldset legend {
     background-color: transparent !important;
@@ -547,8 +546,20 @@ table tbody tr:nth-child(2n) td, fieldset, fieldset legend {
 table tbody td {
     background-color: transparent !important;
 }
+.tui-image-editor-size-wrap{background: #fff !important;}
+.tui-image-editor-align-wrap{background: url(/wordpress/wp-content/plugins/edicion-de-productos/assets/img/grid.png);}
 .tui-image-editor-menu-text{
   height: 100%;
+}
+.tui-image-editor .tui-image-editor-canvas-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  opacity: .6;
 }
 .tui-image-editor-submenu-item {
     display: block;
@@ -561,9 +572,10 @@ table tbody td {
     padding: 10px !important;
 }
 .tui-image-editor-container.left .tui-image-editor-menu > .tui-image-editor-item[title]:after {
-  top: 7px;
-  left: 39px;
+  top: 30px;
+  left: -5px;
   white-space: nowrap;
+  z-index: 1;
 }
 .tui-image-editor-container.left .tui-image-editor-submenu {
   left: 0;

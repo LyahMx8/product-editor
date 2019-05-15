@@ -106,10 +106,10 @@ class Editor_Admin{
 				<td><?php echo $ch['name_usr']; ?></td>
 				<td><?php echo $ch['cel_usr']; ?></td>
 				<td><?php echo $ch['email_usr']; ?></td>
-				<td><img style="width:100px;height:70px;object-fit:cover;" src="<?php echo URL_PB."/".$_frntl_etado['cmpurlimg']; ?>">
+				<td><img style="width:100px;height:70px;object-fit: contain;" src="<?php echo URL_PB."/".$_frntl_etado['cmpurlimg']; ?>">
 				<a style="margin-top:calc((70px / 2) - 10px)" href="<?php echo URL_PB."/".$ch['cmpurlimg']; ?>" download class="dashicons dashicons-download"></a></td>
 				<td><?php echo $_frntl_etado['cmpfechup']; ?></td>
-				<td><img style="width:100px;height:70px;object-fit:cover;" src="<?php echo URL_PB."/".$_trsro_etado['cmpurlimg']; ?>">
+				<td><img style="width:100px;height:70px;object-fit: contain;" src="<?php echo URL_PB."/".$_trsro_etado['cmpurlimg']; ?>">
 				<a style="margin-top:calc((70px / 2) - 10px)" href="<?php echo URL_PB."/".$_trsro_etado['cmpurlimg']; ?>" download class="dashicons dashicons-download"></a></td>
 				<td><?php echo $_trsro_etado['cmpfechup']; ?></td>
 			</tr>
@@ -328,7 +328,7 @@ class Editor_Admin{
 				
 				for (var i=0;i<event.target.files.length;i++) {
 
-					$("#uprecallmuchas").append("<div class='variationGallery'><img id =\"ImGaleryMuch"+i+"\" class=\"ImgCont\" style=\"width:200px;\" src="+URL.createObjectURL(event.target.files[i])+" rel=\"0\" /><a href=\"#\" style=\"position:absolute;top:5px;right:5px;\" onclick=\"_CallDeleteImg(event,this);\" rel="+i+">X</a></div>");
+					$("#uprecallmuchas").append("<div class='variationGallery'><img id =\"ImGaleryMuch"+i+"\" class=\"ImgCont\" style=\"width:150px;height:150px;object-fit: contain;\" src="+URL.createObjectURL(event.target.files[i])+" rel=\"0\" /><a href=\"#\" style=\"position:absolute;top:5px;right:5px;\" onclick=\"_CallDeleteImg(event,this);\" rel="+i+">X</a></div>");
 
 					FilesAdd.push(event.target.files[i]);
 				}
@@ -378,7 +378,7 @@ class Editor_Admin{
 
 			if(!is_null($result)){
 				foreach ($result as$k=>$e){
-					$_order .= '<div class="variationGallery"><img id="output" style="width:200px;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;top:5px;right:5px;" onclick="_CallDeleteImg(event,this);">X</a></div>';
+					$_order .= '<div class="variationGallery"><img id="output" style="width:150px;height:150px;object-fit: contain;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;top:5px;right:5px;" onclick="_CallDeleteImg(event,this);">X</a></div>';
 				}
 			}
 
@@ -388,7 +388,7 @@ class Editor_Admin{
 			
 			$result = $wpdb->get_row("SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A);
 
-			if(!is_null($result['cmpurlimg'])) return '<img id="output" style="width:100%;max-height:500px;object-fit:cover;"  src="'.W_URL.$result['cmpurlimg'].'"/>';
+			if(!is_null($result['cmpurlimg'])) return '<img id="output" style="width:100%;max-height:500px;object-fit: contain;"  src="'.W_URL.$result['cmpurlimg'].'"/>';
 		}
 
 		return "";

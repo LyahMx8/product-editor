@@ -15,43 +15,31 @@ if ( !defined('ABSPATH') ) {
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/tui-image-editor.css'; ?>" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/fontselect-alternate.css'; ?>" rel="stylesheet">
 	<style>
-		@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+		@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 		div #tui-image-editor-container{
-			height: 100%;
-			margin: 0;
+			height: 100%;margin: 0;
 		}
 		.tui-image-editor .tui-image-editor-canvas-container{
 			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto"]; ?>');
-			background-size:contain;
-			background-repeat:no-repeat;
+			background-size:contain;background-repeat:no-repeat;
 		}
 		.tui-image-editor .tui-image-editor-canvas-container::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
 			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
-			background-repeat: repeat;
 			background-size: contain;
 			background-repeat: no-repeat;
-			mix-blend-mode: multiply;
-			opacity: .6;
 		}
-		
 	</style>
 </head>
 	
 
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.min.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
-	<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
-	<script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.js"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-code-snipped.min.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/FileSaver.min.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-color-picker.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-image-editor.js'; ?>"></script>
-	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/white-theme.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
 	
 	<div id="tui-image-editor-container"></div>
@@ -59,17 +47,27 @@ if ( !defined('ABSPATH') ) {
 	<script>
 
 	 // Image editor
+	 var locale_es_ES = {
+		'Crop': 'Recortar',
+		'Flip': 'Girar',
+		'Rotate': 'Rotar',
+		'Draw': 'Dibujar',
+		'Shape': 'Forma',
+		'Icon': 'Ícono',
+		'Text': 'Texto'
+	};
 	var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 		includeUI: {
 			loadImage: {
 				path: '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/background.png',
 				name: 'SampleImage'
 			},
-			theme: blackTheme, // or whiteTheme
+			locale: locale_es_ES,
+			theme: blackTheme,
 			initMenu: '',
 			menuBarPosition: 'left'
 		},
-		cssMaxWidth: 700,
+		cssMaxWidth: 500,
 		cssMaxHeight: 500
 	});
 
@@ -78,13 +76,11 @@ if ( !defined('ABSPATH') ) {
 	 }
 	</script>
 	<script>
-		$(function(){
-			$('#font').fontselect().change(function(){
+		jQuery(function(){
+			jQuery('#font').fontselect().change(function(){
 			
-				// replace + signs with spaces for css
-				var font = $(this).val().replace(/\+/g, ' ');
+				var font = jQuery(this).val().replace(/\+/g, ' ');
 				
-				// split font into family and weight
 				font = font.split(':');
 
 				imageEditor.changeTextStyle(imageEditor.activeObjectId, {
@@ -99,7 +95,7 @@ if ( !defined('ABSPATH') ) {
 			jQuery('#tui-image-editor-next-btn').click(function(e){
 				e.preventDefault();
 				imageEditor.addImageObject('http://localhost/wordpress/wp-content/plugins/edicion-de-productos/productos/2019-05-03-00-48-12.png', 'lena').then(result => {
-				     console.log('result');
+					 console.log('result');
 				});
 				imageEditor.applyFilter('mask', {maskObjId: imageEditor.activeObjectId}).then(obj => {
 					console.log('filterType: ', obj.type);
@@ -110,7 +106,6 @@ if ( !defined('ABSPATH') ) {
 			});
 		});
 	</script>
-	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
 	
 </body>
 </html>
