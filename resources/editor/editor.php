@@ -27,6 +27,15 @@ if ( !defined('ABSPATH') ) {
 			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
 			background-size: contain;
 			background-repeat: no-repeat;
+			filter: drop-shadow(0 0 5px red);
+			mix-blend-mode: multiply;
+		}
+		.lower-canvas {
+			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
+			-webkit-mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
+			-webkit-mask-size: 500px 500px;
+			mask-size: 500px 500px;
+			mask-mode: luminance;
 		}
 	</style>
 </head>
@@ -67,13 +76,38 @@ if ( !defined('ABSPATH') ) {
 			initMenu: '',
 			menuBarPosition: 'left'
 		},
-		cssMaxWidth: 500,
-		cssMaxHeight: 500
+		cssMaxWidth: 700,
+		cssMaxHeight: 700
 	});
+	jQuery('#tie-btn-filter').
+	replaceWith('<label style="display: block;" for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
+	jQuery('#tie-btn-crop').
+	replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<img src="/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemtoMin.png" style="width: 32px;">\n	</li>\n	</a>');
 
 	 window.onresize = function() {
 		 imageEditor.ui.resizeEditor();
 	 }
+
+	 function loadImage(event){
+		var imgUrl = void 0;
+
+		var _event$target$files = event.target.files,
+			file = _event$target$files[0];
+
+		if (file) {
+			imgUrl = URL.createObjectURL(file);
+			//this.actions.registCustomIcon(imgUrl, file);
+			imageEditor.addImageObject(
+				imgUrl
+			).then(objectProps => {
+			    console.log(objectProps.id);
+			});
+		}
+	}
+
+	function openIcons(){
+		alert("Iconos");
+	}
 	</script>
 	<script>
 		jQuery(function(){

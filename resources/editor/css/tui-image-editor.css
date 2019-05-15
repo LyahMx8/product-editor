@@ -135,7 +135,7 @@ body > textarea {
   vertical-align: middle;
   white-space: nowrap;
 }
-.tui-image-editor-container .tui-image-editor-menu > .tui-image-editor-item {
+.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item {
   position: relative;
   display: inline-block;
   border-radius: 2px;
@@ -143,7 +143,7 @@ body > textarea {
   cursor: pointer;
   margin: 0 4px;
 }
-.tui-image-editor-container .tui-image-editor-menu > .tui-image-editor-item[title]:hover:before {
+.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover:before {
   content: '';
   position: absolute;
   display: inline-block;
@@ -157,7 +157,7 @@ body > textarea {
   left: 13px;
   top: -2px;
 }
-.tui-image-editor-container .tui-image-editor-menu > .tui-image-editor-item[title]:hover:after {
+.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover:after {
   content: attr(title);
   position: absolute;
   display: inline-block;
@@ -534,7 +534,7 @@ body > textarea {
   width: 1px;
   height: 24px;
 }
-.tui-image-editor-container.left .tui-image-editor-menu > .tui-image-editor-item[title]:before {
+.tui-image-editor-container.left .tui-image-editor-menu .tui-image-editor-item[title]:before {
   top: 16px;
   border-right: 7px solid transparent;
   border-top: 7px solid transparent;
@@ -571,7 +571,7 @@ table tbody td {
     background: rgba(0,0,0,.2);
     padding: 10px !important;
 }
-.tui-image-editor-container.left .tui-image-editor-menu > .tui-image-editor-item[title]:after {
+.tui-image-editor-container.left .tui-image-editor-menu .tui-image-editor-item[title]:after {
   top: 30px;
   left: -5px;
   white-space: nowrap;

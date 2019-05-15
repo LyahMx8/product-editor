@@ -5212,7 +5212,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					},
 					locale: {},
 					menuIconPath: '',
-					menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'icon', 'text'],
+					menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'icon', 'text', 'filter'],
 					initMenu: '',
 					uiSize: {
 						width: '100%',
@@ -5689,7 +5689,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			loadButtonStyle = _ref.loadButtonStyle,
 			downloadButtonStyle = _ref.downloadButtonStyle,
 			submenuStyle = _ref.submenuStyle;
-		return '\n    <div class="tui-image-editor-main-container" style="' + commonStyle + '">\n        <div class="tui-image-editor-header" style="' + headerStyle + '">\n            <div class="tui-image-editor-header-logo">\n                <img src="' + biImage + '" />\n            </div>\n            <div class="tui-image-editor-header-buttons">\n                '/*<div style="' + loadButtonStyle + '">\n                    ' + locale.localize('Cargar') + '\n                    <input type="file" class="tui-image-editor-load-btn" />\n                </div>\n                */+'<a id="tui-image-editor-next-btn" style="background-color: #fdba3b;border: 1px solid #fdba3b;color: #fff;font-family: `Noto Sans`, sans-serif;font-size: 12px">Siguiente</a>\n            </div>\n        </div>\n        <div class="tui-image-editor-main">\n            <div class="tui-image-editor-submenu">\n                <div class="tui-image-editor-submenu-style" style="' + submenuStyle + '"></div>\n            </div>\n            <div class="tui-image-editor-wrap">\n                <div class="tui-image-editor-size-wrap">\n                    <div class="tui-image-editor-align-wrap">\n                        <div class="tui-image-editor"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n';
+		return '\n    <div class="tui-image-editor-main-container" style="' + commonStyle + '">\n        <div class="tui-image-editor-header" style="' + headerStyle + '">\n            <div class="tui-image-editor-header-logo">\n                <img src="' + biImage + '" />\n            </div>\n            <div class="tui-image-editor-header-buttons">\n                '/*<div style="' + loadButtonStyle + '">\n                    ' + locale.localize('Cargar') + '\n                    <input type="file" class="tui-image-editor-load-btn" />\n                </div>\n                */+'<a id="tui-image-editor-next-btn" style="background-color:#048c94;border:1px solid #1d666b;color: #fff;font-family: `Noto Sans`, sans-serif;font-size: 12px">Agregar al Carrito</a>\n            </div>\n        </div>\n        <div class="tui-image-editor-main">\n            <div class="tui-image-editor-submenu">\n                <div class="tui-image-editor-submenu-style" style="' + submenuStyle + '"></div>\n            </div>\n            <div class="tui-image-editor-wrap">\n                <div class="tui-image-editor-size-wrap">\n                    <div class="tui-image-editor-align-wrap">\n                        <div class="tui-image-editor"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n';
 	};
 
 /***/ }),
@@ -9085,7 +9085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				},
 				next: function next() {
-					console.log('GGATOSOSOD')
+					//console.log('GGATOSOSOD')
 					/*var dataURL = _this.toDataURL();
 					var imageName = _this.getImageName();
 					var blob = void 0,

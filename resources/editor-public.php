@@ -130,7 +130,7 @@ class Editor_Public{
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); 
 					jQuery('.Editor').click(function(e){
 						e.preventDefault();
-						console.log(this.attributes.url.textContent);
+						//console.log(this.attributes.url.textContent);
 						document.getElementById("popContainer").style.display = "block"; 
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto='+this.attributes.url.textContent+'&alpha_frn=<?php echo $alph_frn; ?>&alpha_tsr=<?php echo $alph_tsr; ?>');
 					});
