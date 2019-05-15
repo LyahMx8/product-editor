@@ -378,7 +378,7 @@ class Editor_Admin{
 
 			if(!is_null($result)){
 				foreach ($result as$k=>$e){
-					$_order .= '<div class="variationGallery"><img id="output" style="width:150px;height:150px;object-fit: contain;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;top:5px;right:5px;" onclick="_CallDeleteImg(event,this);">X</a></div>';
+					$_order .= '<div class="variationGallery" style="background:#fff;border:2px solid #efefef;padding:15px;box-shadow:2px 2px 3px #efefef;"><img id="output" style="width:100px;height:100px;object-fit: contain;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;top:5px;right:5px;" onclick="_CallDeleteImg(event,this);">X</a></div>';
 				}
 			}
 

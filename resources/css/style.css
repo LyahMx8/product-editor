@@ -25,7 +25,8 @@
 .img-btn{display:inline-block;text-align:center;padding:5px;border:1px solid #efefef;position:relative;cursor:pointer;border-radius:10px;}
 .img-btn img{width:70px;}.img-btn:hover img{filter: brightness(50%);background: #000;}
 .img-btn span{line-height: 18px;display:none;position:absolute;top: 30%;left: 0;right: 0;color: #fff;}.img-btn:hover span{display:block;}
-.custom-file-label > div {background-image: linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4),linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4);background-position: 0 0,10px 10px;background-size: 20px 20px;}
+.custom-file-label > div{background-image: linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4),linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4);background-position: 0 0,10px 10px;background-size: 20px 20px;}
+.ctm-icons{position:absolute;width:calc(100% - 65px);bottom:0;height:100px;right:0;border-top: 4px solid #000;}
 
 @media screen and (max-width:600px){
 	.popUp{width:96%;left:2%;}

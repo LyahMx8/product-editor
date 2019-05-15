@@ -71,6 +71,7 @@ class Editor_Public{
 		$product_editor = $wpdb->get_results( "SELECT cmpidtipimg, cmpurlimg FROM zalemto_editor_img WHERE cmpidprdct = '$thepostid'" );
 		$clr_tsr = array();
 		$clr_frn = array();
+		$ctm_icon = array();
 		foreach ($product_editor as $key) {
 			if($key->cmpidtipimg == 0){
 				$alph_frn = $key->cmpurlimg;
@@ -127,7 +128,7 @@ class Editor_Public{
 				* Funcion que abre el modal y carga el editor dentro del div popUp
 				*/
 				jQuery(document).ready(function(){
-					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php'); 
+					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
 						e.preventDefault();
 						//console.log(this.attributes.url.textContent);
