@@ -21,20 +21,38 @@ if ( !defined('ABSPATH') ) {
 		div #tui-image-editor-container{
 			height: 100%;margin: 0;
 		}
-		.tui-image-editor .tui-image-editor-canvas-container{
+		#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container{
 			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto"]; ?>');
 			background-size:contain;background-repeat:no-repeat;
 		}
-		.tui-image-editor .tui-image-editor-canvas-container::before {
+		#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container::before {
 			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
 			background-size: contain;
 			background-repeat: no-repeat;
 			filter: drop-shadow(0 0 5px red);
 			mix-blend-mode: multiply;
 		}
-		.lower-canvas {
+		#tui-image-editor-container .lower-canvas {
 			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
 			-webkit-mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_frn"]; ?>');
+			-webkit-mask-size: 500px 500px;
+			mask-size: 500px 500px;
+			mask-mode: luminance;
+		}
+		#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container{
+			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto_tsr"]; ?>');
+			background-size:contain;background-repeat:no-repeat;
+		}
+		#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container::before {
+			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_tsr"]; ?>');
+			background-size: contain;
+			background-repeat: no-repeat;
+			filter: drop-shadow(0 0 5px red);
+			mix-blend-mode: multiply;
+		}
+		#tui-image-editor-container-2 .lower-canvas {
+			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_tsr"]; ?>');
+			-webkit-mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["alpha_tsr"]; ?>');
 			-webkit-mask-size: 500px 500px;
 			mask-size: 500px 500px;
 			mask-mode: luminance;
@@ -53,7 +71,15 @@ if ( !defined('ABSPATH') ) {
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-image-editor.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
 	
+	<section class="variationProd">
+		<div class="fb-login-button" data-width="70px" data-size="small" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
+		<a onclick="openEditor('tui-image-editor-container','script1')"><img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto"]; ?>"></a>
+		<a onclick="openEditor('tui-image-editor-container-2','script2')"><img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $_GET["producto_tsr"]; ?>"></a>
+	</section>
+
 	<div id="tui-image-editor-container"></div>
+	<div id="tui-image-editor-container-2" style="display:none;"></div>
+
 	<section class="custom-file-label" id="iconContainer" style="display:none">
 		<div class="ctm-icons carrusel-prods">
 			<?php
@@ -66,8 +92,95 @@ if ( !defined('ABSPATH') ) {
 		</div>
 	</section>
 	
-	<script>
+	<script id="script2" style="display:none;">
+		 // Image editor
+		 var locale_es_ES = {
+			'Crop': 'Recortar',
+			'Flip': 'Girar',
+			'Rotate': 'Rotar',
+			'Draw': 'Dibujar',
+			'Shape': 'Forma',
+			'Icon': 'Ícono',
+			'Text': 'Texto'
+		};
+		var imageEditor2 = new tui.ImageEditor('#tui-image-editor-container-2', {
+			includeUI: {
+				loadImage: {
+					path: '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/background.png',
+					name: 'SampleImage'
+				},
+				locale: locale_es_ES,
+				theme: blackTheme,
+				initMenu: '',
+				menuBarPosition: 'left'
+			},
+			cssMaxWidth: 500,
+			cssMaxHeight: 500
+		});
+		jQuery('#tie-btn-filter').
+		replaceWith('<label style="display: block;" for="tie-icon-image-upload2">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage2(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload2" class="tie-icon-image-file">');
+		jQuery('#tie-btn-crop').
+		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<img src="/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemtoMin.png" style="width: 32px;">\n	</li>\n	</a>');
 
+		 window.onresize = function() {
+			 imageEditor2.ui.resizeEditor();
+		 }
+
+		 function loadImage2(event){
+			var imgUrl2 = void 0;
+
+			var _event$target$files2 = event.target.files,
+				file2 = _event$target$files2[0];
+
+			if (file2) {
+				imgUrl2 = URL.createObjectURL(file2);
+				//this.actions.registCustomIcon(imgUrl2, file);
+				imageEditor2.addImageObject(
+					imgUrl2
+				).then(objectProps => {
+					console.log(objectProps.id);
+				});
+			}
+		}
+
+		function putIcon(url){
+			imageEditor2.addImageObject(
+				url
+			).then(objectProps => {
+				console.log(objectProps.id);
+			});
+		}
+		
+		jQuery(function(){
+			jQuery('#font').fontselect().change(function(){
+			
+				var font = jQuery(this).val().replace(/\+/g, ' ');
+				
+				font = font.split(':');
+
+				imageEditor2.changeTextStyle(imageEditor2.activeObjectId, {
+					fontFamily: font[0]
+				});
+			});
+		});
+
+		jQuery(document).ready(function(){
+			jQuery('#tui-image-editor-next-btn').click(function(e){
+				e.preventDefault();
+				imageEditor2.addImageObject('http://localhost/wordpress/wp-content/plugins/edicion-de-productos/productos/2019-05-03-00-48-12.png', 'lena').then(result => {
+					 console.log('result');
+				});
+				imageEditor2.applyFilter('mask', {maskObjId: imageEditor2.activeObjectId}).then(obj => {
+					console.log('filterType: ', obj.type);
+					console.log('actType: ', obj.action);
+				}).catch(message => {
+					console.log('error: ', message);
+				});;
+			});
+		});
+	</script>
+	
+	<script id="script1">
 		 // Image editor
 		 var locale_es_ES = {
 			'Crop': 'Recortar',
@@ -118,15 +231,6 @@ if ( !defined('ABSPATH') ) {
 			}
 		}
 
-		function openIcons(){
-			var iconContainer = document.getElementById("iconContainer"); 
-			if(iconContainer.style.display == "none"){
-				iconContainer.style.display = "block"
-			}else{
-				iconContainer.style.display = "none"
-			}
-		}
-
 		function putIcon(url){
 			imageEditor.addImageObject(
 				url
@@ -134,8 +238,7 @@ if ( !defined('ABSPATH') ) {
 				console.log(objectProps.id);
 			});
 		}
-	</script>
-	<script>
+		
 		jQuery(function(){
 			jQuery('#font').fontselect().change(function(){
 			
@@ -149,8 +252,6 @@ if ( !defined('ABSPATH') ) {
 			});
 		});
 
-	</script>
-	<script>
 		jQuery(document).ready(function(){
 			jQuery('#tui-image-editor-next-btn').click(function(e){
 				e.preventDefault();
@@ -165,6 +266,33 @@ if ( !defined('ABSPATH') ) {
 				});;
 			});
 		});
+	</script>
+	<script>
+		function openIcons(){
+			var iconContainer = document.getElementById("iconContainer"); 
+			if(iconContainer.style.display == "none"){
+				iconContainer.style.display = "block";
+			}else{
+				iconContainer.style.display = "none";
+			}
+		}
+		function openEditor(editorId, scriptId){
+			document.getElementById("tui-image-editor-container").style.display = "none";
+			document.getElementById("tui-image-editor-container-2").style.display = "none";
+			document.getElementById("script1").style.display = "none";
+			document.getElementById("script2").style.display = "none";
+			if(document.getElementById(editorId).style.display == "none"){
+				document.getElementById(editorId).style.display = "block";
+			}else{
+				document.getElementById(editorId).style.display = "none";
+			}
+			if(document.getElementById(scriptId).style.display == "none"){
+				document.getElementById(scriptId).style.display = "block";
+			}else{
+				document.getElementById(scriptId).style.display = "none";
+			}
+		}
+
 	</script>
 	
 </body>

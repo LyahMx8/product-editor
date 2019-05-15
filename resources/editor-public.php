@@ -133,7 +133,8 @@ class Editor_Public{
 						e.preventDefault();
 						//console.log(this.attributes.url.textContent);
 						document.getElementById("popContainer").style.display = "block"; 
-						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto='+this.attributes.url.textContent+'&alpha_frn=<?php echo $alph_frn; ?>&alpha_tsr=<?php echo $alph_tsr; ?>');
+						var string = this.attributes.url.textContent;
+						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto='+this.attributes.url.textContent+'&producto_tsr=<?php echo $clr_tsr[0]; ?>&alpha_frn=<?php echo $alph_frn; ?>&alpha_tsr=<?php echo $alph_tsr; ?>');
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
 
