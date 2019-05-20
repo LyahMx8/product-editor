@@ -7,6 +7,7 @@ if ( !defined('ABSPATH') ) {
 }
 
 $fecha = date("Y-m-d H:i:s");
+
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 	/* 
 	* Ya definila consulta en functions ahora se puede almacenar las imagenes con este array para definir si es frontal o algo 
@@ -17,27 +18,25 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	*	Que dice Yimmy? asi seria mas facil saber si es imagen alpha se peude borrar al igual que las imagenes que se tienen
 	*	los unicos estados que van a tener mayor cantidad de imagenes van a ser el 2, 3 y muy posible 4
 	*/
+	if(array_key_exists("ImageRequest", $_FILES)){
 
-	if($_POST['TiProduct']==2 || $_POST['TiProduct']==3 || $_POST['TiProduct']==6){
-		// Con el Tiempo se deberá cambiar el metodo a subir varias imagenes
+		if($_POST['TiProduct']==2 || $_POST['TiProduct']==3 || $_POST['TiProduct']==6){
+			// Con el Tiempo se deberá cambiar el metodo a subir varias imagenes
 
-		for ($i=0;$i<count($_FILES["ImageRequest"]["name"]);$i++){ 
-			$foo = new mCntrolMultiFileSave($_FILES["ImageRequest"],$_POST,$i);
+			for ($i=0;$i<count($_FILES["ImageRequest"]["name"]);$i++){ 
+				$foo = new mCntrolMultiFileSave($_FILES["ImageRequest"],$_POST,$i);
+			}
+
+		}
+		else{
+			$foo = new mCntrolFileSave($_FILES["ImageRequest"],$_POST);
 		}
 
-	}
-	else{
-		$foo = new mCntrolFileSave($_FILES["ImageRequest"],$_POST);
-	}
+		if(!$foo){ print("Problema Al Subir la Imagen Comunicate a Soporte"); }
 
-	global $wpdb;
+	}else{ print("Se debe ingresar una imagen primero..."); }
 
-	if($foo){
+	echo Editor_Admin::show_preimages($_POST['IdProduct'],$_POST['TiProduct']);
 
-		echo Editor_Admin::show_preimages($_POST['IdProduct'],$_POST['TiProduct']);
-
-	}else{
-		print("Problema al subir la imagen");
-	}
 }
 ?>

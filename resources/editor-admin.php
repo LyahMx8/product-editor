@@ -147,7 +147,7 @@ class Editor_Admin{
 			<p class="max-upload-size">Tamaño máximo de archivo: 1.5 MB.</p>
 		</div>
 	</div>
-	<div class="upload-inline-status" id="_charge_img" style="padding:50px;"><?php echo Editor_Admin::show_preimages(0,6); ?></div>
+	<div class="upload-inline-status" id="_charge_img" style="padding:50px;"><?php echo Editor_Admin::show_preimages(0,6,"icons_img"); ?></div>
 </div>
 	</div>
 	<script>
@@ -253,7 +253,7 @@ class Editor_Admin{
 			<div class="col-sm-5 custom-file">
 				<input type="file" class="custom-file-input" name="mImageAddBack" id="mImageAddBack" onchange="loadFileBck(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddBack">
-					<div id="uprecallbck" ><?php echo Editor_Admin::show_preimages($thepostid,1); ?></div>
+					<div id="uprecallbck" ><?php echo Editor_Admin::show_preimages($thepostid,1,"outputbck"); ?></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
 				</label>
 			</div>
@@ -294,7 +294,7 @@ class Editor_Admin{
 	}
 	public static function out_carrousel_image($post){
 		
-		$thepostid = $post->ID;
+		$thepostid = get_the_ID();
 
 		?>
 		<form enctype="multipart/form-data" class="vFormImgGalMuch">
@@ -302,7 +302,7 @@ class Editor_Admin{
 				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas[]" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
 				<label class="custom-file-label" for="mImageAddMuchas">
 					<div id="uprecallmuchas" class="carrusel-prods">
-					<?php echo Editor_Admin::show_preimages($thepostid,2); ?>
+					<?php echo Editor_Admin::show_preimages($thepostid,2,"image_carousel"); ?>
 					</div>
 					<a style="text-decoration:underline;">Establecer imagenes para Edición</a>
 				</label>
@@ -365,7 +365,7 @@ class Editor_Admin{
 		<?php
 	}
 
-	public static function show_preimages($id_post,$tip_post){
+	public static function show_preimages($id_post,$tip_post, $_id_carga_prev = "output"){
 		global $wpdb;
 
 		if($tip_post==3 || $tip_post==2 || $tip_post==6){
@@ -378,7 +378,7 @@ class Editor_Admin{
 
 			if(!is_null($result)){
 				foreach ($result as$k=>$e){
-					$_order .= '<div class="variationGallery" style=""><img id="output" style="width:100px;height:100px;object-fit: contain;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;top:5px;right:5px;" onclick="_CallDeleteImg(event,this);">X</a></div>';
+					$_order .= '<div class="variationGallery" style=""><img id="'.$_id_carga_prev.'" style="width:100px;height:100px;object-fit: contain;"  src="'.W_URL.$e['cmpurlimg'].'" rel="'.$e['cmpidimg'].'"/><a href="#" style="position:absolute;top:5px;right:5px;" onclick="_CallDeleteImg(event,this);">X</a></div>';
 				}
 			}
 
@@ -388,10 +388,10 @@ class Editor_Admin{
 			
 			$result = $wpdb->get_row("SELECT cmpurlimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post, ARRAY_A);
 
-			if(!is_null($result['cmpurlimg'])) return '<img id="output" style="width:100%;max-height:500px;object-fit: contain;"  src="'.W_URL.$result['cmpurlimg'].'"/>';
+			if(!is_null($result['cmpurlimg'])) return '<img id="'.$_id_carga_prev.'" style="width:100%;max-height:500px;object-fit: contain;"  src="'.W_URL.$result['cmpurlimg'].'"/>';
 		}
 
-		return "";
+		return '<img id="'.$_id_carga_prev.'" style="width:100%;max-height:500px;object-fit: contain;" />';
 	}
 
 }

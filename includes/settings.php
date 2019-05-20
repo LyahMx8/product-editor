@@ -27,8 +27,8 @@ if(app_env == 'production'){
 	define('URL_PB', "/wp-content/plugins/edicion-de-productos");
 }else{
 	//Mostrar errores de php supongo que toca cabiar eso Yimmy por edicion-de-productos
-	error_reporting(E_ALL);
-	ini_set('display_errors', '1');
+	//error_reporting(E_ALL);
+	//ini_set('display_errors', '1');
 	
 	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wordpress/wp-content/plugins/edicion-de-productos");
 	define('URL_PS', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/edicion-de-productos");

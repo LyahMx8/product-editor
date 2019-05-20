@@ -31,10 +31,10 @@
 .chooseSelect{display: block;box-shadow: 2px 2px 7px rgba(0,0,0,.2);color:#fff;width: auto;padding: 5px;margin: 10px;border: 1px solid #d7d7d7;cursor: pointer;}
 .chooseSelect:hover{ contrast(110%);}
 .chooseSelect>ul{display:none;}
-.chooseSelect:hover>ul{display:block;margin: 0;background: #1e1e1e;}
-.chooseSelect>ul>div{padding:5px;border-bottom:1px solid #efefef;}
+.chooseSelect:hover>ul{display:block;margin: 0;background: #1e1e1e;overflow: hidden;}
+.chooseSelect>ul>div{padding:5px;border-bottom:1px solid #efefef;float: left;}
 .chooseSelect>ul>div:hover{background: #000;}
-.variationProd div img{width:20px;height:20px;object-fit:contain;float:left;margin-right:5px;}
+.variationProd div img{width:60px;height:60px;object-fit:contain;}
 
 .changeProd{position:absolute;bottom:100px;right:5px;display:block;z-index: 1}
 .changeProd a{display: block;box-shadow: 2px 2px 7px rgba(0,0,0,.2);background:#e7e7e7;width: auto;padding: 5px;margin: 10px;border: 1px solid #d7d7d7;cursor: pointer;}

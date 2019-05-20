@@ -6,28 +6,6 @@ if ( !defined('ABSPATH') ) {
 	include_once plugin_dir_path( dirname(__DIR__) ).'includes/settings.php';
 	global $wpdb;
 	$product_editor = $wpdb->get_results( "SELECT * FROM zalemto_editor_img WHERE cmpidtipimg = 6 OR cmpidprdct = ".$_GET["producto"]);
-	$clr_frn = array();
-	$clr_tsr = array();
-	$ctm_icon = array();
-	foreach ($product_editor as $key) {
-		switch ($key->cmpidtipimg) {
-			case 0:
-				$alph_frn = $key->cmpurlimg;
-				break;
-			case 1:
-				$alph_tsr = $key->cmpurlimg;
-				break;
-			case 2:
-				array_push($clr_frn, $key->cmpurlimg);
-				break;
-			case 3:
-				array_push($clr_tsr, $key->cmpurlimg);
-				break;
-			case 6:
-				array_push($ctm_icon, $key->cmpurlimg);
-				break;
-		}
-	}
 }
 ?>
 <!DOCTYPE html>
@@ -38,14 +16,54 @@ if ( !defined('ABSPATH') ) {
 	<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/tui-image-editor.css'; ?>" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/fontselect-alternate.css'; ?>" rel="stylesheet">
+	<script>
+		var clr_frn=[];
+		var clr_tsr=[];
+	</script>
+	<?php
+		$clr_frn = array();
+		$clr_tsr = array();
+		$ctm_icon = array();
+		foreach ($product_editor as $key) {
+			switch ($key->cmpidtipimg) {
+				case 0:
+					$alph_frn = $key->cmpurlimg;
+					break;
+				case 1:
+					$alph_tsr = $key->cmpurlimg;
+					break;
+				case 2:
+					array_push($clr_frn, $key->cmpurlimg);
+					?> <script>clr_frn.push("<?php echo $key->cmpurlimg; ?>")</script> <?php
+					break;
+				case 3:
+					array_push($clr_tsr, $key->cmpurlimg);
+					?> <script>clr_tsr.push("<?php echo $key->cmpurlimg; ?>")</script> <?php
+					break;
+				case 6:
+					array_push($ctm_icon, $key->cmpurlimg);
+					break;
+			}
+		} 
+	?>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.min.js'; ?>"></script>
+	<script>
+		function changeColor(colorFrn, colorTsr){
+			var cssFrontal = {'background':'url(/wordpress/wp-content/plugins/edicion-de-productos/'+colorFrn+')'}
+			jQuery('#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container').css(cssFrontal);
+			jQuery('.imgPrdFrn').html('<img src="/wordpress/wp-content/plugins/edicion-de-productos/'+colorFrn+'">');
+			var cssTrasero = {'background':'url(/wordpress/wp-content/plugins/edicion-de-productos/'+colorTsr+')'}
+			jQuery('#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container').css(cssTrasero);
+			jQuery('.imgPrdTsr').html('<img src="/wordpress/wp-content/plugins/edicion-de-productos/'+colorTsr+'">');
+		}
+	</script>
 	<style>
 		@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 		div #tui-image-editor-container{
 			height: 100%;margin: 0;
 		}
 		#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container{
-			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $clr_frn[1]; ?>');
-			background-size:contain;background-repeat:no-repeat;
+			background-size:contain !important;background-repeat:no-repeat !important;
 		}
 		#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container::before {
 			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
@@ -61,9 +79,9 @@ if ( !defined('ABSPATH') ) {
 			mask-size: 500px 500px;
 			mask-mode: luminance;
 		}
+	<?php if (isset($alph_tsr)) : ?>
 		#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container{
-			background:url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $clr_tsr[0]; ?>');
-			background-size:contain;background-repeat:no-repeat;
+			background-size:contain !important;background-repeat:no-repeat !important;
 		}
 		#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container::before {
 			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_tsr; ?>');
@@ -79,10 +97,10 @@ if ( !defined('ABSPATH') ) {
 			mask-size: 500px 500px;
 			mask-mode: luminance;
 		}
+	<?php endif; ?>
 	</style>
 </head>
 <body>
-	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.min.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-code-snipped.min.js'; ?>"></script>
@@ -94,10 +112,13 @@ if ( !defined('ABSPATH') ) {
 	<section class="variationProd">
 		<div class="chooseSelect">Selecciona un color <span class="dashicons dashicons-arrow-down"></span>
 			<ul>
-				<?php foreach ($clr_frn as $key) { ?>
-					<div onclick="putIcon('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>')">
+				<?php foreach ($clr_frn as $key) { 
+					foreach ($clr_tsr as $value) {
+						if(explode("-",$key)[4] == explode("-",$value)[4]){$key2=$value;}
+					}
+				?>
+					<div onclick="changeColor('<?php echo $key; ?>','<?php echo $key2; ?>')">
 						<img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>">
-						<?php echo explode("-",$key)[4]; ?>
 					</div>
 				<?php } ?>
 			</ul>
@@ -106,8 +127,10 @@ if ( !defined('ABSPATH') ) {
 
 	<section class="changeProd">
 		<div class="fb-login-button" data-width="70px" data-size="small" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-		<a onclick="openEditor('tui-image-editor-container',imageEditor)"><img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $clr_frn[1]; ?>"></a>
-		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)"><img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $clr_tsr[1]; ?>"></a>
+		<a onclick="openEditor('tui-image-editor-container',imageEditor)" class="imgPrdFrn"></a>
+	<?php if (isset($alph_tsr)) : ?>
+		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $clr_tsr[0]; ?>"></a>
+	<?php endif; ?>
 	</section>
 
 	<div id="tui-image-editor-container"></div>
@@ -122,13 +145,13 @@ if ( !defined('ABSPATH') ) {
 	</section>
 
 	<script id="script1">
-		var editorActive = imageEditor;
+
 		function setActive(editorVar){
 			editorActive = editorVar;
 			console.log(editorVar);
 		}
-
 		function openIcons(){
+			jQuery('.tui-image-editor-item').removeClass('active');
 			var iconContainer = document.getElementById("iconContainer"); 
 			if(iconContainer.style.display == "none"){
 				iconContainer.style.display = "block";
@@ -158,6 +181,14 @@ if ( !defined('ABSPATH') ) {
 			'Icon': 'Ícono',
 			'Text': 'Texto'
 		};
+		var menuPosition = 'left';
+		$(window).on("resize", function(){
+			var width = $(window).width();
+			if (width < 800){
+				console.log("perros");
+				this.menuPosition = 'bottom';
+			}
+		});
 		var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 			includeUI: {
 				loadImage: {
@@ -167,7 +198,7 @@ if ( !defined('ABSPATH') ) {
 				locale: locale_es_ES,
 				theme: blackTheme,
 				initMenu: '',
-				menuBarPosition: 'left'
+				menuBarPosition: menuPosition
 			},
 			cssMaxWidth: 500,
 			cssMaxHeight: 500
@@ -181,7 +212,7 @@ if ( !defined('ABSPATH') ) {
 				locale: locale_es_ES,
 				theme: blackTheme,
 				initMenu: '',
-				menuBarPosition: 'left'
+				menuBarPosition: menuPosition
 			},
 			cssMaxWidth: 500,
 			cssMaxHeight: 500
@@ -191,6 +222,7 @@ if ( !defined('ABSPATH') ) {
 		jQuery('.tui-image-editor-item.normal.crop').
 		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
 
+		var editorActive = imageEditor;
 		 window.onresize = function() {
 			 editorActive.ui.resizeEditor();
 		 }
@@ -234,6 +266,8 @@ if ( !defined('ABSPATH') ) {
 		});
 
 		jQuery(document).ready(function(){
+			changeColor(clr_frn[0], clr_tsr[0]);
+
 			jQuery('#tui-image-editor-next-btn').click(function(e){
 				e.preventDefault();
 				editorActive.addImageObject('http://localhost/wordpress/wp-content/plugins/edicion-de-productos/productos/2019-05-03-00-48-12.png', 'lena').then(result => {
