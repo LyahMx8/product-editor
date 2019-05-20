@@ -123,7 +123,7 @@ class Functions{
 	/**
 	 * Obtener la versión de WooCommerce
 	 */
-	private function wpc_get_woo_version_number() {
+	/*private function wpc_get_woo_version_number() {
 		// If get_plugins() isn't available, require it
 		if (!function_exists('get_plugins'))
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -139,53 +139,53 @@ class Functions{
 			// Otherwise return null
 			return NULL;
 		}
-	}
+	}*/
 
 	/**
 	 * Redefine los filtros de variables de Woocommerce
 	 */
-	function set_variable_action_filters() {
+	/*function set_variable_action_filters() {
 		GLOBAL $wpd_settings;
 		$options = $wpd_settings['wpc-general-options'];
 		$woo_version = $this->wpc_get_woo_version_number();
 		if ($options['wpc-parts-position-cart'] == "name") {
 			if ($woo_version < 2.1) {
 				//Old WC versions
-				add_filter("woocommerce_in_cart_product_title", array($this, "get_wpd_data"), 10, 3);
+				add_filter("woocommerce_in_cart_product_title", array($this, "get_wpd_data"));
 			} else {
 				//New WC versions
-				add_filter("woocommerce_cart_item_name", array($this, "get_wpd_data"), 10, 3);
+				add_filter("woocommerce_cart_item_name", array($this, "get_wpd_data"));
 			}
 		} else {
 			if ($woo_version < 2.1) {
 				//Old WC versions
-				add_filter("woocommerce_in_cart_product_thumbnail", array($this, "get_wpd_data"), 10, 3);
+				add_filter("woocommerce_in_cart_product_thumbnail", array($this, "get_wpd_data"));
 			} else {
 				//New WC versions
-				add_filter("woocommerce_cart_item_thumbnail", array($this, "get_wpd_data"), 10, 3);
+				add_filter("woocommerce_cart_item_thumbnail", array($this, "get_wpd_data"));
 			}
 		}
 		$append_content_filter = $options['wpc-content-filter'];
 
 		if ($append_content_filter !== "0" && !is_admin()) {
 
-			add_filter("the_content", array($this, "filter_content"), 99);
+			add_filter("the_content", array($this, 'filter_content'), 99);
 		}
-	}
+	}*/
 
 	/**
 	 * Agrega nuevas variables
 	 */
-	public function wpd_add_query_vars($aVars) {
+	/*public function wpd_add_query_vars($aVars) {
 		$aVars[] = "product_id";
 		$aVars[] = "tpl";
 		$aVars[] = "edit";
 		$aVars[] = "design_index";
 		$aVars[] = "oid";
 		return $aVars;
-	}
+	}*/
 
-	public function wpd_add_rewrite_rules($param) {
+	/*public function wpd_add_rewrite_rules($param) {
 		GLOBAL $wpd_settings;
 		GLOBAL $wp_rewrite;
 		$options = $wpd_settings['wpc-general-options'];
@@ -262,7 +262,7 @@ class Functions{
 
 			$wp_rewrite->flush_rules(false);
 		}
-	}
+	}*/
 
 	
 }

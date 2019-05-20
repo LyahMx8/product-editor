@@ -68,60 +68,17 @@ class Editor_Public{
 		global $wpdb;
 
 		$thepostid = get_the_ID();
-		$product_editor = $wpdb->get_results( "SELECT cmpidtipimg, cmpurlimg FROM zalemto_editor_img WHERE cmpidprdct = '$thepostid'" );
-		$clr_tsr = array();
-		$clr_frn = array();
-		$ctm_icon = array();
-		foreach ($product_editor as $key) {
-			if($key->cmpidtipimg == 0){
-				$alph_frn = $key->cmpurlimg;
-			} else if($key->cmpidtipimg == 1){
-				$alph_tsr = $key->cmpurlimg;
-			} else if($key->cmpidtipimg == 2){
-				array_push($clr_frn, $key->cmpurlimg);
-			} else if($key->cmpidtipimg == 3){
-				array_push($clr_tsr, $key->cmpurlimg);
-			}
-		}
+		$product_editor = $wpdb->get_results( "SELECT cmpidtipimg FROM zalemto_editor_img WHERE cmpidprdct = '$thepostid'" );
 
 		if ($product_editor !== null): ?>
-			<section class="carrusel-prods">
-		<?php foreach ($clr_frn as $key) { ?>
-				<div class="img-btn Editor" url="<?php echo $key; ?>">
-					<img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>" alt="Producto Htc">
-					<span>Editar<br>Producto</span>
-				</div>
-		<?php } ?>
-			</section>
-			<!--button class="btnEditor" id="Editor">Editar Producto</button>
-			<button class="btnEditor" id="Datos">Llenar datos</button-->
+
+			<button class="btnEditor Editor">Editar Producto <span class="dashicons dashicons-edit"></span></button>
 			<div id="popContainer">
 				<div class="popLayer" onclick="closeModal('popContainer')">
 					<span>X</span>
 				</div>
 				<section class="popUp" id="popUp"></section>
 			</div>
-
-			<!--div id="popDatos">
-				<div class="popLayer" onclick="closeModal('popDatos')">
-					<span>X</span>
-				</div>
-				<section class="popUp">
-					<form action="" class="datosForm">
-						<h3>Llena tus datos</h3>
-						<p>Por favor llena tus datos completos, para que podamos ponernos en contacto contigo</p>
-						<div class="formCntn">
-							<div><input type="text" id="datoNom"><label for="datoNom">Nombre</label></div>
-							<div><input type="text" id="datoTel"><label for="datoTel">Teléfono</label></div>
-						</div>
-						<div class="formCntn">
-							<div><input type="text" id="datoDir"><label for="datoDir">Dirección</label></div>
-							<div><input type="text" id="datoEmail"><label for="datoEmail">Correo Electrónico</label></div>
-						</div><br style="clear:left;">
-						<input type="submit" value="Enviar">
-					</form>
-				</section>
-			</div-->
 
 			<script>
 				/**
@@ -131,17 +88,10 @@ class Editor_Public{
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
 						e.preventDefault();
-						//console.log(this.attributes.url.textContent);
 						document.getElementById("popContainer").style.display = "block"; 
-						var string = this.attributes.url.textContent;
-						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto='+this.attributes.url.textContent+'&producto_tsr=<?php echo $clr_tsr[0]; ?>&alpha_frn=<?php echo $alph_frn; ?>&alpha_tsr=<?php echo $alph_tsr; ?>');
+						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
-
-					/*jQuery('#Datos').click(function(e){
-						e.preventDefault();
-						document.getElementById("popDatos").style.display = "block";
-					});*/
 				});
 				fnctnajaxpcrgpg = function(vrbldivdestino,vrblurlorigen){
 					jQuery.ajax({
