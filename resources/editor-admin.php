@@ -370,7 +370,7 @@ class Editor_Admin{
 
 		if($tip_post==3 || $tip_post==2 || $tip_post==6){
 
-			$_query_multi_img = ($tip_post==3 || $tip_post==2)?"SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = 3 OR cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post:"SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post;
+			$_query_multi_img = ($tip_post==3 || $tip_post==2)?"SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE (cmpidtipimg = 3 OR cmpidtipimg = ".$tip_post.") AND cmpidprdct = ".$id_post:"SELECT cmpurlimg,cmpidimg FROM zalemto_editor_img WHERE cmpidtipimg = ".$tip_post." AND cmpidprdct = ".$id_post;
 			
 			$_order = "";
 

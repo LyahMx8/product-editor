@@ -98,7 +98,7 @@ class Editor_Public{
 						url: vrblurlorigen,
 						type: 'GET',
 						beforeSend: function(){
-							jQuery("#"+vrbldivdestino).html("Cargando Editor...");
+							jQuery("#"+vrbldivdestino).html("<div class='cm-spinner'></div>");
 							jQuery('#Editor').attr('disabled','disabled');
 						},
 						success: function(vrblprdctscplt){ return jQuery('#'+vrbldivdestino).html(vrblprdctscplt); }

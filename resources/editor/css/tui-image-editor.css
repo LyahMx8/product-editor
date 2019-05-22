@@ -211,7 +211,7 @@ body > textarea {
   border: 0;
   box-shadow: 0 0 1px 0 rgba(0,0,0,0.3);
   border-radius: 100%;
-  background-color: #fff;
+  background-color: green;
 }
 .tui-image-editor-container .tui-image-editor-grid-visual table td.dot.left-top:before {
   top: -5px;
@@ -970,4 +970,21 @@ table tbody td {
 }
 .tui-image-editor-container.top.tui-image-editor-top-optimization .tui-image-editor-controls-logo {
   display: none;
+}
+
+@media screen and (max-width:800px){
+  .tui-image-editor-container .tui-image-editor-controls{width:100% !important;height:64px !important;overflow-x:auto;overflow-y:hidden;scrollbar-color: #0073aa #87d8ff;scrollbar-width: thin;}
+  .tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover::after {top: 23px;}
+  .tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover::before {left: 15px;top: 17px;border-bottom: 7px solid #2f2f2f;border-top: 0;}
+  .tui-image-editor-container .tui-image-editor-menu {white-space: nowrap !important;position: relative;}
+  .tui-image-editor-container.left .tui-image-editor-main-container {width: 100% !important;}
+  .changeProd {top: 65px;height: 70px;}.changeProd a {float: left;}.changeProd a img {width: 40px;height: 40px;}
+  .tui-image-editor-partition,.tui-image-editor-newline {display: none !important;}.tui-image-editor-submenu div ul li {float: left !important;width: auto;}
+  .tui-image-editor-submenu {width: 100%;height: 100px;display: block;}
+  .tui-image-editor-container.bottom .tui-image-editor-submenu > div {padding-bottom:0 !important;height: 150px;overflow-y: auto;}
+  .ctm-icons{width: 100% !important;bottom: 65px;}
+  .tui-image-editor-container.bottom .tui-image-editor-submenu div ul{padding: 15px !important;overflow-x: hidden;overflow-y: auto;display: block;}
+  .tui-image-editor-submenu-item{bottom: 0 !important;top: 0 !important;height: 150px;}
+  .tui-image-editor-submenu {bottom: 17px !important;}
+  .tui-image-editor-menu-text {height:auto !important;}
 }

@@ -100,9 +100,10 @@ if ( !defined('ABSPATH') ) {
 	<?php endif; ?>
 	</style>
 </head>
-<body>
+<body onresize="changeSize()">
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
-	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/editor.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/fabric.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/customiseControls.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-code-snipped.min.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/FileSaver.min.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-color-picker.js'; ?>"></script>
@@ -148,7 +149,6 @@ if ( !defined('ABSPATH') ) {
 
 		function setActive(editorVar){
 			editorActive = editorVar;
-			console.log(editorVar);
 		}
 		function openIcons(){
 			jQuery('.tui-image-editor-item').removeClass('active');
@@ -171,6 +171,8 @@ if ( !defined('ABSPATH') ) {
 				document.getElementById(editorId).style.display = "none";
 			}
 		}
+
+
 		 // Image editor
 		 var locale_es_ES = {
 			'Crop': 'Recortar',
@@ -181,14 +183,19 @@ if ( !defined('ABSPATH') ) {
 			'Icon': 'Ícono',
 			'Text': 'Texto'
 		};
-		var menuPosition = 'left';
-		$(window).on("resize", function(){
-			var width = $(window).width();
-			if (width < 800){
-				console.log("perros");
-				this.menuPosition = 'bottom';
+
+		window.addEventListener("resize", setMenu);
+		var menuPosition;
+		function setMenu() {
+			console.log(window.outerWidth);
+			if (document.body.scrollWidth < 800){
+				menuPosition = 'bottom';
+			}else{
+				menuPosition = 'left';
 			}
-		});
+		};
+		setMenu();
+
 		var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 			includeUI: {
 				loadImage: {
@@ -218,14 +225,15 @@ if ( !defined('ABSPATH') ) {
 			cssMaxHeight: 500
 		});
 		jQuery('.tui-image-editor-item.normal.filter').
-		replaceWith('<label style="display: block;" for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
+		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
 		jQuery('.tui-image-editor-item.normal.crop').
 		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
 
 		var editorActive = imageEditor;
-		 window.onresize = function() {
-			 editorActive.ui.resizeEditor();
-		 }
+
+		window.onresize = function() {
+			editorActive.ui.resizeEditor();
+		}
 
 		 function loadImage(event){
 			var imgUrl = void 0;
@@ -244,11 +252,120 @@ if ( !defined('ABSPATH') ) {
 			}
 		}
 
+		editorActive.on('object:selected', function (e) {
+			e.target.transparentCorners = false;
+			e.target.borderColor = '#cccccc';
+			e.target.cornerColor = '#0CB7F0';
+			e.target.minScaleLimit = 2;
+			e.target.cornerStrokeColor = '#0CB7F0';
+			e.target.cornerStyle = 'circle';
+			e.target.minScaleLimit = 0;
+			e.target.lockScalingFlip = true;
+			e.target.padding = 70;
+			e.target.selectionDashArray = [10, 5];
+			e.target.borderDashArray = [10, 5];
+			e.target.cornerDashArray = [10, 5];
+		});
+
+		fabric.Object.prototype.drawControls = function (ctx) {
+
+			if (!this.hasControls) {
+				return this;
+			}
+
+			var wh = this._calculateCurrentDimensions(),
+					width = wh.x,
+					height = wh.y,
+					scaleOffset = this.cornerSize,
+					left = -(width + scaleOffset) / 2,
+					top = -(height + scaleOffset) / 2,
+					methodName = this.transparentCorners ? 'stroke' : 'fill';
+
+			ctx.save();
+			ctx.strokeStyle = ctx.fillStyle = this.cornerColor;
+			if (!this.transparentCorners) {
+				ctx.strokeStyle = this.cornerStrokeColor;
+			}
+			this._setLineDash(ctx, this.cornerDashArray, null);
+
+			// top-left
+			this._drawControl('tl', ctx, methodName,
+				left,
+				top);
+
+			// top-right
+			this._drawControl('tr', ctx, methodName,
+				left + width,
+				top);
+
+			// bottom-left
+			this._drawControl('bl', ctx, methodName,
+				left,
+				top + height);
+
+			// bottom-right
+			this._drawControl('br', ctx, methodName,
+				left + width,
+				top + height);
+
+			if (!this.get('lockUniScaling')) {
+
+				// middle-top
+				this._drawControl('mt', ctx, methodName,
+					left + width / 2,
+					top);
+
+				// middle-bottom
+				this._drawControl('mb', ctx, methodName,
+					left + width / 2,
+					top + height);
+
+				// middle-right
+				this._drawControl('mr', ctx, methodName,
+					left + width,
+					top + height / 2);
+
+				// middle-left
+				this._drawControl('ml', ctx, methodName,
+					left,
+					top + height / 2);
+			}
+
+			// middle-top-rotate
+			if (this.hasRotatingPoint) {
+				var rotate = new Image(), rotateLeft, rotateTop;
+				rotate.src = '<?php echo plugin_dir_url( __FILE__ )."img/rotate.png"; ?>';
+				rotateLeft = left - 20 + width / 2;
+				rotateTop = top - 20 - this.rotatingPointOffset;
+				ctx.drawImage(rotate, rotateLeft, rotateTop, 70, 70);
+			}
+
+			ctx.restore();
+
+			return this;
+		}
+
+		jQuery('.tui-image-editor-button.flipX').click(function(e) {
+			editorActive.flipX().then(status => {
+				console.log('flipX: ', status.flipX);
+			}).catch(message => {
+				console.log('error: ', message);
+			});
+		});
+
+		jQuery('.tui-image-editor-button.flipY').click(function(e) {
+			editorActive.flipY().then(status => {
+				console.log('flipY: ', status.flipY);
+			}).catch(message => {
+				console.log('error: ', message);
+			});
+		});
+
 		function putIcon(url){
 			editorActive.addImageObject(
 				url
 			).then(objectProps => {
-				console.log(objectProps.id);
+				console.log(objectProps);
 			});
 		}
 		
@@ -262,10 +379,12 @@ if ( !defined('ABSPATH') ) {
 				editorActive.changeTextStyle(editorActive.activeObjectId, {
 					fontFamily: font[0]
 				});
+			
 			});
 		});
 
 		jQuery(document).ready(function(){
+
 			changeColor(clr_frn[0], clr_tsr[0]);
 
 			jQuery('#tui-image-editor-next-btn').click(function(e){

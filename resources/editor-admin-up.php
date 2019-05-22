@@ -3,7 +3,7 @@ if ( !defined('ABSPATH') ) {
 	//traer cuando wordprress cargue.
 	$path = $_SERVER['DOCUMENT_ROOT'].'/wordpress';
 	include_once $path.'/wp-load.php';
-	include_once  plugin_dir_path( dirname( __FILE__ ) ).'includes/settings.php';
+	include_once  plugin_dir_path( dirname( __FILE__ ) ).'/includes/settings.php';
 }
 
 $fecha = date("Y-m-d H:i:s");
