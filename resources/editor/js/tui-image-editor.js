@@ -5430,6 +5430,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				this._els[menuName].addEventListener('click', function () {
 					_this5.changeMenu(menuName);
+					if((jQuery('.tui-image-editor').css('left')) == '250px'){
+						jQuery('.tui-image-editor').css({'left':'0'});
+						jQuery('.tui-image-editor').removeClass('leftCntnt');
+					}else{
+						jQuery('.tui-image-editor').addClass('leftCntnt');
+					}
 				});
 			}
 
@@ -5694,7 +5700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			loadButtonStyle = _ref.loadButtonStyle,
 			downloadButtonStyle = _ref.downloadButtonStyle,
 			submenuStyle = _ref.submenuStyle;
-		return '\n    <div class="tui-image-editor-main-container" style="' + commonStyle + '">\n        <div class="tui-image-editor-header" style="' + headerStyle + '">\n            <div class="tui-image-editor-header-logo">\n                <img src="' + biImage + '" />\n            </div>\n            <div class="tui-image-editor-header-buttons">\n                '/*<div style="' + loadButtonStyle + '">\n                    ' + locale.localize('Cargar') + '\n                    <input type="file" class="tui-image-editor-load-btn" />\n                </div>\n                */+'<!--a id="tui-image-editor-next-btn" class="btnEditor" style="font-size: 14px;">Agregar al Carrito <span class="dashicons dashicons-cart"></span></a-->\n            </div>\n        </div>\n        <div class="tui-image-editor-main">\n            <div class="tui-image-editor-submenu">\n                <div class="tui-image-editor-submenu-style" style="' + submenuStyle + '"></div>\n            </div>\n            <div class="tui-image-editor-wrap">\n                <div class="tui-image-editor-size-wrap">\n                    <div class="tui-image-editor-align-wrap">\n                        <div class="tui-image-editor"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n';
+		return '\n    <div class="tui-image-editor-main-container" style="' + commonStyle + '">\n        <div class="tui-image-editor-header" style="' + headerStyle + '">\n            <div class="tui-image-editor-header-logo">\n                <img src="' + biImage + '" />\n            </div>\n            <div class="tui-image-editor-header-buttons">\n                '/*<div style="' + loadButtonStyle + '">\n                    ' + locale.localize('Cargar') + '\n                    <input type="file" class="tui-image-editor-load-btn" />\n                </div>\n                */+'<a id="tui-image-editor-next-btn" class="btnEditor" style="font-size: 14px;margin: 5px;">Agregar <span class="addCartLabel">al Carrito</span> <span class="dashicons dashicons-cart"></span></a>\n            </div>\n        </div>\n        <div class="tui-image-editor-main">\n            <div class="tui-image-editor-submenu">\n                <div class="tui-image-editor-submenu-style" style="' + submenuStyle + '"></div>\n            </div>\n            <div class="tui-image-editor-wrap">\n                <div class="tui-image-editor-size-wrap">\n                    <div class="tui-image-editor-align-wrap">\n                        <div class="tui-image-editor"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n';
 	};
 
 /***/ }),
