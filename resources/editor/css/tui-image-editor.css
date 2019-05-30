@@ -998,7 +998,7 @@ table tbody td {
 	.tui-image-editor-submenu div ul li {float: left !important;width: auto;}
 	.tui-image-editor-submenu {width: 100%;height: 100px;display: block;}
 	.tui-image-editor-container.bottom .tui-image-editor-submenu > div {padding-bottom:0 !important;height: 100px;overflow-y: auto;}
-	.ctm-icons{width: 100% !important;bottom: 65px;}
+	.ctm-icons{width: 100% !important;bottom: 65px;left:0;height:100px;}
 	.tui-image-editor-container.bottom .tui-image-editor-submenu div ul{padding: 15px !important;overflow-x: hidden;overflow-y: auto;display: block;}
 	.tui-image-editor-submenu-item{bottom: 0 !important;top: 0 !important;height: 100px;}
 	.tui-image-editor-submenu {bottom: 0 !important;}
