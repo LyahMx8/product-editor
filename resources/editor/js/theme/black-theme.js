@@ -28,12 +28,12 @@ var blackTheme = {
     // main icons
     'menu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
     'menu.normalIcon.name': 'icon-d',
-    'menu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg',
-    'menu.activeIcon.name': 'icon-b',
-    'menu.disabledIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
-    'menu.disabledIcon.name': 'icon-a',
-    'menu.hoverIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
-    'menu.hoverIcon.name': 'icon-c',
+    'menu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
+    'menu.activeIcon.name': 'icon-d',
+    'menu.disabledIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
+    'menu.disabledIcon.name': 'icon-d',
+    'menu.hoverIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
+    'menu.hoverIcon.name': 'icon-d',
     'menu.iconSize.width': '24px',
     'menu.iconSize.height': '24px',
 
@@ -44,8 +44,8 @@ var blackTheme = {
     // submenu icons
     'submenu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
     'submenu.normalIcon.name': 'icon-d',
-    'submenu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
-    'submenu.activeIcon.name': 'icon-c',
+    'submenu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
+    'submenu.activeIcon.name': 'icon-d',
     'submenu.iconSize.width': '32px',
     'submenu.iconSize.height': '32px',
 

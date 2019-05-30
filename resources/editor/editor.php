@@ -71,15 +71,18 @@ if ( !defined('ABSPATH') ) {
 			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
 			background-size: contain;
 			background-repeat: no-repeat;
-			filter: drop-shadow(0 0 5px red);
+			filter: drop-shadow(0 0 1px red);
 			mix-blend-mode: multiply;
 		}
 		#tui-image-editor-container .lower-canvas {
-			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
 			-webkit-mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
+			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
 			-webkit-mask-size: contain;
 			mask-size: contain;
+			-webkit-mask-mode: luminance;
 			mask-mode: luminance;
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
 		}
 	<?php if (isset($alph_tsr)) : ?>
 		#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container{
@@ -93,40 +96,39 @@ if ( !defined('ABSPATH') ) {
 			mix-blend-mode: multiply;
 		}
 		#tui-image-editor-container-2 .lower-canvas {
-			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_tsr; ?>');
 			-webkit-mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_tsr; ?>');
+			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_tsr; ?>');
 			-webkit-mask-size: contain;
 			mask-size: contain;
+			-webkit-mask-mode: luminance;
 			mask-mode: luminance;
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
 		}
 	<?php endif; ?>
 	</style>
 </head>
 <body onresize="changeSize()">
-	<script>
-  window.fbAsyncInit = function() {
-	FB.init({
-	  appId      : '303269393938393',
-	  cookie     : true,
-	  xfbml      : true,
-	  version    : 'v3.3'
-	});
-	  
-	FB.AppEvents.logPageView();   
-	  
-  };
-
-  (function(d, s, id){
-	 var js, fjs = d.getElementsByTagName(s)[0];
-	 if (d.getElementById(id)) {return;}
-	 js = d.createElement(s); js.id = id;
-	 js.src = "https://connect.facebook.net/en_US/sdk.js";
-	 fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 	<div id="fb-root"></div>
 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.3&appId=303269393938393&autoLogAppEvents=1"></script>
-	<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+	<script>
+		/*window.fbAsyncInit = function() {
+			FB.init({
+				appId	: '303269393938393',
+				cookie	: true,
+				xfbml	: true,
+				version	: 'v3.3'
+			});
+			FB.AppEvents.logPageView();
+		};
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));*/
+	</script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/fabric.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/customiseControls.js'; ?>"></script>
@@ -137,7 +139,7 @@ if ( !defined('ABSPATH') ) {
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
 
 	<section class="variationProd">
-		<div class="chooseSelect">Elige el color  <span class="dashicons dashicons-arrow-down"></span>
+		<div class="chooseSelect">Selecciona el color  <span class="dashicons dashicons-arrow-down"></span>
 			<ul>
 				<?php foreach ($clr_frn as $key) { 
 					foreach ($clr_tsr as $value) {
@@ -153,7 +155,7 @@ if ( !defined('ABSPATH') ) {
 	</section>
 
 	<section class="changeProd">
-		<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
+		<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 		<a onclick="openEditor('tui-image-editor-container',imageEditor)" class="imgPrdFrn"></a>
 	<?php if (isset($alph_tsr)) : ?>
 		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $clr_tsr[0]; ?>"></a>
@@ -179,6 +181,7 @@ if ( !defined('ABSPATH') ) {
 		function openIcons(){
 			jQuery('.tui-image-editor-item').removeClass('active');
 			var iconContainer = document.getElementById("iconContainer"); 
+				jQuery('.tui-image-editor-main').attr('class','tui-image-editor-main');
 			if(iconContainer.style.display == "none"){
 				iconContainer.style.display = "block";
 			}else{
@@ -248,9 +251,9 @@ if ( !defined('ABSPATH') ) {
 			cssMaxHeight: '100%'
 		});
 		jQuery('.tui-image-editor-item.normal.filter').
-		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
+		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
 		jQuery('.tui-image-editor-item.normal.crop').
-		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
+		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
 
 		var editorActive = imageEditor;
 

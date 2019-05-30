@@ -74,8 +74,8 @@ class Editor_Public{
 
 			<button class="btnEditor Editor">Editar Producto <span class="dashicons dashicons-edit"></span></button>
 			<div id="popContainer">
-				<div class="popLayer" onclick="closeModal('popContainer')">
-					<span>X</span>
+				<div class="popLayer">
+					<span onclick="closeModal('popContainer')">X</span>
 				</div>
 				<section class="popUp" id="popUp"></section>
 			</div>
@@ -87,7 +87,7 @@ class Editor_Public{
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
-					    jQuery('body.product-template-default').css({'height':'100vh','overflow':'hidden'});
+					    jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden'});
 						e.preventDefault();
 						document.getElementById("popContainer").style.display = "block"; 
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
