@@ -1,10 +1,9 @@
 <?php
 if ( !defined('ABSPATH') ) {
-	//traer cuando wordprress cargue.
-	$path = $_SERVER['DOCUMENT_ROOT'].'/wordpress';
-	include_once $path.'/wp-load.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/wordpress/wp-load.php';
 	include_once plugin_dir_path( dirname(__DIR__) ).'includes/settings.php';
 	global $wpdb;
+	//traer cuando wordprress cargue.
 	$product_editor = $wpdb->get_results( "SELECT * FROM zalemto_editor_img WHERE cmpidtipimg = 6 OR cmpidprdct = ".$_GET["producto"]);
 }
 ?>
@@ -51,12 +50,12 @@ if ( !defined('ABSPATH') ) {
 		var activeFrn;var activeTsr;
 		function changeColor(colorFrn, colorTsr){
 			activeFrn = colorFrn;activeTsr = colorTsr;
-			var cssFrontal = {'background':'url(/wordpress/wp-content/plugins/edicion-de-productos/'+colorFrn+')'}
+			var cssFrontal = {'background':'url(<?php echo URL_PB; ?>/'+colorFrn+')'}
 			jQuery('#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container').css(cssFrontal);
-			jQuery('.imgPrdFrn').html('<img src="/wordpress/wp-content/plugins/edicion-de-productos/'+colorFrn+'">');
-			var cssTrasero = {'background':'url(/wordpress/wp-content/plugins/edicion-de-productos/'+colorTsr+')'}
+			jQuery('.imgPrdFrn').html('<img src="<?php echo URL_PB; ?>/'+colorFrn+'">');
+			var cssTrasero = {'background':'url(<?php echo URL_PB; ?>/'+colorTsr+')'}
 			jQuery('#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container').css(cssTrasero);
-			jQuery('.imgPrdTsr').html('<img src="/wordpress/wp-content/plugins/edicion-de-productos/'+colorTsr+'">');
+			jQuery('.imgPrdTsr').html('<img src="<?php echo URL_PB; ?>/'+colorTsr+'">');
 		}
 	</script>
 	<style>
@@ -68,15 +67,15 @@ if ( !defined('ABSPATH') ) {
 			background-size:contain !important;background-repeat:no-repeat !important;
 		}
 		#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container::before {
-			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
+			background: url('<?php echo URL_PB; ?>/<?php echo $alph_frn; ?>');
 			background-size: contain;
 			background-repeat: no-repeat;
 			filter: drop-shadow(0 0 1px red);
 			mix-blend-mode: multiply;
 		}
 		#tui-image-editor-container .lower-canvas {
-			-webkit-mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
-			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_frn; ?>');
+			-webkit-mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_frn; ?>');
+			mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_frn; ?>');
 			-webkit-mask-size: contain;
 			mask-size: contain;
 			-webkit-mask-mode: luminance;
@@ -89,15 +88,15 @@ if ( !defined('ABSPATH') ) {
 			background-size:contain !important;background-repeat:no-repeat !important;
 		}
 		#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container::before {
-			background: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_tsr; ?>');
+			background: url('<?php echo URL_PB; ?>/<?php echo $alph_tsr; ?>');
 			background-size: contain;
 			background-repeat: no-repeat;
 			filter: drop-shadow(0 0 5px red);
 			mix-blend-mode: multiply;
 		}
 		#tui-image-editor-container-2 .lower-canvas {
-			-webkit-mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_tsr; ?>');
-			mask-image: url('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $alph_tsr; ?>');
+			-webkit-mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_tsr; ?>');
+			mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_tsr; ?>');
 			-webkit-mask-size: contain;
 			mask-size: contain;
 			-webkit-mask-mode: luminance;
@@ -106,6 +105,7 @@ if ( !defined('ABSPATH') ) {
 			mask-repeat: no-repeat;
 		}
 	<?php endif; ?>
+
 	</style>
 </head>
 <body onresize="changeSize()">
@@ -140,7 +140,7 @@ if ( !defined('ABSPATH') ) {
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
 
 	<section class="variationProd">
-		<div class="chooseSelect">Selecciona el color  <span class="dashicons dashicons-arrow-down"></span>
+		<div class="chooseSelect">Cambiar de color <span class="dashicons dashicons-arrow-down"></span>
 			<ul>
 				<?php foreach ($clr_frn as $key) { 
 					foreach ($clr_tsr as $value) {
@@ -148,7 +148,7 @@ if ( !defined('ABSPATH') ) {
 					}
 				?>
 					<div onclick="changeColor('<?php echo $key; ?>','<?php echo $key2; ?>')">
-						<img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>">
+						<img src="<?php echo URL_PB; ?>/<?php echo $key; ?>">
 					</div>
 				<?php } ?>
 			</ul>
@@ -159,46 +159,39 @@ if ( !defined('ABSPATH') ) {
 		<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 		<a onclick="openEditor('tui-image-editor-container',imageEditor)" class="imgPrdFrn"></a>
 	<?php if (isset($alph_tsr)) : ?>
-		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $clr_tsr[0]; ?>"></a>
+		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="<?php echo URL_PB; ?>/<?php echo $clr_tsr[0]; ?>"></a>
 	<?php endif; ?>
 	</section>
 
 	<section class="choseAction">
-		<span class="dashicons dashicons-list-view"></span>
+		<i style="font-size: 30px;" class="fa fa-chevron-circle-down"></i>
 		<ul>
-			<li id="tie-btn-undo" class="tui-image-editor-item" title="Deshacer">
+			<li id="btn-undo" class="tui-image-editor-item" title="Deshacer">
 				<svg class="svg_ic-menu">
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="enabled"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="normal"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="hover"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="enabled"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="normal"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="hover"></use>
 				</svg>
 			</li>
-			<li id="tie-btn-redo" class="tui-image-editor-item" title="Rehacer">
+			<li id="btn-redo" class="tui-image-editor-item" title="Rehacer">
 				<svg class="svg_ic-menu">
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="enabled"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="normal"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="hover"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="enabled"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="normal"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="hover"></use>
 				</svg>
 			</li>
-			<li id="tie-btn-reset" class="tui-image-editor-item" title="Reiniciar">
+			<li id="delete-object" class="tui-image-editor-item" title="Eliminar">
 				<svg class="svg_ic-menu">
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-reset" class="enabled"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-reset" class="normal"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-reset" class="hover"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="enabled"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="normal"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="hover"></use>
 				</svg>
 			</li>
-			<li id="tie-btn-delete" class="tui-image-editor-item" title="Eliminar">
+			<li id="btn-delete-all" class="tui-image-editor-item" title="Eliminar-todos">
 				<svg class="svg_ic-menu">
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="enabled"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="normal"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="hover"></use>
-				</svg>
-			</li>
-			<li id="tie-btn-delete-all" class="tui-image-editor-item" title="Eliminar-todos">
-				<svg class="svg_ic-menu">
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="enabled"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="normal"></use>
-					<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="hover"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="enabled"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="normal"></use>
+					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="hover"></use>
 				</svg>
 			</li>
 		</ul>
@@ -210,7 +203,7 @@ if ( !defined('ABSPATH') ) {
 	<section class="custom-file-label" id="iconContainer" style="display:none">
 		<div class="ctm-icons carrusel-prods">
 			<?php foreach ($ctm_icon as $key) { ?>
-				<div class="variationGallery" onclick="putIcon('/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>')"><img style="height:80px;max-width:100px;object-fit:contain;cursor:pointer;" src="/wordpress/wp-content/plugins/edicion-de-productos/<?php echo $key; ?>"></div>
+				<div class="variationGallery" onclick="putIcon('<?php echo URL_PB; ?>/<?php echo $key; ?>')"><img style="height:80px;max-width:100px;object-fit:contain;cursor:pointer;" src="<?php echo URL_PB; ?>/<?php echo $key; ?>"></div>
 			<?php } ?>
 		</div>
 	</section>
@@ -244,7 +237,6 @@ if ( !defined('ABSPATH') ) {
 			}
 		}
 
-
 		 // Image editor
 		 var locale_es_ES = {
 			'Crop': 'Recortar',
@@ -259,18 +251,15 @@ if ( !defined('ABSPATH') ) {
 		window.addEventListener("resize", setMenu);
 		var menuPosition;
 		function setMenu() {
-			if (document.body.scrollWidth < 800){
-				menuPosition = 'bottom';
-			}else{
-				menuPosition = 'left';
-			}
+			if (document.body.scrollWidth < 800){menuPosition = 'bottom';}
+			else{menuPosition = 'left';}
 		};
 		setMenu();
 
 		var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 			includeUI: {
 				loadImage: {
-					path: '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/background.png',
+					path: '<?php echo URL_PB; ?>/assets/img/background.png',
 					name: 'SampleImage'
 				},
 				locale: locale_es_ES,
@@ -283,7 +272,7 @@ if ( !defined('ABSPATH') ) {
 		var imageEditor2 = new tui.ImageEditor('#tui-image-editor-container-2', {
 			includeUI: {
 				loadImage: {
-					path: '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/background.png',
+					path: '<?php echo URL_PB; ?>/assets/img/background.png',
 					name: 'SampleImage'
 				},
 				locale: locale_es_ES,
@@ -294,30 +283,23 @@ if ( !defined('ABSPATH') ) {
 			cssMaxHeight: '100%'
 		});
 
-		jQuery('#tie-btn-redo').click(function(){
+		jQuery('#btn-redo').click(function(){
 			editorActive.redo();
 		});
-
-		jQuery('#tie-btn-undo').click(function(){
+		jQuery('#btn-undo').click(function(){
 			editorActive.undo();
 		});
-		
-		jQuery('#tie-btn-reset').click(function(){
-			editorActive.reset();
+		jQuery('#delete-object').click(function(){
+			editorActive.removeActiveObject();
 		});
-		
-		jQuery('#tie-btn-delete').click(function(){
-			editorActive.getActiveObject().removeObject(id);
-		});
-		
-		jQuery('#tie-btn-delete-all').click(function(){
-			editorActive.clear();
+		jQuery('#btn-delete-all').click(function(){
+			imageEditor.clearObjects();
 		});
 
 		jQuery('.tui-image-editor-item.normal.filter').
-		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
+		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
 		jQuery('.tui-image-editor-item.normal.crop').
-		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
+		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
 
 		var editorActive = imageEditor;
 
@@ -483,7 +465,7 @@ if ( !defined('ABSPATH') ) {
 				var image = imageEditor.toDataURL('image/png').replace("image/png", "image/octet-stream");
 				image = image.replace('data:image/png;base64,', '');
 				$.ajax({
-					url: "/wordpress/wp-content/plugins/edicion-de-productos/includes/saveImage.php",
+					url: "<?php echo URL_PB; ?>/includes/saveImage.php",
 					data: '{"post": "<?php echo $_GET["producto"]; ?>","imgfrn":"'+image+'"}',
 					success: function(response) {
 						document.getElementById("popContainer").style.display = "none"; 

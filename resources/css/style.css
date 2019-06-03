@@ -1,9 +1,3 @@
-#icon-d-ic-rotate .st0{fill:#A5283A;}#icon-d-ic-rotate .st1{fill:#2B729E;}#icon-d-ic-rotate .st2{fill:#45A7FF;}#icon-d-ic-rotate .st3{fill:#F8FAFB;}#icon-d-ic-rotate .st4{fill:#5BCEAA;}#icon-d-ic-rotate .st5{fill:#76FFD9;}#icon-d-ic-rotate .st6{fill:#B7BDC7;}#icon-d-ic-rotate .st7{fill:#3488C6;}#icon-d-ic-rotate .st8{fill:#FF4757;}
-#icon-d-ic-icon .st0{fill:#DB5449;}#icon-d-ic-icon .st1{fill:#C54B42;}#icon-d-ic-icon .st2{fill:#D05045;}#icon-d-ic-icon .st3{fill:#BB483E;}#icon-d-ic-icon .st4{fill:#EB6258;}#icon-d-ic-icon .st5{fill:#FFDB57;}#icon-d-ic-icon .st6{fill:#F5BA3D;}#icon-d-ic-icon .st7{fill:#D89E39;}
-#icon-d-ic-draw .st0{fill:#C04A3E;}#icon-d-ic-draw .st1{fill:#E84C3D;}#icon-d-ic-draw .st2{fill:#FFFFFF;}#icon-d-ic-draw .st3{fill:#FEE7BD;}#icon-d-ic-draw .st4{fill:#3EAAE5;}#icon-d-ic-draw .st5{fill:#2C8DB7;}#icon-d-ic-draw .st6{fill:#C2AD78;}#icon-d-ic-draw .st7{fill:#E8D7AC;}#icon-d-ic-draw .st8{fill:#1B698C;}#icon-d-ic-draw .st9{fill:#1E2832;}#icon-d-ic-draw .st10{fill:#953B3B;}
-#icon-d-ic-text .st0{fill:#3AC7E8;}#icon-d-ic-text .st1{fill:#00A9E0;}#icon-d-ic-text .st2{fill:#00809E;}#icon-d-ic-text .st3{fill:#9FACBC;}#icon-d-ic-text .st4{fill:#D0D4D6;}#icon-d-ic-text .st5{fill:#C8CED6;}
- #icon-d-ic-icon-load .st0{fill:#0D7F9E;}#icon-d-ic-icon-load .st1{fill:#009ACF;}#icon-d-ic-icon-load .st2{fill:#2ED573;}#icon-d-ic-icon-load .st3{fill:#7BED9F;}#icon-d-ic-icon-load .st4{fill:#FFA502;}#icon-d-ic-icon-load .st5{fill:#ECCC68;}#icon-d-ic-icon-load .st6{fill:#2F2FA8;}#icon-d-ic-icon-load .st7{fill:#5352ED;}#icon-d-ic-icon-load .st8{fill:#8686F2;}
-
 .btnEditor{background: #00A9E0;border-radius: 25px !important;border:2px solid transparent !important;color: #ffffff !important;font-weight: 600 !important;padding: 5px 20px !important;margin:0;display: block !important;height:auto;line-height: 24px;position: relative !important;clear: left;width: 100%;}
 .btnEditor:hover{border:2px solid #00A9E0 !important;background:#fff !important;color:#00A9E0 !important;}
 #popContainer,#popDatos,#pleaseHidemMe{display:none;}
@@ -49,7 +43,7 @@
 .changeProd a:hover{filter:brightness(103%) contrast(110%);}
 .changeProd a img{width:60px;height:60px;object-fit:contain;}
 
-.choseAction{position:absolute;top:80px;right:5px;display: block;z-index: 1;padding:10px;}
+.choseAction{position:absolute;top:65px;right:5px;display: block;z-index: 10;padding:10px;}
 .choseAction:hover{background:#1e1e1e;}.choseAction:hover *{color:#fff !important;}
 .choseAction ul{display:none;margin:0}.choseAction:hover ul{display:block;}
 .choseAction ul li{list-style:none;display:block;}.choseAction ul li svg{width:20px;height:20px;cursor:pointer;}
@@ -78,4 +72,5 @@
 	.carrusel-prods{white-space: nowrap;}
 	.popUp{width:90%;left:2%;}
 	.formCntn{margin-right:0}
+	.btnEditor{padding:5px !important;}
 }

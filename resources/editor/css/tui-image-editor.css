@@ -58,7 +58,7 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-header-buttons button,
 .tui-image-editor-container .tui-image-editor-header-buttons div,
-.tui-image-editor-container .tui-image-editor-controls-buttons button, #tui-image-editor-next-btn {
+.tui-image-editor-container .tui-image-editor-controls-buttons button {
 	display: inline-block;
 	position: relative;
 	padding: 0;
@@ -986,6 +986,7 @@ table tbody td {
 }
 
 @media screen and (max-width:800px){
+	.tui-image-editor-container .tui-image-editor-main{top:125px;}
 	.tui-image-editor-container .tui-image-editor-wrap {overflow:hidden;}
 	.tui-image-editor-container .tui-image-editor {top:0 !important;left:0 !important;}
 	.tui-image-editor-container .tui-image-editor-controls{width:100% !important;height:64px !important;overflow-x:auto;overflow-y:hidden;scrollbar-color: #0073aa #87d8ff;scrollbar-width: thin;}
