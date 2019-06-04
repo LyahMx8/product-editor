@@ -87,7 +87,7 @@ class Editor_Public{
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
-					    jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden'});
+						//document.body.requestFullscreen();
 						e.preventDefault();
 						document.getElementById("popContainer").style.display = "block"; 
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
@@ -111,7 +111,7 @@ class Editor_Public{
 				*/
 				function closeModal(nombreModal){
 					document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
-					jQuery('body.product-template-default').css({'height':'auto','overflow':'auto'});
+					//document.exitFullscreen();
 				}
 			</script>
 		<?php

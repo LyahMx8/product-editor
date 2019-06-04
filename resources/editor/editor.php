@@ -1,9 +1,9 @@
 <?php
 if ( !defined('ABSPATH') ) {
+	//traer cuando wordprress cargue.
 	include_once $_SERVER['DOCUMENT_ROOT'].'/wordpress/wp-load.php';
 	include_once plugin_dir_path( dirname(__DIR__) ).'includes/settings.php';
 	global $wpdb;
-	//traer cuando wordprress cargue.
 	$product_editor = $wpdb->get_results( "SELECT * FROM zalemto_editor_img WHERE cmpidtipimg = 6 OR cmpidprdct = ".$_GET["producto"]);
 }
 ?>
@@ -164,34 +164,26 @@ if ( !defined('ABSPATH') ) {
 	</section>
 
 	<section class="choseAction">
-		<i style="font-size: 30px;" class="fa fa-chevron-circle-down"></i>
+		<i style="font-size: 30px;color: #878787;" class="fa fa-edit"></i>
 		<ul>
 			<li id="btn-undo" class="tui-image-editor-item" title="Deshacer">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="enabled"></use>
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="normal"></use>
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="hover"></use>
 				</svg>
 			</li>
 			<li id="btn-redo" class="tui-image-editor-item" title="Rehacer">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="enabled"></use>
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="normal"></use>
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="hover"></use>
 				</svg>
 			</li>
 			<li id="delete-object" class="tui-image-editor-item" title="Eliminar">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="enabled"></use>
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="normal"></use>
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="hover"></use>
 				</svg>
 			</li>
 			<li id="btn-delete-all" class="tui-image-editor-item" title="Eliminar-todos">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="enabled"></use>
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="normal"></use>
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="hover"></use>
 				</svg>
 			</li>
 		</ul>
@@ -267,7 +259,10 @@ if ( !defined('ABSPATH') ) {
 				menuBarPosition: menuPosition
 			},
 			cssMaxWidth: '100%',
-			cssMaxHeight: '100%'
+			cssMaxHeight: '100%',
+			selectionStyle: {
+				rotatingPointOffset: 100
+			}
 		});
 		var imageEditor2 = new tui.ImageEditor('#tui-image-editor-container-2', {
 			includeUI: {
@@ -300,6 +295,14 @@ if ( !defined('ABSPATH') ) {
 		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
 		jQuery('.tui-image-editor-item.normal.crop').
 		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
+		jQuery('#tie-text-range').
+		replaceWith('<input type="range" id="textRange" onchange="textSize(this)" min="10" max="240" value="120">');
+		jQuery('#tie-draw-range').
+		replaceWith('<input type="range" id="drawRange" onchange="drawSize(this)" min="10" max="240" value="120">');
+		jQuery('#tie-rotate-range').
+		replaceWith('<input type="range" id="rotateRange" onchange="rotateSize(this)" min="-360" max="360" value="0">');
+		jQuery('#textInput').
+		replaceWith('<div style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<input type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);">\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></div>');
 
 		var editorActive = imageEditor;
 
@@ -328,7 +331,7 @@ if ( !defined('ABSPATH') ) {
 			e.target.transparentCorners = false;
 			e.target.borderColor = '#cccccc';
 			e.target.cornerColor = '#0CB7F0';
-			e.target.minScaleLimit = 2;
+			e.target.minScaleLimit = 1;
 			e.target.cornerStrokeColor = '#0CB7F0';
 			e.target.cornerStyle = 'circle';
 			e.target.minScaleLimit = 0;
@@ -340,11 +343,7 @@ if ( !defined('ABSPATH') ) {
 		});
 
 		fabric.Object.prototype.drawControls = function (ctx) {
-
-			if (!this.hasControls) {
-				return this;
-			}
-
+			if (!this.hasControls) { return this; }
 			var wh = this._calculateCurrentDimensions(),
 					width = wh.x,
 					height = wh.y,
@@ -352,58 +351,23 @@ if ( !defined('ABSPATH') ) {
 					left = -(width + scaleOffset) / 2,
 					top = -(height + scaleOffset) / 2,
 					methodName = this.transparentCorners ? 'stroke' : 'fill';
-
 			ctx.save();
 			ctx.strokeStyle = ctx.fillStyle = this.cornerColor;
 			if (!this.transparentCorners) {
 				ctx.strokeStyle = this.cornerStrokeColor;
 			}
 			this._setLineDash(ctx, this.cornerDashArray, null);
-
-			// top-left
-			this._drawControl('tl', ctx, methodName,
-				left,
-				top);
-
-			// top-right
-			this._drawControl('tr', ctx, methodName,
-				left + width,
-				top);
-
-			// bottom-left
-			this._drawControl('bl', ctx, methodName,
-				left,
-				top + height);
-
-			// bottom-right
-			this._drawControl('br', ctx, methodName,
-				left + width,
-				top + height);
+			this._drawControl('tl', ctx, methodName, left, top);
+			this._drawControl('tr', ctx, methodName, left + width, top);
+			this._drawControl('bl', ctx, methodName, left, top + height);
+			this._drawControl('br', ctx, methodName, left + width, top + height);
 
 			if (!this.get('lockUniScaling')) {
-
-				// middle-top
-				this._drawControl('mt', ctx, methodName,
-					left + width / 2,
-					top);
-
-				// middle-bottom
-				this._drawControl('mb', ctx, methodName,
-					left + width / 2,
-					top + height);
-
-				// middle-right
-				this._drawControl('mr', ctx, methodName,
-					left + width,
-					top + height / 2);
-
-				// middle-left
-				this._drawControl('ml', ctx, methodName,
-					left,
-					top + height / 2);
+				this._drawControl('mt', ctx, methodName, left + width / 2, top);
+				this._drawControl('mb', ctx, methodName, left + width / 2, top + height);
+				this._drawControl('mr', ctx, methodName, left + width, top + height / 2);
+				this._drawControl('ml', ctx, methodName, left, top + height / 2);
 			}
-
-			// middle-top-rotate
 			if (this.hasRotatingPoint) {
 				var rotate = new Image(), rotateLeft, rotateTop;
 				rotate.src = '<?php echo plugin_dir_url( __FILE__ )."img/rotate.png"; ?>';
@@ -411,25 +375,27 @@ if ( !defined('ABSPATH') ) {
 				rotateTop = top - 20 - this.rotatingPointOffset;
 				ctx.drawImage(rotate, rotateLeft, rotateTop, 70, 70);
 			}
-
 			ctx.restore();
-
 			return this;
 		}
 
+		imageEditor.on('objectActivated', function(props) {
+			jQuery('#inputText').val(props.text);
+		});
+
 		jQuery('.tui-image-editor-button.flipX').click(function(e) {
 			editorActive.flipX().then(status => {
-				//console.log('flipX: ', status.flipX);
+				console.log('flipX: ', status.flipX);
 			}).catch(message => {
-				//console.log('error: ', message);
+				console.log('error: ', message);
 			});
 		});
 
 		jQuery('.tui-image-editor-button.flipY').click(function(e) {
 			editorActive.flipY().then(status => {
-				//console.log('flipY: ', status.flipY);
+				console.log('flipY: ', status.flipY);
 			}).catch(message => {
-				//console.log('error: ', message);
+				console.log('error: ', message);
 			});
 		});
 
@@ -437,18 +403,49 @@ if ( !defined('ABSPATH') ) {
 			editorActive.addImageObject(
 				url
 			).then(objectProps => {
-				//console.log(objectProps);
 				jQuery("#iconContainer").hide();
 			});
+		}
+
+		function textSize(parametro){
+			jQuery('#tie-text-range-value').val(parametro.value);
+			editorActive.changeTextStyle(editorActive.activeObjectId, {
+				fontSize: parseInt(parametro.value, 10)
+			});
+		};
+
+		function drawSize(parametro){
+			jQuery('#tie-draw-range-value').val(parametro.value);
+			editorActive.setBrush({
+				width: parseInt(parametro.value, 10)
+			});
+		};
+
+		function rotateSize(parametro){
+			jQuery('#tie-ratate-range-value').val(parametro.value);
+			editorActive.rotate(parseInt(parametro.value, 10));
+		};
+
+		function agregarTexto(){
+			if(editorActive.activeObjectId == null){
+				editorActive.addText(jQuery('#inputText').val(), {
+					styles: {
+						fill: '#000',
+						fontSize: 80
+					}
+				}).then(objectProps => {
+					console.log(objectProps.id);
+				});
+			}else{
+				editorActive.changeText(editorActive.activeObjectId, jQuery('#inputText').val());
+			}
 		}
 		
 		jQuery(function(){
 			jQuery('.font').fontselect().change(function(){
 			
 				var font = jQuery(this).val().replace(/\+/g, ' ');
-				
 				font = font.split(':');
-
 				editorActive.changeTextStyle(editorActive.activeObjectId, {
 					fontFamily: font[0]
 				});
