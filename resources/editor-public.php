@@ -81,13 +81,24 @@ class Editor_Public{
 			</div>
 
 			<script>
+				var elem = document.documentElement;
 				/**
 				* Funcion que abre el modal y carga el editor dentro del div popUp
 				*/
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
-						//document.body.requestFullscreen();
+						if (elem.requestFullscreen) {
+							elem.requestFullscreen();
+						} else if (elem.mozRequestFullScreen) { /* Firefox */
+							elem.mozRequestFullScreen();
+						} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+							elem.webkitRequestFullscreen();
+						} else if (elem.msRequestFullscreen) { /* IE/Edge */
+							elem.msRequestFullscreen();
+						}else{
+							document.requestFullscreen();
+						}
 						e.preventDefault();
 						document.getElementById("popContainer").style.display = "block"; 
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
@@ -111,7 +122,15 @@ class Editor_Public{
 				*/
 				function closeModal(nombreModal){
 					document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
-					//document.exitFullscreen();
+						if (document.exitFullscreen) {
+							document.exitFullscreen();
+						} else if (document.mozCancelFullScreen) { /* Firefox */
+							document.mozCancelFullScreen();
+						} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+							document.webkitExitFullscreen();
+						} else if (document.msExitFullscreen) { /* IE/Edge */
+							document.msExitFullscreen();
+						}
 				}
 			</script>
 		<?php

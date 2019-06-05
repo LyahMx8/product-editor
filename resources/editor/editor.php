@@ -11,7 +11,10 @@ if ( !defined('ABSPATH') ) {
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<title>Editor</title>
 	<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/tui-image-editor.css'; ?>" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/fontselect-alternate.css'; ?>" rel="stylesheet">
@@ -342,6 +345,71 @@ if ( !defined('ABSPATH') ) {
 			e.target.cornerDashArray = [10, 5];
 		});
 
+		imageEditor.on('objectActivated', function(props) {
+			jQuery('#inputText').val(props.text);
+		});
+
+		jQuery('.tui-image-editor-button.flipX').click(function(e) {
+			editorActive.flipX().then(status => {
+				console.log('flipX: ', status.flipX);
+			});
+		});
+
+		jQuery('.tui-image-editor-button.flipY').click(function(e) {
+			editorActive.flipY().then(status => {
+				console.log('flipY: ', status.flipY);
+			});
+		});
+
+		function putIcon(url){
+			editorActive.addImageObject(
+				url
+			).then(objectProps => {
+				jQuery("#iconContainer").hide();
+			});
+		}
+
+		function textSize(parametro){
+			jQuery('#tie-text-range-value').val(parametro.value);
+			editorActive.changeTextStyle(editorActive.activeObjectId, {
+				fontSize: parseInt(parametro.value, 10)
+			});
+		};
+
+		function drawSize(parametro){
+			jQuery('#tie-draw-range-value').val(parametro.value);
+			editorActive.setBrush({
+				width: parseInt(parametro.value, 10)
+			});
+		};
+
+		function rotateSize(parametro){
+			jQuery('#tie-ratate-range-value').val(parametro.value);
+			editorActive.rotate(parseInt(parametro.value, 10));
+		};
+
+		function agregarTexto(){
+			if(editorActive.activeObjectId == null){
+				editorActive.addText(jQuery('#inputText').val(), {
+					styles: { fill: '#000', fontSize: 80
+					}
+				});
+			}else{
+				editorActive.changeText(editorActive.activeObjectId, jQuery('#inputText').val());
+			}
+		}
+		
+		jQuery(function(){
+			jQuery('.font').fontselect().change(function(){
+				var font = jQuery(this).val().replace(/\+/g, ' ');
+				font = font.split(':');
+				editorActive.changeTextStyle(editorActive.activeObjectId, {
+					fontFamily: font[0]
+				});
+			
+			});
+		});
+
 		fabric.Object.prototype.drawControls = function (ctx) {
 			if (!this.hasControls) { return this; }
 			var wh = this._calculateCurrentDimensions(),
@@ -379,98 +447,21 @@ if ( !defined('ABSPATH') ) {
 			return this;
 		}
 
-		imageEditor.on('objectActivated', function(props) {
-			jQuery('#inputText').val(props.text);
-		});
-
-		jQuery('.tui-image-editor-button.flipX').click(function(e) {
-			editorActive.flipX().then(status => {
-				console.log('flipX: ', status.flipX);
-			}).catch(message => {
-				console.log('error: ', message);
-			});
-		});
-
-		jQuery('.tui-image-editor-button.flipY').click(function(e) {
-			editorActive.flipY().then(status => {
-				console.log('flipY: ', status.flipY);
-			}).catch(message => {
-				console.log('error: ', message);
-			});
-		});
-
-		function putIcon(url){
-			editorActive.addImageObject(
-				url
-			).then(objectProps => {
-				jQuery("#iconContainer").hide();
-			});
-		}
-
-		function textSize(parametro){
-			jQuery('#tie-text-range-value').val(parametro.value);
-			editorActive.changeTextStyle(editorActive.activeObjectId, {
-				fontSize: parseInt(parametro.value, 10)
-			});
-		};
-
-		function drawSize(parametro){
-			jQuery('#tie-draw-range-value').val(parametro.value);
-			editorActive.setBrush({
-				width: parseInt(parametro.value, 10)
-			});
-		};
-
-		function rotateSize(parametro){
-			jQuery('#tie-ratate-range-value').val(parametro.value);
-			editorActive.rotate(parseInt(parametro.value, 10));
-		};
-
-		function agregarTexto(){
-			if(editorActive.activeObjectId == null){
-				editorActive.addText(jQuery('#inputText').val(), {
-					styles: {
-						fill: '#000',
-						fontSize: 80
-					}
-				}).then(objectProps => {
-					console.log(objectProps.id);
-				});
-			}else{
-				editorActive.changeText(editorActive.activeObjectId, jQuery('#inputText').val());
-			}
-		}
-		
-		jQuery(function(){
-			jQuery('.font').fontselect().change(function(){
-			
-				var font = jQuery(this).val().replace(/\+/g, ' ');
-				font = font.split(':');
-				editorActive.changeTextStyle(editorActive.activeObjectId, {
-					fontFamily: font[0]
-				});
-			
-			});
-		});
-
 		jQuery(document).ready(function(){
 
 			changeColor(clr_frn[0], clr_tsr[0]);
 
 			jQuery('#tui-image-editor-next-btn').click(function(e){
 				e.preventDefault();
-				var image = imageEditor.toDataURL('image/png').replace("image/png", "image/octet-stream");
-				image = image.replace('data:image/png;base64,', '');
-				$.ajax({
-					url: "<?php echo URL_PB; ?>/includes/saveImage.php",
-					data: '{"post": "<?php echo $_GET["producto"]; ?>","imgfrn":"'+image+'"}',
-					success: function(response) {
-						document.getElementById("popContainer").style.display = "none"; 
-					},
-					error: function(xhr) {
-						alert("Error 01");
-					}
-				});
+				var image = imageEditor.toDataURL('image/png');
+				  $.post("<?php echo URL_PB; ?>/includes/saveImage.php",
+				  {
+				    post: 	"<?php echo $_GET["producto"]; ?>",
+					imgfrn: image
+				  },
+				  function(data, status){
+				    alert("Se ha guardado la imagen correctamente");
+				  });
 			});
 		});
 	</script>

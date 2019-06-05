@@ -9479,7 +9479,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				},
 				/* eslint-enable complexity */
 				addText: function addText(pos) {
-					_this11.addText('Doble Clic', {
+					_this11.addText('Crear texto', {
 						position: pos.originPosition,
 						styles: {
 							fill: _this11.ui.text.textColor,

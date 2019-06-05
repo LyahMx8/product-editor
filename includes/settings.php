@@ -93,9 +93,6 @@ class Settings{
 		//La clase para guardar las imagenes del Plugin
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/mCntrolFileSave.php';
 
-		//La clase que guarda imagenes simples
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/saveImage.php';
-
 		//La clase para guardar las imagenes del Plugin
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/mCntrolMultiFileSave.php';
 		

@@ -8,14 +8,15 @@ if ( !defined('ABSPATH') ) {
 
 global $wpdb;
 
-$img = $_GET['imgfrn'];
+$img = $_POST['imgfrn'];
 $img = str_replace('data:image/png;base64,', '', $img);
 $img = str_replace(' ', '+', $img);
 $fileData = base64_decode($img);
-$fileName = 'public://' . uniqid() . 'myCanvas.png';
-$carpeta_destino = URL_PB.'/productos/';
-//imagepng($img,$carpeta_destino.$fileName);
-file_put_contents('image_file', base64_decode($img));
+define('UPLOAD_DIR', SERV.'/personalizados/');
+$fileName = UPLOAD_DIR.uniqid('created',false) . '.png';
+file_put_contents($fileName, $fileData);
 
-$sql = ("INSERT INTO zalemto_editor_img (cmpidprdct, cmpidtipimg, cmpurlimg, cmpfechup) values ('".$_GET["post"]."','4','".$fileName."','".date("Y-m-d H:i:s")."')");
-$wpdb->query($sql);
+//imagepng($fileData,$fileName);
+
+/*$sql = ("INSERT INTO zalemto_editor_img (cmpidprdct, cmpidtipimg, cmpurlimg, cmpfechup) values ('".$_POST["post"]."','4','".$fileName."','".date("Y-m-d H:i:s")."')");
+$wpdb->query($sql);*/
