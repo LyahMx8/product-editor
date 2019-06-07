@@ -14,6 +14,7 @@ if ( !defined('ABSPATH') ) {
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" /> <meta name="apple-mobile-web-app-capable" content="yes" /> <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
 	<title>Editor</title>
 	<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/tui-image-editor.css'; ?>" rel="stylesheet">
@@ -167,7 +168,6 @@ if ( !defined('ABSPATH') ) {
 	</section>
 
 	<section class="choseAction">
-		<i style="font-size: 30px;color: #878787;" class="fa fa-edit"></i>
 		<ul>
 			<li id="btn-undo" class="tui-image-editor-item" title="Deshacer">
 				<svg class="svg_ic-menu">
@@ -281,6 +281,43 @@ if ( !defined('ABSPATH') ) {
 			cssMaxHeight: '100%'
 		});
 
+		fabric.Object.prototype.drawControls = function (ctx) {
+			if (!this.hasControls) { return this; }
+			var wh = this._calculateCurrentDimensions(),
+					width = wh.x,
+					height = wh.y,
+					scaleOffset = this.cornerSize,
+					left = -(width + scaleOffset) / 2,
+					top = -(height + scaleOffset) / 2,
+					methodName = this.transparentCorners ? 'stroke' : 'fill';
+			ctx.save();
+			ctx.strokeStyle = ctx.fillStyle = this.cornerColor;
+			if (!this.transparentCorners) {
+				ctx.strokeStyle = this.cornerStrokeColor;
+			}
+			this._setLineDash(ctx, this.cornerDashArray, null);
+			this._drawControl('tl', ctx, methodName, left, top);
+			this._drawControl('tr', ctx, methodName, left + width, top);
+			this._drawControl('bl', ctx, methodName, left, top + height);
+			this._drawControl('br', ctx, methodName, left + width, top + height);
+
+			if (!this.get('lockUniScaling')) {
+				this._drawControl('mt', ctx, methodName, left + width / 2, top);
+				this._drawControl('mb', ctx, methodName, left + width / 2, top + height);
+				this._drawControl('mr', ctx, methodName, left + width, top + height / 2);
+				this._drawControl('ml', ctx, methodName, left, top + height / 2);
+			}
+			if (this.hasRotatingPoint) {
+				var rotate = new Image(), rotateLeft, rotateTop;
+				rotate.src = '<?php echo plugin_dir_url( __FILE__ )."img/rotate.png"; ?>';
+				rotateLeft = left - 20 + width / 2;
+				rotateTop = top - 20 - this.rotatingPointOffset;
+				ctx.drawImage(rotate, rotateLeft, rotateTop, 70, 70);
+			}
+			ctx.restore();
+			return this;
+		}
+		
 		jQuery('#btn-redo').click(function(){
 			editorActive.redo();
 		});
@@ -305,7 +342,7 @@ if ( !defined('ABSPATH') ) {
 		jQuery('#tie-rotate-range').
 		replaceWith('<input type="range" id="rotateRange" onchange="rotateSize(this)" min="-360" max="360" value="0">');
 		jQuery('#textInput').
-		replaceWith('<div style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<input type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);">\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></div>');
+		replaceWith('<form style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<input type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);">\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></form>');
 
 		var editorActive = imageEditor;
 
@@ -322,10 +359,13 @@ if ( !defined('ABSPATH') ) {
 			if (file) {
 				imgUrl = URL.createObjectURL(file);
 				//this.actions.registCustomIcon(imgUrl, file);
-				editorActive.addImageObject(
-					imgUrl
-				).then(objectProps => {
-					//console.log(objectProps.id);
+				editorActive.addImageObject(imgUrl).
+				then(objectProps => {
+					console.log(objectProps);
+					editorActive.setObjectProperties(objectProps.id, {
+						width: (objectProps.width * 0.10),
+						height: (objectProps.height * 0.10)
+					});
 				});
 			}
 		}
@@ -410,42 +450,6 @@ if ( !defined('ABSPATH') ) {
 			});
 		});
 
-		fabric.Object.prototype.drawControls = function (ctx) {
-			if (!this.hasControls) { return this; }
-			var wh = this._calculateCurrentDimensions(),
-					width = wh.x,
-					height = wh.y,
-					scaleOffset = this.cornerSize,
-					left = -(width + scaleOffset) / 2,
-					top = -(height + scaleOffset) / 2,
-					methodName = this.transparentCorners ? 'stroke' : 'fill';
-			ctx.save();
-			ctx.strokeStyle = ctx.fillStyle = this.cornerColor;
-			if (!this.transparentCorners) {
-				ctx.strokeStyle = this.cornerStrokeColor;
-			}
-			this._setLineDash(ctx, this.cornerDashArray, null);
-			this._drawControl('tl', ctx, methodName, left, top);
-			this._drawControl('tr', ctx, methodName, left + width, top);
-			this._drawControl('bl', ctx, methodName, left, top + height);
-			this._drawControl('br', ctx, methodName, left + width, top + height);
-
-			if (!this.get('lockUniScaling')) {
-				this._drawControl('mt', ctx, methodName, left + width / 2, top);
-				this._drawControl('mb', ctx, methodName, left + width / 2, top + height);
-				this._drawControl('mr', ctx, methodName, left + width, top + height / 2);
-				this._drawControl('ml', ctx, methodName, left, top + height / 2);
-			}
-			if (this.hasRotatingPoint) {
-				var rotate = new Image(), rotateLeft, rotateTop;
-				rotate.src = '<?php echo plugin_dir_url( __FILE__ )."img/rotate.png"; ?>';
-				rotateLeft = left - 20 + width / 2;
-				rotateTop = top - 20 - this.rotatingPointOffset;
-				ctx.drawImage(rotate, rotateLeft, rotateTop, 70, 70);
-			}
-			ctx.restore();
-			return this;
-		}
 
 		jQuery(document).ready(function(){
 
@@ -456,11 +460,11 @@ if ( !defined('ABSPATH') ) {
 				var image = imageEditor.toDataURL('image/png');
 				  $.post("<?php echo URL_PB; ?>/includes/saveImage.php",
 				  {
-				    post: 	"<?php echo $_GET["producto"]; ?>",
+					post: 	"<?php echo $_GET["producto"]; ?>",
 					imgfrn: image
 				  },
 				  function(data, status){
-				    alert("Se ha guardado la imagen correctamente");
+					alert("Se ha guardado la imagen correctamente");
 				  });
 			});
 		});

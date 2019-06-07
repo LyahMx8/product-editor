@@ -72,7 +72,7 @@ class Editor_Public{
 
 		if ($product_editor !== null): ?>
 
-			<button class="btnEditor Editor">Editar Producto <span class="dashicons dashicons-edit"></span></button>
+			<button class="btnEditor Editor">Editar Producto <i class="fa fa-edit"></i></button>
 			<div id="popContainer">
 				<div class="popLayer">
 					<span onclick="closeModal('popContainer')">X</span>
@@ -88,18 +88,9 @@ class Editor_Public{
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
-						if (elem.requestFullscreen) {
-							elem.requestFullscreen();
-						} else if (elem.mozRequestFullScreen) { /* Firefox */
-							elem.mozRequestFullScreen();
-						} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-							elem.webkitRequestFullscreen();
-						} else if (elem.msRequestFullscreen) { /* IE/Edge */
-							elem.msRequestFullscreen();
-						}else{
-							document.requestFullscreen();
-						}
 						e.preventDefault();
+						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden'});
+						window.scrollTo(0, 1);
 						document.getElementById("popContainer").style.display = "block"; 
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
 					});
@@ -122,15 +113,7 @@ class Editor_Public{
 				*/
 				function closeModal(nombreModal){
 					document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
-						if (document.exitFullscreen) {
-							document.exitFullscreen();
-						} else if (document.mozCancelFullScreen) { /* Firefox */
-							document.mozCancelFullScreen();
-						} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-							document.webkitExitFullscreen();
-						} else if (document.msExitFullscreen) { /* IE/Edge */
-							document.msExitFullscreen();
-						}
+					jQuery('body.product-template-default').css({'height':'auto','overflow':'auto'});
 				}
 			</script>
 		<?php

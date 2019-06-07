@@ -44,9 +44,8 @@ body{overscroll-behavior: none}
 .changeProd a:hover{filter:brightness(110%) contrast(110%);}
 .changeProd a img{width:60px;height:60px;object-fit:contain;}
 
-.choseAction{position:absolute;top:5px;right:150px;display: block;z-index: 10;padding:10px;}
-.choseAction:hover{background:#1e1e1e;}.choseAction:hover *{color:#fff !important;}
-.choseAction ul{display:none;margin:0}.choseAction:hover ul{display:block;}
+.choseAction{position:absolute;top:70px;right:15px;display: block;z-index: 10;padding:10px;background:#1e1e1e;}
+.choseAction ul{margin:0;display:block;}
 .choseAction ul li{list-style:none;display:block;}.choseAction ul li svg{width:20px;height:20px;cursor:pointer;}
 .choseAction ul li:hover *{filter:brightness(150%)}
 
@@ -68,6 +67,7 @@ body{overscroll-behavior: none}
 }
 
 @media screen and (max-width:600px){
+	.choseAction{top:180px;right:auto;left:10px;}
 	#fontSelect-undefined {margin-bottom: 20px;}
 	.carrusel-prods{overflow-x: hidden;overflow-y: auto;white-space: nowrap;}
 	.variationGallery {float: left;}
