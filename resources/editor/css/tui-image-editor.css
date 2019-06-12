@@ -39,11 +39,13 @@ body > textarea
 .tui-image-editor-container .tui-image-editor-menu
 {width:auto;list-style:none;padding:0;margin:0 auto;display:block;position:relative;top:50%;-ms-transform:translateY(-50%);transform:translateY(-50%);text-align:center;white-space:nowrap}
 .tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item
-{position:relative;display:inline-block;border-radius:2px;padding:7px 8px 3px;cursor:pointer;margin:0 4px}
-.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover:before
-{content:'';position:absolute;display:inline-block;margin:0 auto;width:0;height:0;border-right:7px solid transparent;border-top:7px solid #2f2f2f;border-left:7px solid transparent;position:absolute;left:13px;top:-2px}
-.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover:after
-{content:attr(title);position:absolute;display:inline-block;background-color:#2f2f2f;color:#fff;padding:5px 8px;font-size:11px;font-weight:lighter;border-radius:3px;max-height:23px;top:-22px;left:0;min-width:24px}
+{position:relative;display:inline-block;border-radius:2px;padding:7px 8px 3px;cursor:pointer;margin:0 4px;max-width: 64px;}
+/*.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]::before
+{content: '';position: relative !important;display: block;margin: 0 auto;width: 5px;height: 4px;border-right: 7px solid transparent;border-top: 7px solid #2f2f2f;border-left: 7px solid transparent;position: absolute;left: auto !important;top: 32px !important;margin: 0 auto !important;right: auto !important;float: none !important;}
+*/
+.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]::after
+{content:attr(title);position:relative;display:inline-block;background-color:#2f2f2f;color:#fff;padding:2px 5px;font-size:11px;font-weight:lighter;border-radius:3px;max-height:23px;top:0 !important;left:auto !important;min-width:24px}
+li.tui-image-editor-item.active::after {color: #000 !important;}
 .tui-image-editor-container .tui-image-editor-menu > .tui-image-editor-item.active
 {background-color:#fff;transition:all .3s ease}
 .tui-image-editor-container .tui-image-editor-wrap
@@ -258,10 +260,8 @@ table tbody td
 {top:0;bottom:inherit}
 .tui-image-editor-container #tie-icon-add-button .tui-image-editor-button
 {min-width:42px}
-.tui-image-editor-container .svg_ic-menu
-{width:24px;height:24px}
-.tui-image-editor-container .svg_ic-submenu
-{width:32px;height:32px}
+.tui-image-editor-container svg
+{width:24px;height:24px;display: block;margin: 0 auto;}
 .tui-image-editor-container .svg_img-bi
 {width:257px;height:26px}
 .tui-image-editor-container .tui-image-editor-controls svg > use
@@ -360,6 +360,7 @@ table tbody td
 {display:none}
 
 @media screen and (max-width:800px){
+	.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]::after{background:none !important;}
 	.tui-image-editor-container .tui-image-editor-wrap {overflow:hidden;min-height: 300px;}
 	.tui-image-editor-container .tui-image-editor {top:0 !important;left:0 !important;}
 	.tui-image-editor-container .tui-image-editor-controls{width:100% !important;height:64px !important;overflow-x:auto;overflow-y:hidden;scrollbar-color: #0073aa #87d8ff;scrollbar-width: thin;}
@@ -367,7 +368,7 @@ table tbody td
 	.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover::before {left: 15px;top: 17px;border-bottom: 7px solid #2f2f2f;border-top: 0;}
 	.tui-image-editor-container .tui-image-editor-menu {white-space: nowrap !important;position: relative;}
 	.tui-image-editor-container.left .tui-image-editor-main-container {width: 100% !important;}
-	.changeProd {top: 65px;height: 70px;left: 5px;width: 100px;}.changeProd a {width: 40px;margin: 3px;}.changeProd a img {width: 30px;height: 30px;}
+	.changeProd {top: 65px;right:5px;position: fixed;}.changeProd a {width: 40px;margin: 3px;}.changeProd a img {width: 30px;height: 30px;}
 	.chooseSelect > ul > div{float:none;}
 	.tui-image-editor-submenu div ul li {float: left !important;width: auto;}
 	.tui-image-editor-submenu {width: 100%;height: 100px;display: block;}

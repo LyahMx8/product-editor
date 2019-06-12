@@ -113,6 +113,7 @@ if ( !defined('ABSPATH') ) {
 	</style>
 </head>
 <body onresize="changeSize()">
+	<span class="closeModal" onclick="closeModal('popContainer')">X</span>
 	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
@@ -160,7 +161,6 @@ if ( !defined('ABSPATH') ) {
 	</section>
 
 	<section class="changeProd">
-		<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 		<a onclick="openEditor('tui-image-editor-container',imageEditor)" class="imgPrdFrn"></a>
 	<?php if (isset($alph_tsr)) : ?>
 		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="<?php echo URL_PB; ?>/<?php echo $clr_tsr[0]; ?>"></a>
@@ -196,6 +196,7 @@ if ( !defined('ABSPATH') ) {
 	<div id="tui-image-editor-container-2" style="display:none;"></div>
 
 	<section class="custom-file-label" id="iconContainer" style="display:none">
+		<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 		<div class="ctm-icons carrusel-prods">
 			<?php foreach ($ctm_icon as $key) { ?>
 				<div class="variationGallery" onclick="putIcon('<?php echo URL_PB; ?>/<?php echo $key; ?>')"><img style="height:80px;max-width:100px;object-fit:contain;cursor:pointer;" src="<?php echo URL_PB; ?>/<?php echo $key; ?>"></div>
@@ -332,7 +333,7 @@ if ( !defined('ABSPATH') ) {
 		});
 
 		jQuery('.tui-image-editor-item.normal.filter').
-		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Subir Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
+		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
 		jQuery('.tui-image-editor-item.normal.crop').
 		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
 		jQuery('#tie-text-range').
@@ -458,7 +459,7 @@ if ( !defined('ABSPATH') ) {
 			jQuery('#tui-image-editor-next-btn').click(function(e){
 				e.preventDefault();
 				var image = imageEditor.toDataURL('image/png');
-				  $.post("<?php echo URL_PB; ?>/includes/saveImage.php",
+				  jQuery.post("<?php echo URL_PB; ?>/includes/saveImage.php",
 				  {
 					post: 	"<?php echo $_GET["producto"]; ?>",
 					imgfrn: image
