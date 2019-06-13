@@ -12,7 +12,7 @@ if ( !defined('ABSPATH') ) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	 <meta name="mobile-web-app-capable" content="yes"> 
+	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" /> <meta name="apple-mobile-web-app-capable" content="yes" /> <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
@@ -248,7 +248,7 @@ if ( !defined('ABSPATH') ) {
 		window.addEventListener("resize", setMenu);
 		var menuPosition;
 		function setMenu() {
-			if (document.body.scrollWidth < 800){menuPosition = 'bottom';}
+			if (document.body.scrollWidth < 560){menuPosition = 'bottom';}
 			else{menuPosition = 'left';}
 		};
 		setMenu();
@@ -344,7 +344,7 @@ if ( !defined('ABSPATH') ) {
 		jQuery('#tie-rotate-range').
 		replaceWith('<input type="range" id="rotateRange" onchange="rotateSize(this)" min="-360" max="360" value="0">');
 		jQuery('#textInput').
-		replaceWith('<form style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<input type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);">\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></form>');
+		replaceWith('<form onsubmit="agregarTexto()" style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<textarea type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);height:35px;"></textarea>\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></form>');
 
 		var editorActive = imageEditor;
 

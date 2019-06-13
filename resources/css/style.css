@@ -2,7 +2,7 @@ body{overscroll-behavior: none}
 .btnEditor{background: #00A9E0;border-radius: 25px !important;cursor:pointer;border:2px solid transparent !important;color: #ffffff !important;font-weight: 600 !important;padding: 5px 20px !important;margin:0;display: block !important;height:auto;line-height: 24px;position: relative !important;clear: left;width: 100%;}
 .btnEditor:hover{border:2px solid #00A9E0 !important;background:#fff !important;color:#00A9E0 !important;}
 #popContainer,#popDatos,#pleaseHidemMe{display:none;}
-.popUp{overscroll-behavior: none;width:100%;height:85vh;top:0;left:0;display:block;margin:0 auto;position:fixed;overflow-y:auto;overflow-x:auto;z-index:999999;background:#fff;border:2px solid #efefef;}
+.popUp{overscroll-behavior: none;width:100%;height:89vh;top:0;left:0;display:block;margin:0 auto;position:fixed;overflow-y:auto;overflow-x:auto;z-index:999999;background:#fff;border:2px solid #efefef;}
 .popLayer{width:100%;height:100vh;position:fixed;top:0;left:0;background:rgba(0,0,0,.9);z-index:999991;}
 .popLayer span{font-size:22px;font-weight:900;position:fixed;top:5px;right:5px;color:rgba(255,255,255,.8);cursor:pointer;}
 .datosForm{padding:15px;display:block;overflow:hidden;}
@@ -68,8 +68,10 @@ body{overscroll-behavior: none}
 	to {-webkit-transform: rotate(360deg);transform: rotate(360deg);}
 }
 
-@media screen and (max-width:800px){
+@media screen and (max-width:650px){
 	.choseAction{top:180px;left:auto;right:10px;position: fixed;}
+}
+@media screen and (max-width:560px){
 	#fontSelect-undefined {margin-bottom: 20px;}
 	.carrusel-prods{overflow-x: hidden;overflow-y: auto;white-space: nowrap;}
 	.variationGallery {float: left;}

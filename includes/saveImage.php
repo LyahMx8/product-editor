@@ -16,7 +16,7 @@ define('UPLOAD_DIR', SERV.'/personalizados/');
 $fileName = UPLOAD_DIR.uniqid('created',false) . '.png';
 file_put_contents($fileName, $fileData);
 
-//imagepng($fileData,$fileName);
+//WC()->cart->add_to_cart( $_POST['post'] );
 
-/*$sql = ("INSERT INTO zalemto_editor_img (cmpidprdct, cmpidtipimg, cmpurlimg, cmpfechup) values ('".$_POST["post"]."','4','".$fileName."','".date("Y-m-d H:i:s")."')");
-$wpdb->query($sql);*/
+$sql = ("INSERT INTO zalemto_editor_img (cmpidprdct, cmpidtipimg, cmpurlimg, cmpfechup) values ('".$_POST["post"]."','4','".$fileName."','".date("Y-m-d H:i:s")."')");
+$wpdb->query($sql);

@@ -88,9 +88,8 @@ class Editor_Public{
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
+						document.cookie = "client_ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>";
 						window.scrollTo(0,1);
-						//window.addEventListener('scroll', disableScroll);
-						//document.body.requestFullscreen();
 						window.onscroll = null;
 						e.preventDefault();
 						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
