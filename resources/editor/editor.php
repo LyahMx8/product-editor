@@ -467,6 +467,7 @@ if ( !defined('ABSPATH') ) {
 				  },
 				  function(data, status){
 					alert("Se ha guardado la imagen correctamente");
+					closeModal('popContainer');
 				  });
 			});
 		});
