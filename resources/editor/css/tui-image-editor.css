@@ -10,6 +10,8 @@ body > textarea
 {marign:0;padding:0;box-sizing:border-box;min-height:300px;height:100%;position:relative;background-color:#282828;overflow:hidden;letter-spacing:.3px}
 .tui-image-editor-container div,.tui-image-editor-container ul,.tui-image-editor-container label,.tui-image-editor-container input,.tui-image-editor-container li
 {box-sizing:border-box;margin:0;padding:0;-ms-user-select:none;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none;user-select:none}
+.tui-image-editor-container input[type="text"]
+{-ms-user-select: initial !important;-moz-user-select: -moz-initial !important;-khtml-user-select: initial !important;-webkit-user-select: initial !important;user-select: initial !important;}
 .tui-image-editor-container .tui-image-editor-header
 {min-width:533px;position:absolute;background-color:#151515;top:0;width:100%}
 .tui-image-editor-container .tui-image-editor-header-buttons,.tui-image-editor-container .tui-image-editor-controls-buttons
@@ -44,7 +46,7 @@ body > textarea
 {content: '';position: relative !important;display: block;margin: 0 auto;width: 5px;height: 4px;border-right: 7px solid transparent;border-top: 7px solid #2f2f2f;border-left: 7px solid transparent;position: absolute;left: auto !important;top: 32px !important;margin: 0 auto !important;right: auto !important;float: none !important;}
 */
 .tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]::after
-{content:attr(title);position:relative;display:inline-block;background-color:#2f2f2f;color:#fff;padding:2px 5px;font-size:11px;font-weight:lighter;border-radius:3px;max-height:23px;top:0 !important;left:auto !important;min-width:24px}
+{content:attr(title);position:relative;display:inline-block;color:#fff;padding:2px 5px;font-size:11px;font-weight:lighter;border-radius:3px;max-height:23px;top:0 !important;left:auto !important;min-width:24px}
 li.tui-image-editor-item.active::after {color: #000 !important;}
 .tui-image-editor-container .tui-image-editor-menu > .tui-image-editor-item.active
 {background-color:#fff;transition:all .3s ease}
@@ -281,7 +283,7 @@ table tbody td
 .tui-image-editor-container .tui-image-editor-controls:hover
 {z-index:3}
 .tui-image-editor-container div.tui-colorpicker-clearfix
-{width:159px;height:28px;border:1px solid #d5d5d5;border-radius:2px;background-color:#f5f5f5;margin-top:6px;padding:4px 7px}
+{width:159px;height:28px;border:1px solid #d5d5d5;border-radius:2px;background-color:#f5f5f5;margin-top:6px;padding:4px 7px;display:none;}
 .tui-image-editor-container .tui-colorpicker-palette-hex
 {width:114px;background-color:#f5f5f5;border:0;font-size:11px;margin-top:2px;font-family:'Noto Sans',sans-serif}
 .tui-image-editor-container .tui-colorpicker-palette-hex[value='#ffffff'] + .tui-colorpicker-palette-preview,.tui-image-editor-container .tui-colorpicker-palette-hex[value=''] + .tui-colorpicker-palette-preview
@@ -291,11 +293,11 @@ table tbody td
 .tui-image-editor-container .tui-colorpicker-palette-preview
 {border-radius:100%;float:left;width:17px;height:17px;border:0}
 .tui-image-editor-container .color-picker-control
-{position:absolute;display:none;z-index:99;width:192px;background-color:#fff;box-shadow:0 3px 22px 6px rgba(0,0,0,0.15);padding:16px;border-radius:2px}
+{position:absolute;display:none;z-index:99;width:192px;background-color:#fff;box-shadow:0 3px 22px 6px rgba(0,0,0,0.15);padding:16px;border-radius:2px;cursor:initial;}
 .tui-image-editor-container .color-picker-control .tui-colorpicker-palette-toggle-slider
 {display:none}
 .tui-image-editor-container .color-picker-control .tui-colorpicker-palette-button
-{border:0;border-radius:100%;margin:2px;background-size:cover;width:20px;height:20px}
+{border:0;border-radius:100%;margin:2px;background-size:cover;width:20px;height:20px;color: transparent !important;cursor:pointer;}
 .tui-image-editor-item.normal:hover .svg_ic-menu
 {filter:brightness(120%)}
 .tui-image-editor-container .color-picker-control .tui-colorpicker-palette-button[title='#ffffff']
@@ -360,8 +362,8 @@ table tbody td
 {display:none}
 
 @media screen and (max-width:800px){
-	.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]::after{background:none !important;}
-	.tui-image-editor-container .tui-image-editor-wrap {overflow:hidden;min-height: 300px;}
+	.tui-image-editor-container .tui-image-editor-wrap {overflow:hidden;min-height: 300px;height: calc(100% - 100px) !important;
+top: 100px !important;}
 	.tui-image-editor-container .tui-image-editor {top:0 !important;left:0 !important;}
 	.tui-image-editor-container .tui-image-editor-controls{width:100% !important;height:64px !important;overflow-x:auto;overflow-y:hidden;scrollbar-color: #0073aa #87d8ff;scrollbar-width: thin;}
 	.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover::after {top: 23px;}
@@ -373,7 +375,7 @@ table tbody td
 	.tui-image-editor-submenu div ul li {float: left !important;width: auto;}
 	.tui-image-editor-submenu {width: 100%;height: 100px;display: block;}
 	.tui-image-editor-container.bottom .tui-image-editor-submenu > div {padding-bottom:0 !important;height: 100px;overflow-y: auto;}
-	.ctm-icons{width: 100% !important;bottom: 65px;left:0;height:100px;}
+	.ctm-icons{top: 65px;position: fixed;height: 60%;z-index: 9999999;width: 80% !important;margin-left: -37.5%;left: 50% !important;border: 4px solid #d3d3d3;}
 	.tui-image-editor-container.bottom .tui-image-editor-submenu div ul{padding: 15px !important;overflow-x: hidden;overflow-y: auto;display: block;}
 	.tui-image-editor-submenu-item{bottom: 0 !important;top: 0 !important;height: 100px;}
 	.tui-image-editor-submenu {bottom: 0 !important;}
@@ -388,7 +390,7 @@ table tbody td
 @media screen and (max-height:650px){
 	.tui-image-editor-container .tui-image-editor
 	{max-width:300px;max-height:300px;}
-	.tui-image-editor-wrap {position: initial !important;overflow: auto !important;display:block;height:100%;}
+	/*.tui-image-editor-wrap {position: initial !important;overflow: auto !important;display:block;height:100%;}*/
 	.tui-image-editor-submenu{position: relative !important;top: 0 !important;}
 
 }

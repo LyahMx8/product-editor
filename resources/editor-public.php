@@ -74,9 +74,9 @@ class Editor_Public{
 
 			<button class="btnEditor Editor">Editar Producto <i class="fa fa-edit"></i></button>
 			<div id="popContainer">
-				<!--div class="popLayer">
-					<span onclick="closeModal('popContainer')">X</span>
-				</div-->
+				<div class="popLayer">
+					<!--span onclick="closeModal('popContainer')">X</span-->
+				</div>
 				<section class="popUp" id="popUp"></section>
 			</div>
 
@@ -88,11 +88,12 @@ class Editor_Public{
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
-//						window.scrollTo(0, 0);
-//						window.addEventListener('scroll', disableScroll);
+						window.scrollTo(0,1);
+						//window.addEventListener('scroll', disableScroll);
+						//document.body.requestFullscreen();
 						window.onscroll = null;
 						e.preventDefault();
-						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden'});
+						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
 						window.scrollTo(0, 1);
 						document.getElementById("popContainer").style.display = "block"; 
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
@@ -115,6 +116,8 @@ class Editor_Public{
 				* Funcion que cierra el modal
 				*/
 				function closeModal(nombreModal){
+					/*document.body.exitFullscreen();
+					document.body.cancelFullScreen();*/
 					document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
 					jQuery('body.product-template-default').css({'height':'auto','overflow':'auto'});
 				}
