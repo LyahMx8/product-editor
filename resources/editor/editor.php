@@ -197,6 +197,7 @@ if ( !defined('ABSPATH') ) {
 	<div id="tui-image-editor-container-2" style="display:none;"></div>
 
 	<section class="custom-file-label" id="iconContainer" style="display:none">
+		<div class="ctmIconLayer" onclick="openIcons()"></div>
 		<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 		<div class="ctm-icons carrusel-prods">
 			<?php foreach ($ctm_icon as $key) { ?>
@@ -344,7 +345,7 @@ if ( !defined('ABSPATH') ) {
 		jQuery('#tie-rotate-range').
 		replaceWith('<input type="range" id="rotateRange" onchange="rotateSize(this)" min="-360" max="360" value="0">');
 		jQuery('#textInput').
-		replaceWith('<form onsubmit="agregarTexto()" style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<textarea type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);height:35px;"></textarea>\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></form>');
+		replaceWith('<form class="addTxtForm" onsubmit="agregarTexto()" style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<textarea type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);height:35px;"></textarea>\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></form>');
 
 		var editorActive = imageEditor;
 
