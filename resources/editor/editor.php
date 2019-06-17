@@ -115,6 +115,8 @@ if ( !defined('ABSPATH') ) {
 </head>
 <body onresize="changeSize()">
 	<span class="closeModal" onclick="closeModal('popContainer')">X</span>
+	
+	<div id="fb-root"></div>
 	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
@@ -125,6 +127,43 @@ if ( !defined('ABSPATH') ) {
 			});
 			FB.AppEvents.logPageView();
 		};
+		FB.login(function (response) {
+
+            if (response.status === "connected") {
+
+                        var uID = response.authResponse.userID;
+
+                        console.log(uID);
+
+                      FB.api('/me', function (response) {
+
+                             var name = response.name;
+                             var locationName = ' ';
+
+                             if (response.location) {
+
+                                locationName = response.location.name;
+                                console.log(locationName);
+
+                            } else {
+
+                                alert("your current city needs to be set in your Facebook 'about' section. Please make it public for our use");
+
+                            }
+                       });//closes fb.api
+
+                    } else if (response.status === "not_authorized") {
+
+                        //authCancelled. redirect
+                    }
+                },
+                {
+                    scope: 'user_location,user_likes'
+                }
+            );
+
+
+      };
 		(function(d, s, id){
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) {return;}
@@ -133,7 +172,6 @@ if ( !defined('ABSPATH') ) {
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
-	<div id="fb-root"></div>
 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.3&appId=303269393938393&autoLogAppEvents=1"></script>
 	<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/jquery.fontselect.js'; ?>"></script>
@@ -198,8 +236,8 @@ if ( !defined('ABSPATH') ) {
 
 	<section class="custom-file-label" id="iconContainer" style="display:none">
 		<div class="ctmIconLayer" onclick="openIcons()"></div>
-		<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 		<div class="ctm-icons carrusel-prods">
+			<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 			<?php foreach ($ctm_icon as $key) { ?>
 				<div class="variationGallery" onclick="putIcon('<?php echo URL_PB; ?>/<?php echo $key; ?>')"><img style="height:80px;max-width:100px;object-fit:contain;cursor:pointer;" src="<?php echo URL_PB; ?>/<?php echo $key; ?>"></div>
 			<?php } ?>
