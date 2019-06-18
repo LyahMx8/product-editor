@@ -309,7 +309,7 @@ table tbody td
 .tui-image-editor-container .color-picker-control .tui-colorpicker-container,.tui-image-editor-container .color-picker-control .tui-colorpicker-palette-container ul,.tui-image-editor-container .color-picker-control .tui-colorpicker-palette-container
 {width:100%;height:auto}
 .tui-image-editor-container .filter-color-item .color-picker-control label
-{font-color:#333;font-weight:400;margin-right:7pxleft}
+{color:#333;font-weight:400;margin-right:7px}
 .tui-image-editor-container .filter-color-item .tui-image-editor-checkbox
 {margin-top:0}
 .tui-image-editor-container .filter-color-item .tui-image-editor-checkbox input + label:before
@@ -368,12 +368,12 @@ table tbody td
 	.tui-image-editor-container.left .tui-image-editor-submenu{width:180px !important}
 	div.tui-colorpicker-clearfix,.tui-image-editor-header-logo,.tui-image-editor-partition,.addCartLabel
 	{display:none !important;}
-	.changeProd {top: 65px;right:5px;position: fixed;}.changeProd a {width: 40px;margin: 3px;}.changeProd a img {width: 30px;height: 30px;}
+	.changeProd {top: 285px;right:5px;position: fixed;}.changeProd a {width: 40px;margin: 3px;}.changeProd a img {width: 30px;height: 30px;}
 }
 @media screen and (max-width:560px){
-	.addTxtForm{position: fixed;top: 130px;left: 5px;width: 80%;}.addTxtForm label{display:none;}
+	.addTxtForm{position: fixed;top: 130px;left: 5px;width: 80%;}.addTxtForm label{display:none !important;}
 	.tui-image-editor-container .tui-image-editor-menu{top:50%;}
-	.tui-image-editor-container .tui-image-editor-wrap {overflow:hidden;min-height: 250px;height:calc(100% - 110px) !important;top: 85px !important;}
+	.tui-image-editor-container .tui-image-editor-wrap {overflow:hidden;min-height: 250px;height:calc(100% - 110px) !important;top: 95px !important;}
 	.tui-image-editor-container .tui-image-editor {top:0 !important;left:0 !important;}
 	.tui-image-editor-container .tui-image-editor-controls{width:100% !important;height:64px !important;overflow-x:auto;overflow-y:hidden;scrollbar-color: #0073aa #87d8ff;scrollbar-width: thin;}
 	.tui-image-editor-container .tui-image-editor-menu .tui-image-editor-item[title]:hover::after {top: 23px;}
@@ -383,13 +383,13 @@ table tbody td
 	.chooseSelect > ul > div{float:none;}
 	.tui-image-editor-partition only-left-right{display:none;}
 	.tui-image-editor-submenu div ul li {width: auto !important;}
-	.tui-image-editor-submenu {width: 100%;height: 85px;display: block;}
-	.tui-image-editor-container.bottom .tui-image-editor-submenu > div {padding-bottom:0 !important;height: 85px;overflow-y: auto;}
+	.tui-image-editor-submenu {width: 100%;height: 95px;display: block;}
+	.tui-image-editor-container.bottom .tui-image-editor-submenu > div {padding-bottom:0 !important;height: 95px;overflow-y: auto;}
 	.ctm-icons{top: 65px;position: fixed;-webkit-box-shadow: 2px 10px 22px 0px rgba(0,0,0,0.34);-moz-box-shadow: 2px 10px 22px 0px rgba(0,0,0,0.34);box-shadow: 2px 10px 22px 0px rgba(0,0,0,0.34);height: 60%;z-index: 9999999;width: 80% !important;margin-left: -37.5%;left: 50% !important;border: 4px solid #d3d3d3;}
-	.tui-image-editor-container.bottom .tui-image-editor-submenu div ul{padding: 15px !important;overflow-x: auto;overflow-y: hidden;display: block;white-space: nowrap !important;}
+	.tui-image-editor-container.bottom .tui-image-editor-submenu div ul{padding: 15px !important;overflow-x: scroll;overflow-y: hidden;display: block;white-space: nowrap !important;}
 	.tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-submenu-item li{display: inline-block !important;float:none !important;}
 	div#fontSelect-undefined div.fs-drop ul.fs-results{overflow-y:auto !important;overflow-x:hidden !important;}div#fontSelect-undefined div.fs-drop ul.fs-results li{display:block !important;}
-	.tui-image-editor-submenu-item{bottom: 0 !important;top: 0 !important;height: 85px;}
+	.tui-image-editor-submenu-item{bottom: 0 !important;top: 0 !important;height: 95px;}
 	.tui-image-editor-submenu {bottom: 0 !important;}
 	.tui-image-editor-menu-text {height:auto !important;}
 	label.range {display: block !important;}

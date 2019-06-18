@@ -17,7 +17,7 @@ body{overscroll-behavior: none}
 #productos tr{background-color: #fff;border: 10px solid #f1f1f1;display:inherit;}
 #productos tr:hover {background-color: #ddd;}
 #productos th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4AB55C;color: white;}
-.carrusel-prods{overflow: auto;scrollbar-color: #0073aa #87d8ff;scrollbar-width: thin;}
+.carrusel-prods{white-space: nowrap !important;overflow: auto;scrollbar-color: #0073aa #87d8ff;scrollbar-width: thin;}
 .carrusel-prods::-webkit-scrollbar {width: 6px;}
 .carrusel-prods::-webkit-scrollbar-track {box-shadow: inset 0 0 5px grey; border-radius: 10px;}
 .carrusel-prods::-webkit-scrollbar-thumb {background: #89bd30; border-radius: 10px;}
@@ -70,7 +70,7 @@ body{overscroll-behavior: none}
 }
 
 @media screen and (max-width:650px){
-	.choseAction{top:180px;left:auto;right:10px;position: fixed;}
+	.choseAction{top:155px;left:auto;right:5px;position: fixed;}
 	.popUp{width:100%;left: 0;padding-right: 40px;}
 }
 @media screen and (max-width:560px){
