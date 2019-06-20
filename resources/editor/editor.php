@@ -113,7 +113,7 @@ if ( !defined('ABSPATH') ) {
 
 	</style>
 </head>
-<body onresize="changeSize()">
+<body onresize="setMenu()" onchange="setArrows()">
 	<span class="closeModal" onclick="closeModal('popContainer')">X</span>
 	
 	<div id="fb-root"></div>
@@ -243,6 +243,9 @@ if ( !defined('ABSPATH') ) {
 			<?php } ?>
 		</div>
 	</section>
+	
+		<i class="naveright naveArrow fa fa-arrow-right"></i>
+		<i class="naveleft naveArrow fa fa-arrow-left"></i>
 
 	<script id="script1">
 
@@ -390,6 +393,18 @@ if ( !defined('ABSPATH') ) {
 		window.onresize = function() {
 			editorActive.ui.resizeEditor();
 		}
+		
+		function setArrows(){
+            if(jQuery(".naveArrow").css("display") == "none"){
+                jQuery(".naveArrow").show();
+            }else{
+                jQuery(".naveArrow").hide();
+            }
+        }
+
+		jQuery(".tui-image-editor-item").click(function(){
+			setArrows();
+		});
 
 		 function loadImage(event){
 			var imgUrl = void 0;
@@ -404,8 +419,8 @@ if ( !defined('ABSPATH') ) {
 				then(objectProps => {
 					console.log(objectProps);
 					editorActive.setObjectProperties(objectProps.id, {
-						width: (objectProps.width * 0.10),
-						height: (objectProps.height * 0.10)
+						width: (objectProps.width * 0.40),
+						height: (objectProps.height * 0.40)
 					});
 				});
 			}

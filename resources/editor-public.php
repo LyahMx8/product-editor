@@ -117,8 +117,15 @@ class Editor_Public{
 				function closeModal(nombreModal){
 					/*document.body.exitFullscreen();
 					document.body.cancelFullScreen();*/
-					document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
+					var r = confirm("Desea cerrar el editor?\n Si lo haces perderas todo tu trabajo");
+					if (r == true) {
+  document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
 					jQuery('body.product-template-default').css({'height':'auto','overflow':'auto'});
+} else {
+  console.log("Continuar");
+}
+					
+					
 				}
 			</script>
 		<?php
