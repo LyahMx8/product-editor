@@ -247,7 +247,7 @@ if ( !defined('ABSPATH') ) {
 	<div id="tui-image-editor-container"></div>
 	<div id="tui-image-editor-container-2" style="display:none;"></div>
 
-	<section class="custom-file-label" id="iconContainer" style="display:none">
+	<section class="ctmfile-label" id="iconContainer" style="display:none">
 		<div class="ctmIconLayer" onclick="openIcons()"></div>
 		<div class="ctm-icons carrusel-prods">
 			<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div><br>

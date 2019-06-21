@@ -28,7 +28,7 @@ i.naveArrow{display:none;}
 .img-btn{display:inline-block;text-align:center;padding:5px;border:1px solid #efefef;position:relative;cursor:pointer;border-radius:10px;}
 .img-btn img{width:70px;}.img-btn:hover img{filter: brightness(50%);background: #000;}
 .img-btn span{line-height: 18px;display:none;position:absolute;top: 30%;left: 0;right: 0;color: #fff;}.img-btn:hover span{display:block;}
-.custom-file-label > div,#iconContainer div div{background-image:linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4),linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4);background-position: 0 0,10px 10px;background-size: 20px 20px;}
+.ctmfile-label > div,#iconContainer div div{background-image:linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4),linear-gradient(45deg,#c4c4c4 25%,transparent 25%,transparent 75%,#c4c4c4 75%,#c4c4c4);background-position: 0 0,10px 10px;background-size: 20px 20px;}
 div.ctm-icons{position:absolute;width:250px;bottom:0;height:calc(100% - 64px);left:62px;border-top: 4px solid #000;white-space: initial !important;}
 #iconContainer .ctm-icons.carrusel-prods {background: #fff !important;z-index: 99;}
 .ctmIconLayer{position: fixed;width: 100%;height: 100%;background: rgba(255,255,255,.6) !important;top: 0;left: 0;z-index: 99;}

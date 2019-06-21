@@ -198,7 +198,7 @@ class Editor_Admin{
 		<form enctype="multipart/form-data" class="vFormImg">
 			<div class="col-sm-5 custom-file">
 				<input type="file" class="custom-file-input" name="mImageAdd" id="mImageAdd" onchange="loadFile(event)" style="display:none;">
-				<label class="custom-file-label" for="mImageAdd">
+				<label class="ctmfile-label" for="mImageAdd">
 					<div id="uprecall" ><?php echo Editor_Admin::show_preimages($thepostid,0); ?></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte frontal</a>
 				</label>
@@ -252,7 +252,7 @@ class Editor_Admin{
 		<form enctype="multipart/form-data" class="vFormImg">
 			<div class="col-sm-5 custom-file">
 				<input type="file" class="custom-file-input" name="mImageAddBack" id="mImageAddBack" onchange="loadFileBck(event)" style="display:none;">
-				<label class="custom-file-label" for="mImageAddBack">
+				<label class="ctmfile-label" for="mImageAddBack">
 					<div id="uprecallbck" ><?php echo Editor_Admin::show_preimages($thepostid,1,"outputbck"); ?></div>
 					<a style="text-decoration:underline;">Establecer imagen alpha matte trasera</a>
 				</label>
@@ -300,7 +300,7 @@ class Editor_Admin{
 		<form enctype="multipart/form-data" class="vFormImgGalMuch">
 			<div class="col-sm-5 custom-file">
 				<input type="file" multiple class="custom-file-input" name="mImageAddMuchas[]" id="mImageAddMuchas" onchange="loadFilesGaleryMuch(event)" style="display:none;">
-				<label class="custom-file-label" for="mImageAddMuchas">
+				<label class="ctmfile-label" for="mImageAddMuchas">
 					<div id="uprecallmuchas" class="carrusel-prods">
 					<?php echo Editor_Admin::show_preimages($thepostid,2,"image_carousel"); ?>
 					</div>
