@@ -88,14 +88,13 @@ class Editor_Public{
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
+						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
 						document.cookie = "client_ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>";
 						window.scrollTo(0,1);
 						window.onscroll = null;
 						e.preventDefault();
 						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
-						window.scrollTo(0, 1);
 						document.getElementById("popContainer").style.display = "block"; 
-						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
 				});
@@ -117,13 +116,13 @@ class Editor_Public{
 				function closeModal(nombreModal){
 					/*document.body.exitFullscreen();
 					document.body.cancelFullScreen();*/
-					var r = confirm("Desea cerrar el editor?\n Si lo haces perderas todo tu trabajo");
+					var r = confirm("¿Deseas cerrar el editor?\n Si lo haces perderás todo tu trabajo");
 					if (r == true) {
-  document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
-					jQuery('body.product-template-default').css({'height':'auto','overflow':'auto'});
-} else {
-  console.log("Continuar");
-}
+						document.getElementById(nombreModal).style.display = "none"; jQuery('#Editor').removeAttr('disabled');
+						jQuery('body.product-template-default').css({'height':'auto','overflow':'auto'});
+					} else {
+						console.log("Continuar");
+					}
 					
 					
 				}

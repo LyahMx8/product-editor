@@ -128,42 +128,28 @@ if ( !defined('ABSPATH') ) {
 			FB.AppEvents.logPageView();
 		};
 		FB.login(function (response) {
-
-            if (response.status === "connected") {
-
-                        var uID = response.authResponse.userID;
-
-                        console.log(uID);
-
-                      FB.api('/me', function (response) {
-
-                             var name = response.name;
-                             var locationName = ' ';
-
-                             if (response.location) {
-
-                                locationName = response.location.name;
-                                console.log(locationName);
-
-                            } else {
-
-                                alert("your current city needs to be set in your Facebook 'about' section. Please make it public for our use");
-
-                            }
-                       });//closes fb.api
-
-                    } else if (response.status === "not_authorized") {
-
-                        //authCancelled. redirect
-                    }
-                },
-                {
-                    scope: 'user_location,user_likes'
-                }
-            );
-
-
-      };
+			if (response.status === "connected") {
+				var uID = response.authResponse.userID;
+				console.log(uID);
+				FB.api('/me', function (response) {
+					var name = response.name;
+					var locationName = ' ';
+					if (response.location) {
+						locationName = response.location.name;
+						console.log(locationName);
+					} else {
+						alert("your current city needs to be set in your Facebook 'about' section. Please make it public for our use");
+					}
+				});//closes fb.api
+			} else if (response.status === "not_authorized") {
+				console.log("No conectado");
+				//authCancelled. redirect
+			}
+		},
+			{
+				scope: 'user_location,user_likes'
+			}
+		);
 		(function(d, s, id){
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) {return;}
@@ -200,6 +186,7 @@ if ( !defined('ABSPATH') ) {
 	</section>
 
 	<section class="changeProd">
+		<span style="display: block;width: 100%;text-align: center;font-size: 11px;line-height: 10px;margin-bottom: 3px;">Cambiar<br>vista</span>
 		<a onclick="openEditor('tui-image-editor-container',imageEditor)" class="imgPrdFrn"></a>
 	<?php if (isset($alph_tsr)) : ?>
 		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="<?php echo URL_PB; ?>/<?php echo $clr_tsr[0]; ?>"></a>
@@ -208,28 +195,54 @@ if ( !defined('ABSPATH') ) {
 
 	<section class="choseAction">
 		<ul>
-			<li id="btn-undo" class="tui-image-editor-item" title="Deshacer">
+			<li id="btn-undo" class="tui-image-editor-item tui-editor-svg-icon" title="Deshacer">
 				<svg class="svg_ic-menu">
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="normal"></use>
 				</svg>
+				<span>Deshacer</span>
 			</li>
-			<li id="btn-redo" class="tui-image-editor-item" title="Rehacer">
+			<li id="btn-redo" class="tui-image-editor-item tui-editor-svg-icon" title="Rehacer">
 				<svg class="svg_ic-menu">
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="normal"></use>
 				</svg>
+				<span>Rehacer</span>
 			</li>
-			<li id="delete-object" class="tui-image-editor-item" title="Eliminar">
+			<li id="delete-object" class="tui-image-editor-item tui-editor-svg-icon" title="Eliminar">
 				<svg class="svg_ic-menu">
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="normal"></use>
 				</svg>
+				<span>Eliminar</span>
 			</li>
-			<li id="btn-delete-all" class="tui-image-editor-item" title="Eliminar-todos">
+			<li id="btn-delete-all" class="tui-image-editor-item tui-editor-svg-icon" title="Eliminar-todos">
 				<svg class="svg_ic-menu">
 					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="normal"></use>
 				</svg>
+				<span>Eliminar<br>todo</span>
 			</li>
 		</ul>
 	</section>
+
+	<div class="tui-image-editor-menu-addImage" style="display:none">
+		<div class="ctmIconLayer ctmImageLayer" onclick="closeImage()"></div>
+		<div class="ctm-icons imageEditMenu">
+			<li>
+				<label>Cambiar Tamaño
+					<input type="range" id="sizeRange" onchange="imageEdition(this, 'size')" min="0" max="3000" value="0"></label><br>
+			</li>
+			<li>
+				<label>Mover horizontal
+					<input type="range" id="moveXRange" onchange="imageEdition(this, 'left')" min="0" max="1800" value="0"></label><br>
+			</li>
+			<li>
+				<label>Mover vertical
+					<input type="range" id="moveYRange" onchange="imageEdition(this, 'top')" min="0" max="1800" value="0"></label><br>
+			</li>
+			<!--li id="tie-retate-button" onclick="imageEdition('', 'backfilt')" >
+				<i style="font-size:25px" class="fa fa-image"></i><br>
+				<span>Eliminar fondo</span>
+			</li-->
+		</div>
+	</div>
 
 	<div id="tui-image-editor-container"></div>
 	<div id="tui-image-editor-container-2" style="display:none;"></div>
@@ -237,7 +250,7 @@ if ( !defined('ABSPATH') ) {
 	<section class="custom-file-label" id="iconContainer" style="display:none">
 		<div class="ctmIconLayer" onclick="openIcons()"></div>
 		<div class="ctm-icons carrusel-prods">
-			<div class="fb-login-button" data-width="100" data-size="small" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
+			<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div><br>
 			<?php foreach ($ctm_icon as $key) { ?>
 				<div class="variationGallery" onclick="putIcon('<?php echo URL_PB; ?>/<?php echo $key; ?>')"><img style="height:80px;max-width:100px;object-fit:contain;cursor:pointer;" src="<?php echo URL_PB; ?>/<?php echo $key; ?>"></div>
 			<?php } ?>
@@ -252,16 +265,6 @@ if ( !defined('ABSPATH') ) {
 
 		function setActive(editorVar){
 			editorActive = editorVar;
-		}
-		function openIcons(){
-			jQuery('.tui-image-editor-item').removeClass('active');
-			var iconContainer = document.getElementById("iconContainer"); 
-				jQuery('.tui-image-editor-main').attr('class','tui-image-editor-main');
-			if(iconContainer.style.display == "none"){
-				iconContainer.style.display = "block";
-			}else{
-				iconContainer.style.display = "none";
-			}
 		}
 
 		function openEditor(editorId, editorVar){
@@ -325,42 +328,51 @@ if ( !defined('ABSPATH') ) {
 			cssMaxHeight: '100%'
 		});
 
-		fabric.Object.prototype.drawControls = function (ctx) {
-			if (!this.hasControls) { return this; }
-			var wh = this._calculateCurrentDimensions(),
-					width = wh.x,
-					height = wh.y,
-					scaleOffset = this.cornerSize,
-					left = -(width + scaleOffset) / 2,
-					top = -(height + scaleOffset) / 2,
-					methodName = this.transparentCorners ? 'stroke' : 'fill';
-			ctx.save();
-			ctx.strokeStyle = ctx.fillStyle = this.cornerColor;
-			if (!this.transparentCorners) {
-				ctx.strokeStyle = this.cornerStrokeColor;
-			}
-			this._setLineDash(ctx, this.cornerDashArray, null);
-			this._drawControl('tl', ctx, methodName, left, top);
-			this._drawControl('tr', ctx, methodName, left + width, top);
-			this._drawControl('bl', ctx, methodName, left, top + height);
-			this._drawControl('br', ctx, methodName, left + width, top + height);
+		fabric.Canvas.prototype.customiseControls({
+			tl: {
+				action: 'rotate',
+				cursor: '<?php echo plugin_dir_url( __FILE__ )."img/rotate.png"; ?>'
+			},
+			tr: {
+				action: 'scale'
+			},
+			bl: {
+				action: 'remove',
+				cursor: 'pointer'
+			},
+			 // only is hasRotatingPoint is not set to false
+			 mtr: {
+				action: 'rotate',
+				cursor: '<?php echo plugin_dir_url( __FILE__ ); ?>img/rotate.png'
+			 },
+		}, function() {
+			canvas.renderAll();
+		} );
+		fabric.Object.prototype.customiseCornerIcons({
+			settings: {
+				borderColor: '#009acf',
+				cornerSize: 25,
+				cornerShape: 'rect',
+				cornerBackgroundColor: 'black',
+				cornerPadding: 10
+			},
+			tl: {
+				icon: '<?php echo URL_PB; ?>/resources/editor/img/rotate.png'
+			},
+			tr: {
+				icon: '<?php echo URL_PB; ?>/resources/editor/img/scale.png'
+			},
+			bl: {
+				icon:  '<?php echo URL_PB; ?>/resources/editor/img/remove.png'
+			},
+			// only is hasRotatingPoint is not set to false
+			mtr: {
+				icon: '<?php echo URL_PB; ?>/resources/editor/img/rotate.png'
+			},
+		}, function() {
+			canvas.renderAll();
+		} );
 
-			if (!this.get('lockUniScaling')) {
-				this._drawControl('mt', ctx, methodName, left + width / 2, top);
-				this._drawControl('mb', ctx, methodName, left + width / 2, top + height);
-				this._drawControl('mr', ctx, methodName, left + width, top + height / 2);
-				this._drawControl('ml', ctx, methodName, left, top + height / 2);
-			}
-			if (this.hasRotatingPoint) {
-				var rotate = new Image(), rotateLeft, rotateTop;
-				rotate.src = '<?php echo plugin_dir_url( __FILE__ )."img/rotate.png"; ?>';
-				rotateLeft = left - 20 + width / 2;
-				rotateTop = top - 20 - this.rotatingPointOffset;
-				ctx.drawImage(rotate, rotateLeft, rotateTop, 70, 70);
-			}
-			ctx.restore();
-			return this;
-		}
 		
 		jQuery('#btn-redo').click(function(){
 			editorActive.redo();
@@ -372,12 +384,12 @@ if ( !defined('ABSPATH') ) {
 			editorActive.removeActiveObject();
 		});
 		jQuery('#btn-delete-all').click(function(){
-			imageEditor.clearObjects();
+			editorActive.clearObjects();
 		});
 
-		jQuery('.tui-image-editor-item.normal.filter').
-		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
 		jQuery('.tui-image-editor-item.normal.crop').
+		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
+		jQuery('.tui-image-editor-item.normal.filter').
 		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
 		jQuery('#tie-text-range').
 		replaceWith('<input type="range" id="textRange" onchange="textSize(this)" min="10" max="240" value="120">');
@@ -385,7 +397,7 @@ if ( !defined('ABSPATH') ) {
 		replaceWith('<input type="range" id="drawRange" onchange="drawSize(this)" min="10" max="240" value="120">');
 		jQuery('#tie-rotate-range').
 		replaceWith('<input type="range" id="rotateRange" onchange="rotateSize(this)" min="-360" max="360" value="0">');
-		jQuery('#textInput').
+		jQuery('.textInput').
 		replaceWith('<form class="addTxtForm" onsubmit="agregarTexto()" style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<textarea type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);height:35px;"></textarea>\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></form>');
 
 		var editorActive = imageEditor;
@@ -393,20 +405,62 @@ if ( !defined('ABSPATH') ) {
 		window.onresize = function() {
 			editorActive.ui.resizeEditor();
 		}
+
+		function openIcons(){
+			jQuery('.tui-image-editor-item').removeClass('active');
+			var iconContainer = document.getElementById("iconContainer"); 
+				jQuery('.tui-image-editor-main').attr('class','tui-image-editor-main');
+			if(iconContainer.style.display == "none"){
+				iconContainer.style.display = "block";
+			}else{
+				iconContainer.style.display = "none";
+			}
+		}
+
+		function imageEdition(valor, parametro){
+			jQuery('.tui-image-editor-item').removeClass('active');
+			if(parametro == 'size'){
+				var actWid = editorActive.getObjectProperties(editorActive.activeObjectId, 'width');
+				var actHei = editorActive.getObjectProperties(editorActive.activeObjectId, 'height');
+				editorActive.setObjectProperties(editorActive.activeObjectId, {
+					width: (parseInt(valor.value)),
+					height: (parseInt(valor.value))
+				});
+			}else if(parametro == 'left'){
+				editorActive.setObjectProperties(editorActive.activeObjectId, {
+					left: parseInt(valor.value)
+				});
+			}else if(parametro == 'top'){
+				editorActive.setObjectProperties(editorActive.activeObjectId, {
+					top: parseInt(valor.value)
+				});
+			}
+		}
 		
 		function setArrows(){
-            if(jQuery(".naveArrow").css("display") == "none"){
-                jQuery(".naveArrow").show();
-            }else{
-                jQuery(".naveArrow").hide();
-            }
-        }
+			if(document.body.scrollWidth < 560){
+				if(jQuery(".naveArrow").css("display") == "none"){
+					jQuery(".naveArrow").show();
+				}else{
+					jQuery(".naveArrow").hide();
+				}
+			}
+		}
+
+		function closeImage(){
+			editorActive.deactivateAll();
+		 	jQuery(".tui-image-editor-menu-addImage").hide();
+		}
 
 		jQuery(".tui-image-editor-item").click(function(){
 			setArrows();
 		});
 
 		 function loadImage(event){
+			jQuery('.tui-image-editor-item').removeClass('active');
+			jQuery('.tui-image-editor-main').attr('class','tui-image-editor-main');
+		 	jQuery(".tui-image-editor-menu-addImage").show();
+			editorActive.stopDrawingMode();
 			var imgUrl = void 0;
 
 			var _event$target$files = event.target.files,
@@ -417,32 +471,30 @@ if ( !defined('ABSPATH') ) {
 				//this.actions.registCustomIcon(imgUrl, file);
 				editorActive.addImageObject(imgUrl).
 				then(objectProps => {
-					console.log(objectProps);
+					if(objectProps.width < 220){
+						var objWidth = objectProps.width + 200;
+						var objHeight = objectProps.height + 200;
+					}else{
+						var objWidth = objectProps.width * 0.30;
+						var objHeight = objectProps.height * 0.30;
+					}
 					editorActive.setObjectProperties(objectProps.id, {
-						width: (objectProps.width * 0.40),
-						height: (objectProps.height * 0.40)
+						width: objWidth,
+						height: objHeight
 					});
 				});
 			}
 		}
 
-		editorActive.on('object:selected', function (e) {
-			e.target.transparentCorners = false;
-			e.target.borderColor = '#cccccc';
-			e.target.cornerColor = '#0CB7F0';
-			e.target.minScaleLimit = 1;
-			e.target.cornerStrokeColor = '#0CB7F0';
-			e.target.cornerStyle = 'circle';
-			e.target.minScaleLimit = 0;
-			e.target.lockScalingFlip = true;
-			e.target.padding = 70;
-			e.target.selectionDashArray = [10, 5];
-			e.target.borderDashArray = [10, 5];
-			e.target.cornerDashArray = [10, 5];
-		});
-
-		imageEditor.on('objectActivated', function(props) {
-			jQuery('#inputText').val(props.text);
+		editorActive.on('objectActivated', function(props) {
+		 	jQuery(".tui-image-editor-menu-addImage").hide();
+			if(props.type == 'i-text'){
+				jQuery('#inputText').val(props.text);
+			}else if(props.type == 'image'){
+				jQuery('.tui-image-editor-item').removeClass('active');
+				jQuery('.tui-image-editor-main').attr('class','tui-image-editor-main');
+		 		jQuery(".tui-image-editor-menu-addImage").show();
+			}
 		});
 
 		jQuery('.tui-image-editor-button.flipX').click(function(e) {
@@ -458,9 +510,23 @@ if ( !defined('ABSPATH') ) {
 		});
 
 		function putIcon(url){
+			editorActive.stopDrawingMode();
 			editorActive.addImageObject(
 				url
 			).then(objectProps => {
+				if(objectProps.width < 220){
+					var objWidth = objectProps.width + 200;
+					var objHeight = objectProps.height + 200;
+					console.log(objWidth);
+				}else{
+					var objWidth = objectProps.width * 0.30;
+					var objHeight = objectProps.height * 0.30;
+					console.log(objWidth);
+				}
+				editorActive.setObjectProperties(objectProps.id, {
+					width: objWidth,
+					height: objHeight
+				});
 				jQuery("#iconContainer").hide();
 			});
 		}
@@ -487,7 +553,7 @@ if ( !defined('ABSPATH') ) {
 		function agregarTexto(){
 			if(editorActive.activeObjectId == null){
 				editorActive.addText(jQuery('#inputText').val(), {
-					styles: { fill: '#000', fontSize: 80
+					styles: { fill: '#000', fontSize: 90
 					}
 				});
 			}else{
@@ -513,7 +579,7 @@ if ( !defined('ABSPATH') ) {
 
 			jQuery('#tui-image-editor-next-btn').click(function(e){
 				e.preventDefault();
-				var image = imageEditor.toDataURL('image/png');
+				var image = editorActive.toDataURL('image/png');
 				  jQuery.post("<?php echo URL_PB; ?>/includes/saveImage.php",
 				  {
 					post: 	"<?php echo $_GET["producto"]; ?>",
