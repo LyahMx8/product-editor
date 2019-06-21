@@ -2,7 +2,7 @@
 
 if ( !defined('ABSPATH') ) {
 	//traer cuando wordprress cargue.
-	include_once $_SERVER['DOCUMENT_ROOT'].'/wordpress/wp-load.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/wp-load.php';
 	include_once  plugin_dir_path( dirname( __FILE__ ) ).'includes/settings.php';
 }
 
