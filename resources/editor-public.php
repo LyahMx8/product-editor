@@ -72,7 +72,7 @@ class Editor_Public{
 
 		if ($product_editor !== null): ?>
 
-			<button class="btnEditor Editor">Editar Producto <i class="fa fa-edit"></i></button>
+			<button class="btnEditor Editor single_add_to_cart_button button alt">Editar Producto <i class="fa fa-edit"></i></button>
 			<div id="popContainer">
 				<div class="popLayer">
 					<!--span onclick="closeModal('popContainer')">X</span-->
@@ -88,11 +88,11 @@ class Editor_Public{
 				jQuery(document).ready(function(){
 					fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php');
 					jQuery('.Editor').click(function(e){
+						e.preventDefault();
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
 						document.cookie = "client_ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>";
 						window.scrollTo(0,1);
 						window.onscroll = null;
-						e.preventDefault();
 						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
 						document.getElementById("popContainer").style.display = "block"; 
 					});
