@@ -9657,7 +9657,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					numberofcolors: 16,
 					mincolorratio: 0,
 					colorquantcycles: 3,
-					layering: 1,
+					layering: 0,
 					strokewidth: 1,
 					linefilter: false,
 					scale: 1,
@@ -15813,7 +15813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		lockSkewingX: true,
 		lockSkewingY: true,
 		lockUniScaling: false,
-		bringForward: true,
+		bringForward: false,
 		isRegular: false
 	};
 

@@ -48,11 +48,11 @@ class mCntrolMultiFileSave{
 		else return $this->mFunSlcMovImg();
 
 	}
-	private function mFunSlcMovImg(){ $mPath = SERV."/productos/"; $mPatchsave = "productos/";
+	private function mFunSlcMovImg(){ $mPath = EDIT_SERV."/productos/"; $mPatchsave = "productos/";
 
 		global $wpdb;
 
-		if($this->m_base_post['TiProduct']==6){ $mPath = SERV."/iconos/"; $mPatchsave = "iconos/"; }
+		if($this->m_base_post['TiProduct']==6){ $mPath = EDIT_SERV."/iconos/"; $mPatchsave = "iconos/"; }
 
 		$mNmbArchv = basename(date("Y-m-d")."-".$this->mGetFileSletd['name'][$this->_index]);
 

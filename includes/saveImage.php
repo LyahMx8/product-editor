@@ -12,7 +12,7 @@ $img = $_POST['imgfrn'];
 $img = str_replace('data:image/png;base64,', '', $img);
 $img = str_replace(' ', '+', $img);
 $fileData = base64_decode($img);
-define('UPLOAD_DIR', SERV.'/personalizados/');
+define('UPLOAD_DIR', EDIT_SERV.'/personalizados/');
 $fileName = UPLOAD_DIR.uniqid('created',false) . '.png';
 file_put_contents($fileName, $fileData);
 

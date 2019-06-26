@@ -20,6 +20,7 @@ if ( !defined('ABSPATH') ) {
 	<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/tui-image-editor.css'; ?>" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/fontselect-alternate.css'; ?>" rel="stylesheet">
+	<link type="text/css" href="https://unpkg.com/driver.js/dist/driver.min.css" rel="stylesheet">
 	<script>
 		var clr_frn=[];
 		var clr_tsr=[];
@@ -55,12 +56,12 @@ if ( !defined('ABSPATH') ) {
 		var activeFrn;var activeTsr;
 		function changeColor(colorFrn, colorTsr){
 			activeFrn = colorFrn;activeTsr = colorTsr;
-			var cssFrontal = {'background':'url(<?php echo URL_PB; ?>/'+colorFrn+')'}
+			var cssFrontal = {'background':'url(<?php echo EDIT_URL_PB; ?>/'+colorFrn+')'}
 			jQuery('#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container').css(cssFrontal);
-			jQuery('.imgPrdFrn').html('<img src="<?php echo URL_PB; ?>/'+colorFrn+'">');
-			var cssTrasero = {'background':'url(<?php echo URL_PB; ?>/'+colorTsr+')'}
+			jQuery('.imgPrdFrn').html('<img src="<?php echo EDIT_URL_PB; ?>/'+colorFrn+'">');
+			var cssTrasero = {'background':'url(<?php echo EDIT_URL_PB; ?>/'+colorTsr+')'}
 			jQuery('#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container').css(cssTrasero);
-			jQuery('.imgPrdTsr').html('<img src="<?php echo URL_PB; ?>/'+colorTsr+'">');
+			jQuery('.imgPrdTsr').html('<img src="<?php echo EDIT_URL_PB; ?>/'+colorTsr+'">');
 		}
 	</script>
 	<style>
@@ -72,15 +73,15 @@ if ( !defined('ABSPATH') ) {
 			background-size:contain !important;background-repeat:no-repeat !important;
 		}
 		#tui-image-editor-container .tui-image-editor .tui-image-editor-canvas-container::before {
-			background: url('<?php echo URL_PB; ?>/<?php echo $alph_frn; ?>');
+			background: url('<?php echo EDIT_URL_PB; ?>/<?php echo $alph_frn; ?>');
 			background-size: contain;
 			background-repeat: no-repeat;
 			filter: drop-shadow(0 0 1px red);
 			mix-blend-mode: multiply;
 		}
 		#tui-image-editor-container .lower-canvas {
-			-webkit-mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_frn; ?>');
-			mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_frn; ?>');
+			-webkit-mask-image: url('<?php echo EDIT_URL_PB; ?>/<?php echo $alph_frn; ?>');
+			mask-image: url('<?php echo EDIT_URL_PB; ?>/<?php echo $alph_frn; ?>');
 			-webkit-mask-size: contain;
 			mask-size: contain;
 			-webkit-mask-mode: luminance;
@@ -93,15 +94,15 @@ if ( !defined('ABSPATH') ) {
 			background-size:contain !important;background-repeat:no-repeat !important;
 		}
 		#tui-image-editor-container-2 .tui-image-editor .tui-image-editor-canvas-container::before {
-			background: url('<?php echo URL_PB; ?>/<?php echo $alph_tsr; ?>');
+			background: url('<?php echo EDIT_URL_PB; ?>/<?php echo $alph_tsr; ?>');
 			background-size: contain;
 			background-repeat: no-repeat;
 			filter: drop-shadow(0 0 5px red);
 			mix-blend-mode: multiply;
 		}
 		#tui-image-editor-container-2 .lower-canvas {
-			-webkit-mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_tsr; ?>');
-			mask-image: url('<?php echo URL_PB; ?>/<?php echo $alph_tsr; ?>');
+			-webkit-mask-image: url('<?php echo EDIT_URL_PB; ?>/<?php echo $alph_tsr; ?>');
+			mask-image: url('<?php echo EDIT_URL_PB; ?>/<?php echo $alph_tsr; ?>');
 			-webkit-mask-size: contain;
 			mask-size: contain;
 			-webkit-mask-mode: luminance;
@@ -138,7 +139,7 @@ if ( !defined('ABSPATH') ) {
 						locationName = response.location.name;
 						console.log(locationName);
 					} else {
-						alert("your current city needs to be set in your Facebook 'about' section. Please make it public for our use");
+						alert("Debes configurar tu ciudad en tu perfil de Facebook para que sea público");
 					}
 				});//closes fb.api
 			} else if (response.status === "not_authorized") {
@@ -168,9 +169,10 @@ if ( !defined('ABSPATH') ) {
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-color-picker.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-image-editor.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
+	<script type="text/javascript" src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
 
 	<section class="variationProd">
-		<div class="chooseSelect">Cambiar de color <span class="dashicons dashicons-arrow-down"></span>
+		<div class="chooseSelect">Variaciones de producto <span class="dashicons dashicons-arrow-down"></span>
 			<ul>
 				<?php foreach ($clr_frn as $key) { 
 					foreach ($clr_tsr as $value) {
@@ -178,7 +180,7 @@ if ( !defined('ABSPATH') ) {
 					}
 				?>
 					<div onclick="changeColor('<?php echo $key; ?>','<?php echo $key2; ?>')">
-						<img src="<?php echo URL_PB; ?>/<?php echo $key; ?>">
+						<img src="<?php echo EDIT_URL_PB; ?>/<?php echo $key; ?>">
 					</div>
 				<?php } ?>
 			</ul>
@@ -189,7 +191,7 @@ if ( !defined('ABSPATH') ) {
 		<span style="display: block;width: 100%;text-align: center;font-size: 11px;line-height: 10px;margin-bottom: 3px;">Cambiar<br>vista</span>
 		<a onclick="openEditor('tui-image-editor-container',imageEditor)" class="imgPrdFrn"></a>
 	<?php if (isset($alph_tsr)) : ?>
-		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="<?php echo URL_PB; ?>/<?php echo $clr_tsr[0]; ?>"></a>
+		<a onclick="openEditor('tui-image-editor-container-2',imageEditor2)" class="imgPrdTsr"><img src="<?php echo EDIT_URL_PB; ?>/<?php echo $clr_tsr[0]; ?>"></a>
 	<?php endif; ?>
 	</section>
 
@@ -197,25 +199,25 @@ if ( !defined('ABSPATH') ) {
 		<ul>
 			<li id="btn-undo" class="tui-image-editor-item tui-editor-svg-icon" title="Deshacer">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="normal"></use>
+					<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-undo" class="normal"></use>
 				</svg>
 				<span>Deshacer</span>
 			</li>
 			<li id="btn-redo" class="tui-image-editor-item tui-editor-svg-icon" title="Rehacer">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="normal"></use>
+					<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-redo" class="normal"></use>
 				</svg>
 				<span>Rehacer</span>
 			</li>
 			<li id="delete-object" class="tui-image-editor-item tui-editor-svg-icon" title="Eliminar">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="normal"></use>
+					<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete" class="normal"></use>
 				</svg>
 				<span>Eliminar</span>
 			</li>
 			<li id="btn-delete-all" class="tui-image-editor-item tui-editor-svg-icon" title="Eliminar-todos">
 				<svg class="svg_ic-menu">
-					<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="normal"></use>
+					<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-delete-all" class="normal"></use>
 				</svg>
 				<span>Eliminar<br>todo</span>
 			</li>
@@ -228,11 +230,11 @@ if ( !defined('ABSPATH') ) {
 			<li>
 				<label>Cambiar Tamaño
 					<input type="range" id="sizeRange" onchange="imageEdition(this, 'size')" min="0" max="3000" value="0"></label><br>
-			</li>
+			</li><br><br>
 			<li>
 				<label>Mover horizontal
 					<input type="range" id="moveXRange" onchange="imageEdition(this, 'left')" min="0" max="1800" value="0"></label><br>
-			</li>
+			</li><br><br>
 			<li>
 				<label>Mover vertical
 					<input type="range" id="moveYRange" onchange="imageEdition(this, 'top')" min="0" max="1800" value="0"></label><br>
@@ -252,7 +254,7 @@ if ( !defined('ABSPATH') ) {
 		<div class="ctm-icons carrusel-prods">
 			<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true"></div><br>
 			<?php foreach ($ctm_icon as $key) { ?>
-				<div class="variationGallery" onclick="putIcon('<?php echo URL_PB; ?>/<?php echo $key; ?>')"><img style="height:80px;max-width:100px;object-fit:contain;cursor:pointer;" src="<?php echo URL_PB; ?>/<?php echo $key; ?>"></div>
+				<div class="variationGallery" onclick="putIcon('<?php echo EDIT_URL_PB; ?>/<?php echo $key; ?>')"><img style="height:80px;max-width:100px;object-fit:contain;cursor:pointer;" src="<?php echo EDIT_URL_PB; ?>/<?php echo $key; ?>"></div>
 			<?php } ?>
 		</div>
 	</section>
@@ -301,7 +303,7 @@ if ( !defined('ABSPATH') ) {
 		var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 			includeUI: {
 				loadImage: {
-					path: '<?php echo URL_PB; ?>/assets/img/background.png',
+					path: '<?php echo EDIT_URL_PB; ?>/assets/img/background.png',
 					name: 'SampleImage'
 				},
 				locale: locale_es_ES,
@@ -317,7 +319,7 @@ if ( !defined('ABSPATH') ) {
 		var imageEditor2 = new tui.ImageEditor('#tui-image-editor-container-2', {
 			includeUI: {
 				loadImage: {
-					path: '<?php echo URL_PB; ?>/assets/img/background.png',
+					path: '<?php echo EDIT_URL_PB; ?>/assets/img/background.png',
 					name: 'SampleImage'
 				},
 				locale: locale_es_ES,
@@ -357,17 +359,17 @@ if ( !defined('ABSPATH') ) {
 				cornerPadding: 10
 			},
 			tl: {
-				icon: '<?php echo URL_PB; ?>/resources/editor/img/rotate.png'
+				icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/rotate.png'
 			},
 			tr: {
-				icon: '<?php echo URL_PB; ?>/resources/editor/img/scale.png'
+				icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/scale.png'
 			},
 			bl: {
-				icon:  '<?php echo URL_PB; ?>/resources/editor/img/remove.png'
+				icon:  '<?php echo EDIT_URL_PB; ?>/resources/editor/img/remove.png'
 			},
 			// only is hasRotatingPoint is not set to false
 			mtr: {
-				icon: '<?php echo URL_PB; ?>/resources/editor/img/rotate.png'
+				icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/rotate.png'
 			},
 		}, function() {
 			canvas.renderAll();
@@ -388,9 +390,9 @@ if ( !defined('ABSPATH') ) {
 		});
 
 		jQuery('.tui-image-editor-item.normal.crop').
-		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Imagen" class="tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
+		replaceWith('<label for="tie-icon-image-upload">\n	<li id="tie-btn-icon" title="Imagen" class="imageMenIcon tui-image-editor-item normal">\n	<svg class="svg_ic-submenu">\n	<style type="text/css"> .st0{fill:#0D7F9E;} .st1{fill:#009ACF;} .st2{fill:#2ED573;} .st3{fill:#7BED9F;} .st4{fill:#FFA502;} .st5{fill:#ECCC68;} .st6{fill:#5352ED;} .st7{fill:#2F2FA8;} .st8{fill:#8686F2;} </style>\n	<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="normal"></use>\n	<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon-load" class="active"></use>\n	</svg>\n	</li>\n	</label>\n	<input onchange="loadImage(event)" style="display:none;" type="file" accept="image/*" id="tie-icon-image-upload" class="tie-icon-image-file">');
 		jQuery('.tui-image-editor-item.normal.filter').
-		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="<?php echo URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
+		replaceWith('<a onclick="openIcons()">\n	<li id="tie-btn-icon" title="Ícono" class="tui-image-editor-item normal">\n	<svg class="svg_ic-menu">\n	<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="normal active">\n	</use>\n	<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-b.svg#icon-b-ic-icon" class="active">\n	</use>\n	<use xlink:href="<?php echo EDIT_URL_PB; ?>/resources/editor/img/svg/icon-d.svg#icon-d-ic-icon" class="hover">\n	</use></svg>\n	</li>\n	</a>');
 		jQuery('#tie-text-range').
 		replaceWith('<input type="range" id="textRange" onchange="textSize(this)" min="10" max="240" value="120">');
 		jQuery('#tie-draw-range').
@@ -482,6 +484,9 @@ if ( !defined('ABSPATH') ) {
 						width: objWidth,
 						height: objHeight
 					});
+					document.getElementById('sizeRange').value = objWidth;
+					document.getElementById('moveXRange').value = objectProps.left;
+					document.getElementById('moveYRange').value = objectProps.top;
 				});
 			}
 		}
@@ -527,6 +532,9 @@ if ( !defined('ABSPATH') ) {
 					width: objWidth,
 					height: objHeight
 				});
+				document.getElementById('sizeRange').value = objWidth;
+				document.getElementById('moveXRange').value = objectProps.left;
+				document.getElementById('moveYRange').value = objectProps.top;
 				jQuery("#iconContainer").hide();
 			});
 		}
@@ -572,6 +580,37 @@ if ( !defined('ABSPATH') ) {
 			});
 		});
 
+		const driver = new Driver({
+			allowClose: false,
+			opacity: 0,
+			animate: true,
+			doneBtnText: 'Finalizado',
+			closeBtnText: 'Cerrar',
+			nextBtnText: 'Siguiente',
+			prevBtnText: 'Anterior',
+			keyboardControl: true,
+		});
+		driver.defineSteps([
+			{
+				element: '.tui-image-editor-header-logo',
+				popover: {
+					className: 'first-step-popover-class',
+					title: 'Title on Popover',
+					description: 'Body of the popover',
+					position: 'bottom'
+				}
+			},
+			{
+				element: '.choseAction',
+				popover: {
+					title: 'Title on Popover',
+					description: 'Body of the popover',
+					position: 'left'
+				}
+			}
+		]);
+		// Start the introduction
+		driver.start();
 
 		jQuery(document).ready(function(){
 
@@ -580,7 +619,7 @@ if ( !defined('ABSPATH') ) {
 			jQuery('#tui-image-editor-next-btn').click(function(e){
 				e.preventDefault();
 				var image = editorActive.toDataURL('image/png');
-				  jQuery.post("<?php echo URL_PB; ?>/includes/saveImage.php",
+				  jQuery.post("<?php echo EDIT_URL_PB; ?>/includes/saveImage.php",
 				  {
 					post: 	"<?php echo $_GET["producto"]; ?>",
 					imgfrn: image

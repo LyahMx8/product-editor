@@ -22,18 +22,18 @@ $dia = date("Y").'-'.date("m").'-'.date("d");
 * Configurar el entorno
 */
 if(app_env == 'production'){
-	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/edicion-de-productos");
-	define('URL_PS', $_SERVER['HTTP_HOST']."wp-content/plugins/edicion-de-productos");
-	define('URL_PB', "/wp-content/plugins/edicion-de-productos");
+	define('EDIT_SERV', $_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/edicion-de-productos");
+	define('EDIT_URL_PS', $_SERVER['HTTP_HOST']."wp-content/plugins/edicion-de-productos");
+	define('EDIT_URL_PB', "/wp-content/plugins/edicion-de-productos");
 }else{
 	//Mostrar errores de php supongo que toca cabiar eso Yimmy por edicion-de-productos
 	//error_reporting(E_ALL);
 	//ini_set('display_errors', '1');
 	
-	define('SERV', $_SERVER['DOCUMENT_ROOT']."/wordpress/wp-content/plugins/edicion-de-productos");
-	define('URL_PS', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/edicion-de-productos");
+	define('EDIT_SERV', $_SERVER['DOCUMENT_ROOT']."/wordpress/wp-content/plugins/edicion-de-productos");
+	define('EDIT_URL_PS', $_SERVER['HTTP_HOST']."/wordpress/wp-content/plugins/edicion-de-productos");
 	//echo URL;
-	define('URL_PB', "/wordpress/wp-content/plugins/edicion-de-productos");
+	define('EDIT_URL_PB', "/wordpress/wp-content/plugins/edicion-de-productos");
 }
 
 class Settings{
