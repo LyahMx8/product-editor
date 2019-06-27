@@ -1,8 +1,8 @@
 var whiteTheme = {
-    'common.bi.image': '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
+    'common.bi.image': '/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
     'common.bisize.width': '105px',
     'common.bisize.height': '35px',
-    'common.backgroundImage': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/bg.png',
+    'common.backgroundImage': '/wp-content/plugins/edicion-de-productos/resources/editor/img/bg.png',
     'common.backgroundColor': '#fff',
     'common.border': '1px solid #c1c1c1',
 
@@ -26,13 +26,13 @@ var whiteTheme = {
     'downloadButton.fontSize': '12px',
 
     // main icons
-    'menu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
+    'menu.normalIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
     'menu.normalIcon.name': 'icon-d',
-    'menu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg',
+    'menu.activeIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg',
     'menu.activeIcon.name': 'icon-b',
-    'menu.disabledIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
+    'menu.disabledIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
     'menu.disabledIcon.name': 'icon-a',
-    'menu.hoverIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
+    'menu.hoverIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
     'menu.hoverIcon.name': 'icon-c',
     'menu.iconSize.width': '24px',
     'menu.iconSize.height': '24px',
@@ -42,9 +42,9 @@ var whiteTheme = {
     'submenu.partition.color': '#e5e5e5',
 
     // submenu icons
-    'submenu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
+    'submenu.normalIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
     'submenu.normalIcon.name': 'icon-d',
-    'submenu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg',
+    'submenu.activeIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-b.svg',
     'submenu.activeIcon.name': 'icon-b',
     'submenu.iconSize.width': '32px',
     'submenu.iconSize.height': '32px',
