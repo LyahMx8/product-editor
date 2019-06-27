@@ -85,7 +85,8 @@ div.ctm-icons{position:absolute;width:250px;bottom:0;height:calc(100% - 64px);le
 	.changeProd {bottom:190px;right:5px;position: fixed;}.changeProd a{width:40px}.changeProd a img {width: 30px;height: 30px;}
 }
 @media screen and (max-width:560px){
-		.btnEditor i {margin: 12px;}
+	.chooseSelect{width:160px;}
+	.btnEditor i {margin: 12px;}
 	div.ctm-icons.imageEditMenu{padding: 5px !important;overflow: auto;overflow-y: auto;display: block;white-space: nowrap !important;height: 95px;left: 0 !important;transform: none !important;margin: 0 !important;width: 87% !important;border: none;}
 	.ctmImageLayer{width:100% !important;height:80px;bottom:0;top:auto;}
 	.changeProd a{margin:0;padding:3px;}

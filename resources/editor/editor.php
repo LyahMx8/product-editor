@@ -20,7 +20,7 @@ if ( !defined('ABSPATH') ) {
 	<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/tui-image-editor.css'; ?>" rel="stylesheet">
 	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/fontselect-alternate.css'; ?>" rel="stylesheet">
-	<link type="text/css" href="https://unpkg.com/driver.js/dist/driver.min.css" rel="stylesheet">
+	<link type="text/css" href="<?php echo plugin_dir_url( __FILE__ ).'css/driver.min.css'; ?>" rel="stylesheet">
 	<script>
 		var clr_frn=[];
 		var clr_tsr=[];
@@ -169,10 +169,10 @@ if ( !defined('ABSPATH') ) {
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-color-picker.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/tui-image-editor.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/theme/black-theme.js'; ?>"></script>
-	<script type="text/javascript" src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
+	<script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/driver.min.js'; ?>"></script>
 
 	<section class="variationProd">
-		<div class="chooseSelect">Variaciones de producto <span class="dashicons dashicons-arrow-down"></span>
+		<div class="chooseSelect">Variaciones<span class="addCartLabel"> de producto</span> <span class="dashicons dashicons-arrow-down"></span>
 			<ul>
 				<?php foreach ($clr_frn as $key) { 
 					foreach ($clr_tsr as $value) {
@@ -295,8 +295,8 @@ if ( !defined('ABSPATH') ) {
 		window.addEventListener("resize", setMenu);
 		var menuPosition;
 		function setMenu() {
-			if (document.body.scrollWidth < 560){menuPosition = 'bottom';}
-			else{menuPosition = 'left';}
+			if (document.body.scrollWidth < 560){ menuPosition = 'bottom'; }
+			else{ menuPosition = 'left'; }
 		};
 		setMenu();
 
@@ -330,6 +330,8 @@ if ( !defined('ABSPATH') ) {
 			cssMaxHeight: '100%'
 		});
 
+		var editorActive = imageEditor;
+
 		fabric.Canvas.prototype.customiseControls({
 			tl: {
 				action: 'rotate',
@@ -342,14 +344,11 @@ if ( !defined('ABSPATH') ) {
 				action: 'remove',
 				cursor: 'pointer'
 			},
-			 // only is hasRotatingPoint is not set to false
 			 mtr: {
 				action: 'rotate',
 				cursor: '<?php echo plugin_dir_url( __FILE__ ); ?>img/rotate.png'
 			 },
-		}, function() {
-			canvas.renderAll();
-		} );
+		});
 		fabric.Object.prototype.customiseCornerIcons({
 			settings: {
 				borderColor: '#009acf',
@@ -358,22 +357,11 @@ if ( !defined('ABSPATH') ) {
 				cornerBackgroundColor: 'black',
 				cornerPadding: 10
 			},
-			tl: {
-				icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/rotate.png'
-			},
-			tr: {
-				icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/scale.png'
-			},
-			bl: {
-				icon:  '<?php echo EDIT_URL_PB; ?>/resources/editor/img/remove.png'
-			},
-			// only is hasRotatingPoint is not set to false
-			mtr: {
-				icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/rotate.png'
-			},
-		}, function() {
-			canvas.renderAll();
-		} );
+			tl: { icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/rotate.png' },
+			tr: { icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/scale.png' },
+			bl: { icon:  '<?php echo EDIT_URL_PB; ?>/resources/editor/img/remove.png' },
+			mtr: { icon: '<?php echo EDIT_URL_PB; ?>/resources/editor/img/rotate.png' },
+		});
 
 		
 		jQuery('#btn-redo').click(function(){
@@ -401,8 +389,6 @@ if ( !defined('ABSPATH') ) {
 		replaceWith('<input type="range" id="rotateRange" onchange="rotateSize(this)" min="-360" max="360" value="0">');
 		jQuery('.textInput').
 		replaceWith('<form class="addTxtForm" onsubmit="agregarTexto()" style="display:block;margin-bottom:10px;"><label style="color:#fff;clear:left;">Agregar Texto</label><br>\n	<textarea type="text" id="inputText" placeholder="Agregar Texto" style="padding:5px;width:calc(100% - 60px);height:35px;"></textarea>\n	<button type="button" onclick="agregarTexto()"><i class="fa fa-paper-plane"></i></button></form>');
-
-		var editorActive = imageEditor;
 
 		window.onresize = function() {
 			editorActive.ui.resizeEditor();
@@ -451,7 +437,7 @@ if ( !defined('ABSPATH') ) {
 
 		function closeImage(){
 			editorActive.deactivateAll();
-		 	jQuery(".tui-image-editor-menu-addImage").hide();
+			jQuery(".tui-image-editor-menu-addImage").hide();
 		}
 
 		jQuery(".tui-image-editor-item").click(function(){
@@ -461,7 +447,7 @@ if ( !defined('ABSPATH') ) {
 		 function loadImage(event){
 			jQuery('.tui-image-editor-item').removeClass('active');
 			jQuery('.tui-image-editor-main').attr('class','tui-image-editor-main');
-		 	jQuery(".tui-image-editor-menu-addImage").show();
+			jQuery(".tui-image-editor-menu-addImage").show();
 			editorActive.stopDrawingMode();
 			var imgUrl = void 0;
 
@@ -492,26 +478,22 @@ if ( !defined('ABSPATH') ) {
 		}
 
 		editorActive.on('objectActivated', function(props) {
-		 	jQuery(".tui-image-editor-menu-addImage").hide();
+			jQuery(".tui-image-editor-menu-addImage").hide();
 			if(props.type == 'i-text'){
 				jQuery('#inputText').val(props.text);
 			}else if(props.type == 'image'){
 				jQuery('.tui-image-editor-item').removeClass('active');
 				jQuery('.tui-image-editor-main').attr('class','tui-image-editor-main');
-		 		jQuery(".tui-image-editor-menu-addImage").show();
+				jQuery(".tui-image-editor-menu-addImage").show();
 			}
 		});
 
 		jQuery('.tui-image-editor-button.flipX').click(function(e) {
-			editorActive.flipX().then(status => {
-				console.log('flipX: ', status.flipX);
-			});
+			editorActive.flipX();
 		});
 
 		jQuery('.tui-image-editor-button.flipY').click(function(e) {
-			editorActive.flipY().then(status => {
-				console.log('flipY: ', status.flipY);
-			});
+			editorActive.flipY();
 		});
 
 		function putIcon(url){
@@ -582,7 +564,6 @@ if ( !defined('ABSPATH') ) {
 
 		const driver = new Driver({
 			allowClose: false,
-			opacity: 0,
 			animate: true,
 			doneBtnText: 'Finalizado',
 			closeBtnText: 'Cerrar',
@@ -592,27 +573,86 @@ if ( !defined('ABSPATH') ) {
 		});
 		driver.defineSteps([
 			{
-				element: '.tui-image-editor-header-logo',
+				element: '.tui-image-editor-header',
 				popover: {
 					className: 'first-step-popover-class',
-					title: 'Title on Popover',
-					description: 'Body of the popover',
+					title: 'Bienvenido al <strong>editor de productos</strong>',
+					description: 'Aquí puedes personalizar tus productos antes de la compra<br>¡Vamos a dar un tour!',
 					position: 'bottom'
 				}
-			},
-			{
+			}, {
 				element: '.choseAction',
 				popover: {
-					title: 'Title on Popover',
-					description: 'Body of the popover',
-					position: 'left'
+					title: 'Opciones rápidas',
+					description: 'Aquí puedes eliminar, rehacer o deshacer tus cambios...',
+					position: 'left-bottom'
+				}
+			}, {
+				element: '.changeProd',
+				popover: {
+					title: 'Cambiar de vista',
+					description: 'Cambia entre la vista frontal o trasera del producto',
+					position: 'top-right'
+				}
+			}, {
+				element: '.variationProd',
+				popover: {
+					title: 'Elige tu favorito',
+					description: 'Elige la variación del producto que quieras',
+					position: 'bottom-right'
+				}
+			}, {
+				element: '.tui-image-editor-menu',
+				popover: {
+					title: 'Navega entre las herramientas',
+					description: 'Tienes múltiples herramientas para crear el mejor diseño',
+					position: 'top'
+				}
+			}, {
+				element: '.imageMenIcon',
+				popover: {
+					title: 'Creemos algo nuevo...',
+					description: '<code>Empieza agregando una imagen</code>',
+					position: 'top-left'
+				},
+				onNext: () => {
+					// Prevent moving to the next step
+					driver.preventMove();
+					jQuery('#tie-icon-image-upload').trigger('click');
+					$('#tie-icon-image-upload').on('change',function(){
+					    driver.moveNext();
+					});
+				}
+			}, {
+				element: '.ctm-icons.imageEditMenu',
+				popover: {
+					title: 'Cambia los valores',
+					description: 'Tienes disponible esta barra de herramientas para cambiar los valores a tu antojo<br><span style="text-align:center;display: block;width: 100%;"><img src="<?php echo EDIT_URL_PB; ?>/resources/editor/img/cursorScroll.png" width="20px"><br><code>¡No dudes en hacer scroll!</code></span>',
+					position: 'bottom-right'
+				}
+			}, {
+				element: '#tui-image-editor-next-btn',
+				popover: {
+					title: 'Para finalizar...',
+					description: 'Agrega tu producto al carrito de compra',
+					position: 'bottom'
+				}
+			}, {
+				element: '.closeModal',
+				popover: {
+					title: 'Si deseas salir del editor...',
+					description: 'Presiona la X<br>pero espero que vuelvas pronto',
+					position: 'bottom-right'
 				}
 			}
 		]);
-		// Start the introduction
-		driver.start();
+		
 
 		jQuery(document).ready(function(){
+			console.log(document.cookie);
+
+			if ($( document ).width() < 560){ driver.start(); }
+			else{ driver.start(); }
 
 			changeColor(clr_frn[0], clr_tsr[0]);
 

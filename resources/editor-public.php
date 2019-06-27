@@ -74,9 +74,7 @@ class Editor_Public{
 
 			<button class="btnEditor Editor single_add_to_cart_button button alt">Editar Producto <i class="fa fa-edit"></i></button>
 			<div id="popContainer">
-				<div class="popLayer">
-					<!--span onclick="closeModal('popContainer')">X</span-->
-				</div>
+				<div class="popLayer"></div>
 				<section class="popUp" id="popUp"></section>
 			</div>
 
