@@ -92,7 +92,7 @@ class Editor_Public{
 						window.onscroll = null;
 						jQuery('body').bind('touchmove', function(w){w.preventDefault()})
 
-						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
+						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important','touch-action':'none'});
 						document.getElementById("popContainer").style.display = "block"; 
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });

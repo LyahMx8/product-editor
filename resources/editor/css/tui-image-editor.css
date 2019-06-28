@@ -183,7 +183,7 @@ table tbody td
 .tui-image-editor-size-wrap
 {background:#fff!important}
 .tui-image-editor-align-wrap
-{background:url(/wordpress/wp-content/plugins/edicion-de-productos/assets/img/grid.png)}
+{background:url(/wp-content/plugins/edicion-de-productos/assets/img/grid.png)}
 .tui-image-editor-menu-text
 {height:calc(100% - 69px)}
 .tui-image-editor .tui-image-editor-canvas-container::before

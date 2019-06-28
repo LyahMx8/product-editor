@@ -91,7 +91,7 @@ div.ctm-icons{position:absolute;width:250px;bottom:0;height:calc(100% - 64px);le
 	.ctmImageLayer{width:100% !important;height:80px;bottom:0;top:auto;}
 	.changeProd a{margin:0;padding:3px;}
 	.choseAction{padding:3px;}
-	.popUp{min-height: 250px !important;height:80vh !important;}
+	.popUp{min-height: 250px !important;height:84vh !important;}
 	#fontSelect-undefined {margin-bottom: 20px;}
 	.carrusel-prods{overflow-x: hidden;overflow-y: auto;white-space: nowrap;}
 	.variationGallery {float: left;}
