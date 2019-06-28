@@ -40,7 +40,7 @@ class Editor_Admin{
 		 * El Loader puede crear una relacion entre los hooks definidos y las funciones definidas en esta clase
 		 */
 		wp_enqueue_style($this->editor, plugin_dir_url(__FILE__) . 'css/style.css', array(), 'all');
-		wp_enqueue_style($this->editor, '/wp-admin/load-styles.php', array(), 'all');
+		wp_enqueue_style($this->editor, '/wordpress/wp-admin/load-styles.php', array(), 'all');
 	}
 	
 	/**

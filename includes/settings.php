@@ -9,7 +9,7 @@
 *
 */
 
-define('app_env', 'production');
+define('app_env', 'development');
 define( 'W_URL', plugins_url('/edicion-de-productos/') );
 ini_set('max_execution_time', 300);
 

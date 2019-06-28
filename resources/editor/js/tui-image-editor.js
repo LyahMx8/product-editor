@@ -6035,7 +6035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 // default keys and styles
 	 var customTheme = {
-		'common.bi.image': '/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
+		'common.bi.image': '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
 		'common.bisize.width': '105px',
 		'common.bisize.height': '35px',
 		'common.backgroundImage': 'none',
@@ -6062,9 +6062,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		'downloadButton.fontSize': '12px',
 
 		// main icons
-		'menu.normalIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
+		'menu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg',
 		'menu.normalIcon.name': 'icon-d',
-		'menu.activeIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
+		'menu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
 		'menu.activeIcon.name': 'icon-a',
 		'menu.iconSize.width': '24px',
 		'menu.iconSize.height': '24px',
@@ -6074,9 +6074,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		'submenu.partition.color': '#858585',
 
 		// submenu icons
-		'submenu.normalIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
+		'submenu.normalIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-a.svg',
 		'submenu.normalIcon.name': 'icon-a',
-		'submenu.activeIcon.path': '/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
+		'submenu.activeIcon.path': '/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg',
 		'submenu.activeIcon.name': 'icon-c',
 		'submenu.iconSize.width': '32px',
 		'submenu.iconSize.height': '32px',
@@ -6109,7 +6109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	 */
 	exports.default = {
-	  'common.bi.image': '/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
+	  'common.bi.image': '/wordpress/wp-content/plugins/edicion-de-productos/assets/img/LogoZalemto-Wh.png',
 	  'common.bisize.width': '105px',
 	  'common.bisize.height': '35px',
 	  'common.backgroundImage': 'none',
@@ -7608,7 +7608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			_ref$iconStyle = _ref.iconStyle,
 			normal = _ref$iconStyle.normal,
 			active = _ref$iconStyle.active;
-		return '\n    <ul class="tui-image-editor-submenu-item">\n        <li>\n            <div class="tui-image-editor-button flipX">\n            <div>\n            <svg class="svg_ic-submenu">\n            <use xlink:href="/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-flip-x" class="normal">\n            </use>\n            <use xlink:href="/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-flip-x" class="active">\n            </use>\n            </svg>\n            </div>\n            <label>Rotar X</label>\n            </div>\n            <div class="tui-image-editor-button flipY">\n            <div>\n            <svg class="svg_ic-submenu">\n            <use xlink:href="/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-flip-y" class="normal">\n            </use>\n            <use xlink:href="/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-flip-y" class="active">\n            </use>\n            </svg>\n            </div>\n            <label>Rotar Y</label>\n            </div>\n            </li>\n            <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li id="tie-retate-button">\n            <div class="tui-image-editor-button clockwise">\n                <div>\n                    <svg class="svg_ic-submenu">\n                        <use xlink:href="' + normal.path + '#' + normal.name + '-ic-rotate-clockwise"\n                            class="normal"/>\n                        <use xlink:href="' + active.path + '#' + active.name + '-ic-rotate-clockwise"\n                            class="active"/>\n                    </svg>\n                </div>\n                <label> 30 </label>\n            </div>\n            <div class="tui-image-editor-button counterclockwise">\n                <div>\n                    <svg class="svg_ic-submenu">\n                        <use xlink:href="' + normal.path + '#' + normal.name + '-ic-rotate-counterclockwise"\n                            class="normal"/>\n                        <use xlink:href="' + active.path + '#' + active.name + '-ic-rotate-counterclockwise"\n                            class="active"/>\n                    </svg>\n                </div>\n                <label> -30 </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-newline tui-image-editor-range-wrap">\n            <label class="range">' + locale.localize('Rotación') + '</label>\n            <input type="range" min="-360" max="360" id="tie-rotate-range">\n            <input id="tie-ratate-range-value" class="tui-image-editor-range-value" value="0" />\n        </li>\n    </ul>\n';
+		return '\n    <ul class="tui-image-editor-submenu-item">\n        <li>\n            <div class="tui-image-editor-button flipX">\n            <div>\n            <svg class="svg_ic-submenu">\n            <use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-flip-x" class="normal">\n            </use>\n            <use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-flip-x" class="active">\n            </use>\n            </svg>\n            </div>\n            <label>Rotar X</label>\n            </div>\n            <div class="tui-image-editor-button flipY">\n            <div>\n            <svg class="svg_ic-submenu">\n            <use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-d.svg#icon-d-ic-flip-y" class="normal">\n            </use>\n            <use xlink:href="/wordpress/wp-content/plugins/edicion-de-productos/resources/editor/img/svg/icon-c.svg#icon-c-ic-flip-y" class="active">\n            </use>\n            </svg>\n            </div>\n            <label>Rotar Y</label>\n            </div>\n            </li>\n            <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li id="tie-retate-button">\n            <div class="tui-image-editor-button clockwise">\n                <div>\n                    <svg class="svg_ic-submenu">\n                        <use xlink:href="' + normal.path + '#' + normal.name + '-ic-rotate-clockwise"\n                            class="normal"/>\n                        <use xlink:href="' + active.path + '#' + active.name + '-ic-rotate-clockwise"\n                            class="active"/>\n                    </svg>\n                </div>\n                <label> 30 </label>\n            </div>\n            <div class="tui-image-editor-button counterclockwise">\n                <div>\n                    <svg class="svg_ic-submenu">\n                        <use xlink:href="' + normal.path + '#' + normal.name + '-ic-rotate-counterclockwise"\n                            class="normal"/>\n                        <use xlink:href="' + active.path + '#' + active.name + '-ic-rotate-counterclockwise"\n                            class="active"/>\n                    </svg>\n                </div>\n                <label> -30 </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-newline tui-image-editor-range-wrap">\n            <label class="range">' + locale.localize('Rotación') + '</label>\n            <input type="range" min="-360" max="360" id="tie-rotate-range">\n            <input id="tie-ratate-range-value" class="tui-image-editor-range-value" value="0" />\n        </li>\n    </ul>\n';
 	};
 
 /***/ }),

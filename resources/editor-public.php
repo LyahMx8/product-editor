@@ -90,7 +90,7 @@ class Editor_Public{
 						document.cookie = "client_ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>";
 						window.scrollTo(0,0);
 						window.onscroll = null;
-						$('body').bind('touchmove', function(w){w.preventDefault()})
+						jQuery('body').bind('touchmove', function(w){w.preventDefault()})
 
 						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
 						document.getElementById("popContainer").style.display = "block"; 

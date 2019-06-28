@@ -1,7 +1,7 @@
 <?php
 if ( !defined('ABSPATH') ) {
 	//traer cuando wordprress cargue.
-	include_once $_SERVER['DOCUMENT_ROOT'].'/wp-load.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/wordpress/wp-load.php';
 	include_once plugin_dir_path( dirname(__DIR__) ).'includes/settings.php';
 	global $wpdb;
 	$product_editor = $wpdb->get_results( "SELECT * FROM zalemto_editor_img WHERE cmpidtipimg = 6 OR cmpidprdct = ".$_GET["producto"]);
@@ -585,7 +585,7 @@ if ( !defined('ABSPATH') ) {
 				popover: {
 					title: 'Opciones rápidas',
 					description: 'Aquí puedes eliminar, rehacer o deshacer tus cambios...',
-					position: 'left-bottom'
+					position: 'bottom-right'
 				}
 			}, {
 				element: '.changeProd',
