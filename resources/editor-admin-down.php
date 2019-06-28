@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		
 		$result = $wpdb->get_row("SELECT cmpidprdct,cmpidtipimg,cmpurlimg FROM zalemto_editor_img WHERE cmpidimg = ".$_POST['down'],ARRAY_A);
 
-		$wpdb->query("DELETE FROM zalemto_editor_img WHERE cmpidimg = ".$_POST['down']); unlink(SERV."/".$result['cmpurlimg']);
+		$wpdb->query("DELETE FROM zalemto_editor_img WHERE cmpidimg = ".$_POST['down']); unlink(EDIT_SERV."/".$result['cmpurlimg']);
 
 		$_access_img=!array_key_exists("icon",$_POST) ? 2 : 6; echo Editor_Admin::show_preimages($result['cmpidprdct'],$_access_img);
 	}

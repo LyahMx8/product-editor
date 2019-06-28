@@ -106,11 +106,11 @@ class Editor_Admin{
 				<td><?php echo $ch['name_usr']; ?></td>
 				<td><?php echo $ch['cel_usr']; ?></td>
 				<td><?php echo $ch['email_usr']; ?></td>
-				<td><img style="width:100px;height:70px;object-fit: contain;" src="<?php echo URL_PB."/".$_frntl_etado['cmpurlimg']; ?>">
-				<a style="margin-top:calc((70px / 2) - 10px)" href="<?php echo URL_PB."/".$ch['cmpurlimg']; ?>" download class="dashicons dashicons-download"></a></td>
+				<td><img style="width:100px;height:70px;object-fit: contain;" src="<?php echo EDIT_URL_PB."/".$_frntl_etado['cmpurlimg']; ?>">
+				<a style="margin-top:calc((70px / 2) - 10px)" href="<?php echo EDIT_URL_PB."/".$ch['cmpurlimg']; ?>" download class="dashicons dashicons-download"></a></td>
 				<td><?php echo $_frntl_etado['cmpfechup']; ?></td>
-				<td><img style="width:100px;height:70px;object-fit: contain;" src="<?php echo URL_PB."/".$_trsro_etado['cmpurlimg']; ?>">
-				<a style="margin-top:calc((70px / 2) - 10px)" href="<?php echo URL_PB."/".$_trsro_etado['cmpurlimg']; ?>" download class="dashicons dashicons-download"></a></td>
+				<td><img style="width:100px;height:70px;object-fit: contain;" src="<?php echo EDIT_URL_PB."/".$_trsro_etado['cmpurlimg']; ?>">
+				<a style="margin-top:calc((70px / 2) - 10px)" href="<?php echo EDIT_URL_PB."/".$_trsro_etado['cmpurlimg']; ?>" download class="dashicons dashicons-download"></a></td>
 				<td><?php echo $_trsro_etado['cmpfechup']; ?></td>
 			</tr>
 	<?php

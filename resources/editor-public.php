@@ -74,14 +74,11 @@ class Editor_Public{
 
 			<button class="btnEditor Editor single_add_to_cart_button button alt">Editar Producto <i class="fa fa-edit"></i></button>
 			<div id="popContainer">
-				<div class="popLayer">
-					<!--span onclick="closeModal('popContainer')">X</span-->
-				</div>
+				<div class="popLayer"></div>
 				<section class="popUp" id="popUp"></section>
 			</div>
 
 			<script>
-				var elem = document.documentElement;
 				/**
 				* Funcion que abre el modal y carga el editor dentro del div popUp
 				*/
@@ -91,9 +88,15 @@ class Editor_Public{
 						e.preventDefault();
 						fnctnajaxpcrgpg('popUp','<?php echo plugin_dir_url(__FILE__); ?>editor/editor.php?producto=<?php echo $thepostid; ?>');
 						document.cookie = "client_ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>";
-						window.scrollTo(0,1);
+						window.scrollTo(0,0);
 						window.onscroll = null;
+<<<<<<< HEAD
 						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
+=======
+						jQuery('body').bind('touchmove', function(w){w.preventDefault()})
+
+						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important','touch-action':'none'});
+>>>>>>> development
 						document.getElementById("popContainer").style.display = "block"; 
 					});
 					jQuery(window).load(function(){ jQuery('#Editor').removeAttr('disabled'); });
@@ -126,6 +129,9 @@ class Editor_Public{
 					
 					
 				}
+				window.onbeforeunload = function() {
+				  closeModal('popUp');
+				};
 			</script>
 		<?php
 		endif;
