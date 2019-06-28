@@ -47,8 +47,8 @@ class Editor_Admin{
 	 * Funcion que agrega el nuevo metabox de edición de productos
 	 */
 	function meta_box_editor(){
-		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
-		/*add_meta_box( 'product-variations', __( 'Variaciones del producto(En Desarrollo)', 'woocommerce' ), 'Editor_Admin::variations', 'product', 'side', 'low' );*/
+		add_meta_box( 'image-galery-product-edit', __( 'Galería de Imagenes Edición', 'woocommerce' ), 'Editor_Admin::out_carrousel_image', 'product', 'normal', 'low' );
+		/*add_meta_box( 'product-variations', __( 'Variaciones del producto', 'woocommerce' ), 'Editor_Admin::variations', 'product', 'side', 'low' );*/
 		add_meta_box( 'image-alpha-product', __( 'Imagen Alpha Frontal', 'woocommerce' ), 'Editor_Admin::output', 'product', 'side', 'low' );
 		add_meta_box( 'image-alpha-product-back', __( 'Imagen Alpha Trasera', 'woocommerce' ), 'Editor_Admin::outputb', 'product', 'side', 'low' );
 	}
@@ -127,7 +127,7 @@ class Editor_Admin{
 		global $wpdb;
 	?>
 	<div class="wrap" id="wp-media-grid" data-search="">
-		<h1 class="wp-heading-inline">Biblioteca de Íconos( En Desarrollo)</h1>
+		<h1 class="wp-heading-inline">Biblioteca de Íconos</h1>
 <div class="media-frame wp-core-ui mode-grid mode-edit hide-menu">
 	<div class="uploader-inline" style="padding:20px;">
 		

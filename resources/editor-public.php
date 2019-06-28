@@ -72,7 +72,7 @@ class Editor_Public{
 
 		if ($product_editor !== null): ?>
 
-			<button class="btnEditor Editor single_add_to_cart_button button alt">Editar Producto <i class="fa fa-edit"></i></button>
+			<button type="button" class="btnEditor Editor single_add_to_cart_button">Editar Producto <i class="fa fa-edit"></i></button>
 			<div id="popContainer">
 				<div class="popLayer"></div>
 				<section class="popUp" id="popUp"></section>
@@ -90,7 +90,7 @@ class Editor_Public{
 						document.cookie = "client_ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>";
 						window.scrollTo(0,0);
 						window.onscroll = null;
-						jQuery('body').bind('touchmove', function(w){w.preventDefault()})
+						//jQuery('body').bind('touchmove', function(w){w.preventDefault()})
 
 						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
 						document.getElementById("popContainer").style.display = "block"; 
