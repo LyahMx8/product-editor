@@ -128,29 +128,6 @@ if ( !defined('ABSPATH') ) {
 			});
 			FB.AppEvents.logPageView();
 		};
-		FB.login(function (response) {
-			if (response.status === "connected") {
-				var uID = response.authResponse.userID;
-				console.log(uID);
-				FB.api('/me', function (response) {
-					var name = response.name;
-					var locationName = ' ';
-					if (response.location) {
-						locationName = response.location.name;
-						console.log(locationName);
-					} else {
-						alert("Debes configurar tu ciudad en tu perfil de Facebook para que sea público");
-					}
-				});//closes fb.api
-			} else if (response.status === "not_authorized") {
-				console.log("No conectado");
-				//authCancelled. redirect
-			}
-		},
-			{
-				scope: 'user_location,user_likes'
-			}
-		);
 		(function(d, s, id){
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) {return;}
@@ -158,6 +135,7 @@ if ( !defined('ABSPATH') ) {
 			js.src = "https://connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
+		
 	</script>
 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.3&appId=303269393938393&autoLogAppEvents=1"></script>
 	<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
@@ -649,6 +627,30 @@ if ( !defined('ABSPATH') ) {
 		
 
 		jQuery(document).ready(function(){
+			FB.login(function (response) {
+				if (response.status === "connected") {
+					var uID = response.authResponse.userID;
+					console.log(uID);
+					FB.api('/me', function (response) {
+						var name = response.name;
+						var locationName = ' ';
+						if (response.location) {
+							locationName = response.location.name;
+							console.log(locationName);
+						} else {
+							alert("Debes configurar tu ciudad en tu perfil de Facebook para que sea público");
+						}
+					});//closes fb.api
+				} else if (response.status === "not_authorized") {
+					console.log("No conectado");
+					//authCancelled. redirect
+				}
+			},
+				{
+					scope: 'user_location,user_likes'
+				}
+			);
+			
 			console.log(document.cookie);
 
 			if ($( document ).width() < 560){ driver.start(); }

@@ -90,6 +90,10 @@ class Editor_Public{
 						document.cookie = "client_ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>";
 						window.scrollTo(0,0);
 						window.onscroll = null;
+<<<<<<< HEAD
+=======
+						//jQuery('body').bind('touchmove', function(w){w.preventDefault()})
+>>>>>>> development
 
 						jQuery('body.product-template-default').css({'height':'80vh','overflow':'hidden','overscroll-behavior':'contain !important'});
 
