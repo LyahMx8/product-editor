@@ -641,7 +641,7 @@ if ( !defined('ABSPATH') ) {
 				element: '.closeModal',
 				popover: {
 					title: 'Si deseas salir del editor...',
-					description: 'Presiona la X<br>pero espero que vuelvas pronto',
+					description: 'Presiona la X y confirma que deseas salir...<br>pero espero que vuelvas pronto',
 					position: 'bottom-right'
 				}
 			}
